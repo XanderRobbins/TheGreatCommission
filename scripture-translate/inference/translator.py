@@ -704,12 +704,29 @@ class ScriptureTranslator:
                 if self.tiered_terminology:
                     translation = self._enforce_tier1_terms(translation, verse["text"], target_lang)
 
-                # Confidence: just model score
+                # Confidence: model score + quality adjustments
                 if hasattr(outputs, "sequences_scores") and outputs.sequences_scores is not None:
                     log_prob = outputs.sequences_scores[i].item()
                     confidence = float(torch.exp(torch.tensor(log_prob)).clamp(0.2, 0.99).item())
                 else:
                     confidence = 0.75
+
+                # Boost for successful Tier 1 injection
+                if self.tiered_terminology:
+                    tier1_terms = self.tiered_terminology.get_terms_by_tier(TermTier.TIER_1)
+                    for source_term in tier1_terms:
+                        if re.search(r"\b" + re.escape(source_term) + r"\b", verse["text"], re.IGNORECASE):
+                            canonical = tier1_terms[source_term]
+                            # Check if canonical form made it into output
+                            if canonical.lower() in translation.lower():
+                                confidence = min(0.99, confidence + 0.05)  # Boost by 5%
+                            else:
+                                confidence = max(0.2, confidence - 0.10)  # Penalize if missing
+                            break
+
+                # Penalize for French contamination
+                if self._detect_french_contamination(translation):
+                    confidence = max(0.2, confidence * 0.8)  # 20% penalty
 
                 # Get terms
                 theological_terms = self.term_extractor.extract_theological_terms(verse["text"])
