@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "total_entries": 5,
+    "cache_hits": 0,
+    "cache_misses": 5,
+    "hit_rate": 0.0
+  },
+  "entries": {
+    "5bbb646788ac4f13": {
+      "source_text": "In the beginning God created the heavens and the earth.",
+      "translation": "###  SYSTEM (DO NOT TRANSLATE, DO NOT INCLUDE IN OUTUTUT) Tradui vèsè Bib la nan seksyon SOURCE TEXT la nan kreyòl ayisyen (). Règ: 1. Sèlman pwodiksyon tradiksyon anpa gen anyen lòt 2. DO NOT repete enstriksyon, glossary, oswa kontèks 3. DO NOT EXIT labèl tankou \"\" oswa \"[\" oswa \"\") 4. Preserve egzak siyifikasyon teolojik 5. Sèvi ak natirèl, fluid kreyòl ayisyen (pa literal mo-pou-mo) 6. Sèvi sèlman ak kreyòl ayisyen id franse 7.",
+      "language_pair": "eng_Latn→hat_Latn",
+      "timestamp": "2026-04-11T23:43:15.433574",
+      "confidence": 0.29209713757038114,
+      "hit_count": 0
+    },
+    "81cf480cb2c4d98d": {
+      "source_text": "And the earth was waste and void; and darkness was upon the face of the deep: and the Spirit of God moved upon the face of the waters.",
+      "translation": "###  SYSTEM (DO NOT TRANSLATE, DO NOT INCLUDE IN OUTUTUT) Tradui vèsè Bib la nan seksyon SOURCE TEXT la nan kreyòl ayisyen (). Règ: 1. Sèlman pwodiksyon tradiksyon anpa gen anyen lòt 2. DO NOT repete enstriksyon, glossary, oswa kontèks 3. DO NOT EXIT labèl tankou \"\" oswa \"[\" oswa \"\") 4. Preserve egzak siyifikasyon teolojik 5. Sèvi ak natirèl, fluid kreyòl ayisyen (pa literal mo-pou-mo) 6. Sèvi sèlman ak kreyòl ayisyen id franse 7.",
+      "language_pair": "eng_Latn→hat_Latn",
+      "timestamp": "2026-04-11T23:43:15.437574",
+      "confidence": 0.2927857232093811,
+      "hit_count": 0
+    },
+    "3055121551dc4def": {
+      "source_text": "And God said, Let there be light: and there was light.",
+      "translation": "###  SYSTEM (DO NOT TRANSLATE, DO NOT INCLUDE IN OUTUTUT) Tradui vèsè Bib la nan seksyon SOURCE TEXT la nan kreyòl ayisyen (). Règ: 1. Sèlman soti nan tradiksyon anpa gen anyen lòt 2. DO NOT repete enstriksyon, glossary, oswa kontèks 3. DO NOT EXPITE etikèt tankou \"\" oswa \"[\" oswa \"\") 4. Preserve egzak siyifikasyon teolojik 5. Sèvi ak natirèl, fluid kreyòl ayisyen (pa literalman mo-pou-mo) 6. Sèvi sèlman ak kreyòl ayisyen id franse 7.",
+      "language_pair": "eng_Latn→hat_Latn",
+      "timestamp": "2026-04-11T23:43:15.439574",
+      "confidence": 0.291120223402977,
+      "hit_count": 0
+    },
+    "c45422fd74b09bef": {
+      "source_text": "And God saw the light, that it was good: and God divided the light from the darkness.",
+      "translation": "###  SYSTEM (DO NOT TRANSLATE, DO NOT INCLUDE IN OUTUTUT) Tradui vèsè Bib la nan seksyon SOURCE TEXT la nan kreyòl ayisyen (). Règ: 1. Sèlman pwodiksyon tradiksyon anpa gen anyen lòt 2. DO NOT repete enstriksyon, glossary, oswa kontèks 3. DO NOT EXIT labèl tankou \"\" oswa \"[\" oswa \"\") 4. Preserve egzak siyifikasyon teolojik 5. Sèvi ak natirèl, fluid kreyòl ayisyen (pa literal mo-pou-mo) 6. Sèvi sèlman ak kreyòl ayisyen id franse 7.",
+      "language_pair": "eng_Latn→hat_Latn",
+      "timestamp": "2026-04-11T23:43:15.440575",
+      "confidence": 0.2921281260251999,
+      "hit_count": 0
+    },
+    "5c690f124d36717b": {
+      "source_text": "And God called the light Day, and the darkness he called Night. And there was evening and there was morning, one day.",
+      "translation": "###  SYSTEM (DO NOT TRANSLATE, DO NOT INCLUDE IN OUTUTUT) Tradui vèsè Bib la nan seksyon SOURCE TEXT la nan kreyòl ayisyen (). Règ: 1. Sèlman pwodiksyon tradiksyon anpa gen anyen lòt 2. DO NOT repete enstriksyon, glossary, oswa kontèks 3. DO NOT EXIT labèl tankou \"\" oswa \"[\" oswa \"\") 4. Preserve egzak siyifikasyon teolojik 5. Sèvi ak natirèl, fluid kreyòl ayisyen (pa literal mo-pou-mo) 6. Sèvi sèlman ak kreyòl ayisyen id franse 7.",
+      "language_pair": "eng_Latn→hat_Latn",
+      "timestamp": "2026-04-11T23:43:15.441574",
+      "confidence": 0.2927743953466415,
+      "hit_count": 0
+    }
+  }
+}

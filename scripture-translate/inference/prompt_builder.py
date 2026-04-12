@@ -1,12 +1,10 @@
-"""Prompt building for scripture translation with strict delimiter separation.
+"""Prompt building for scripture translation.
 
-Uses structured format to completely separate:
-- Instructions (not to be translated)
-- Reference glossary (guidance only)
-- Context (semantic input, not translatable)
-- Source text (the ONLY thing to translate)
+Strategy: Input ONLY the verse text to NLLB (a translation model, not instruction-following).
+Control behavior entirely through post-processing and hard constraints.
 
-This prevents prompt injection artifacts from leaking into output.
+NLLB will translate whatever text you give it, including instructions.
+So we give it minimal text and enforce our rules after generation.
 """
 
 from typing import Dict, Optional, List
@@ -20,12 +18,7 @@ logger = get_logger(__name__)
 
 
 class PromptBuilder:
-    """Build prompts with strict instruction/text separation."""
-
-    # Clear delimiter to mark where actual translation begins
-    SOURCE_TEXT_MARKER = "### SOURCE TEXT ###"
-    TRANSLATION_START_MARKER = "===TRANSLATION START==="
-    TRANSLATION_END_MARKER = "===TRANSLATION END==="
+    """Build minimal prompts for NLLB (translation model, not instruction-follower)."""
 
     def __init__(
         self,
@@ -46,175 +39,110 @@ class PromptBuilder:
         self,
         context_window: ContextWindow,
         target_lang: str,
-        use_glossary: bool = True,
+        use_context: bool = True,
     ) -> str:
-        """Build prompt with strict delimiter separation for context-window translation.
+        """Build minimal input for NLLB: verse text with optional context.
 
-        Structure:
-        1. SYSTEM INSTRUCTIONS (DO NOT TRANSLATE)
-        2. GLOSSARY (REFERENCE ONLY)
-        3. CONTEXT (REFERENCE ONLY)
-        4. SOURCE TEXT (TRANSLATE ONLY THIS)
+        NLLB is a translation model, not instruction-following.
+        Input ONLY the text to translate. No instructions, no delimiters.
+        Control behavior via post-processing.
 
         Args:
             context_window: ContextWindow with prev/current/next verses.
-            target_lang: Target language code.
-            use_glossary: Whether to include glossary reference.
+            target_lang: Target language code (unused in input, for consistency).
+            use_context: Whether to include context verses (helps semantic understanding).
 
         Returns:
-            Formatted prompt string with clear delimiters.
+            Minimal input text for model (verse + optional context).
         """
         parts = []
 
-        # Section 1: System instructions (clearly marked as non-translatable)
-        parts.append(self._build_instructions())
+        # Add previous verse for context (if available and enabled)
+        if use_context and context_window.prev_verse:
+            parts.append(context_window.prev_verse)
 
-        # Section 2: Glossary (reference only, clearly marked)
-        if use_glossary and self.tiered:
-            glossary = self._build_glossary(context_window.current_verse, target_lang)
-            if glossary:
-                parts.append(glossary)
+        # Add the verse to translate (main content)
+        parts.append(context_window.current_verse)
 
-        # Section 3: Context (semantic, not to be translated)
-        context_section = self._build_context_reference(context_window)
-        if context_section:
-            parts.append(context_section)
+        # Add next verse for context (if available and enabled)
+        if use_context and context_window.next_verse:
+            parts.append(context_window.next_verse)
 
-        # Section 4: Source text (THE ONLY THING TO TRANSLATE)
-        parts.append(self._build_source_section(context_window))
-
-        return "\n\n".join(parts)
-
-    def _build_instructions(self) -> str:
-        """Build clearly-marked system instructions."""
-        return """### SYSTEM INSTRUCTIONS (DO NOT TRANSLATE, DO NOT INCLUDE IN OUTPUT)
-
-Translate the Bible verse in the SOURCE TEXT section to Haitian Creole (hat_Latn).
-
-Rules:
-1. ONLY output the translation—nothing else
-2. Do NOT repeat instructions, glossary, or context
-3. Do NOT output labels like "Translation:" or "[" or "]"
-4. Preserve exact theological meaning
-5. Use natural, fluent Haitian Creole (not literal word-for-word)
-6. Use only Haitian Creole words—avoid French
-7. Maintain consistency with the glossary below
-8. Respect poetic structure where present
-
-CRITICAL: Output ONLY the translated verse text. Nothing else."""
-
-    def _build_glossary(self, source_text: str, target_lang: str) -> Optional[str]:
-        """Build reference glossary (not to be translated).
-
-        Args:
-            source_text: Text to extract terms from.
-            target_lang: Target language code.
-
-        Returns:
-            Formatted glossary section, or None if no terms.
-        """
-        if not self.tiered:
-            return None
-
-        terms = self.term_extractor.extract_theological_terms(source_text)
-        if not terms:
-            return None
-
-        # Only include Tier 1 (high priority) terms
-        tier1_terms = []
-        for term in sorted(terms):
-            tier = self.tiered.get_tier(term)
-            if tier == TermTier.TIER_1:
-                translation = self.db.lookup(term, target_lang)
-                if translation:
-                    tier1_terms.append(f"  {term} → {translation}")
-
-        if not tier1_terms:
-            return None
-
-        return "### GLOSSARY (REFERENCE ONLY - GUIDE YOUR TRANSLATION)\n" + "\n".join(
-            tier1_terms
-        )
-
-    def _build_context_reference(self, context_window: ContextWindow) -> Optional[str]:
-        """Build context reference using structural cues only (no labels).
-
-        Provides context without labels that could be translated or copied.
-        Model infers context from position and structure, not from "Previous:"/"Next:" markers.
-
-        Args:
-            context_window: Context window.
-
-        Returns:
-            Formatted context section (unlabeled).
-        """
-        if not context_window.prev_verse and not context_window.next_verse:
-            return None
-
-        # Just provide the raw verses with minimal structure - no labels
-        parts = ["### CONTEXT"]
-        parts.append("")  # Blank line
-
-        if context_window.prev_verse:
-            # No "Previous:" label - just the text
-            parts.append(context_window.prev_verse[:100])
-            parts.append("")
-
-        if context_window.next_verse:
-            # No "Next:" label - just the text
-            parts.append(context_window.next_verse[:100])
-
+        # Join with newlines - just raw text, no labels
         return "\n".join(parts)
 
-    def _build_source_section(self, context_window: ContextWindow) -> str:
-        """Build source text section (ONLY thing to translate).
+    def extract_translation_from_output(
+        self, model_output: str, source_verse: str, context_verse_before: str = "", context_verse_after: str = ""
+    ) -> str:
+        """Extract the translated verse from model output.
 
-        Args:
-            context_window: Context window.
-
-        Returns:
-            Source text section with clear delimiter.
-        """
-        ref = context_window.current_ref or "Verse"
-        return (
-            f"{self.SOURCE_TEXT_MARKER}\n"
-            f"{ref}: {context_window.current_verse}\n"
-            f"\n"
-            f"Translate this to Haitian Creole:\n"
-            f"{self.TRANSLATION_START_MARKER}"
-        )
-
-    def extract_translation_from_output(self, model_output: str) -> str:
-        """Extract ONLY the translation from model output.
-
-        Looks for TRANSLATION_START_MARKER and takes everything after it,
-        cleaning up any artifacts.
+        Strategy: The model translates whatever we give it.
+        If we gave it [prev verse] [current verse] [next verse],
+        we need to extract just the middle part.
 
         Args:
             model_output: Raw output from model.
+            source_verse: The original source verse (to estimate length).
+            context_verse_before: Previous verse (to exclude from output).
+            context_verse_after: Next verse (to exclude from output).
 
         Returns:
-            Cleaned translation text.
+            Cleaned translation of just the current verse.
         """
-        # Look for start marker
-        if self.TRANSLATION_START_MARKER in model_output:
-            # Split at marker and take everything after
-            parts = model_output.split(self.TRANSLATION_START_MARKER)
-            output = parts[-1].strip()
+        output = model_output.strip()
 
-            # Remove end marker if present
-            if self.TRANSLATION_END_MARKER in output:
-                output = output.split(self.TRANSLATION_END_MARKER)[0]
+        # Clean up common junk that NLLB sometimes adds
+        output = self._clean_output(output)
 
-            # Clean up any leftover markers/labels
-            output = self._clean_output(output)
+        # If we had context, try to extract just the middle part
+        if context_verse_before or context_verse_after:
+            output = self._extract_middle_verse(
+                output, source_verse, context_verse_before, context_verse_after
+            )
+
+        return output
+
+    def _extract_middle_verse(
+        self, output: str, source_verse: str, context_before: str, context_after: str
+    ) -> str:
+        """Extract the middle verse from a translation of [context][source][context].
+
+        Uses length ratios to estimate where the middle verse is.
+
+        Args:
+            output: Translated output (all three verses combined).
+            source_verse: Original source verse (length reference).
+            context_before: Original previous verse.
+            context_after: Original next verse.
+
+        Returns:
+            Estimated translation of just the source verse.
+        """
+        # Estimate relative lengths
+        len_before = len(context_before.split())
+        len_source = len(source_verse.split())
+        len_after = len(context_after.split())
+        total_words = len_before + len_source + len_after
+
+        if total_words == 0:
             return output
 
-        # Fallback: return everything, cleaned
-        return self._clean_output(model_output)
+        # Estimate where the source verse translation should start/end
+        # (ratio of source to total, applied to output length)
+        output_words = output.split()
+        total_output_words = len(output_words)
+
+        start_ratio = len_before / total_words if total_words > 0 else 0
+        end_ratio = (len_before + len_source) / total_words if total_words > 0 else 1
+
+        start_idx = max(0, int(total_output_words * start_ratio) - 2)  # -2 buffer
+        end_idx = min(total_output_words, int(total_output_words * end_ratio) + 2)  # +2 buffer
+
+        extracted_words = output_words[start_idx:end_idx]
+        return " ".join(extracted_words).strip()
 
     def _clean_output(self, text: str) -> str:
-        """Remove prompt artifacts from output.
+        """Remove common artifacts from model output.
 
         Args:
             text: Text to clean.
@@ -222,18 +150,19 @@ CRITICAL: Output ONLY the translated verse text. Nothing else."""
         Returns:
             Cleaned text.
         """
-        # Remove common prompt marker remnants
+        # Remove markdown/structural artifacts
+        text = re.sub(r"^#+\s*", "", text, flags=re.MULTILINE)  # Remove # headers
+        text = re.sub(r"===.*?===", "", text, flags=re.DOTALL)  # Remove === markers
         text = re.sub(r"\[.*?\]", "", text)  # Remove [brackets]
-        text = re.sub(r"###.*?###", "", text, flags=re.DOTALL)  # Remove section headers
-        text = re.sub(r"Referans|Referans.*?:\n", "", text, flags=re.IGNORECASE)  # Remove glossary labels
-        text = re.sub(r"Previous:|PREVIOUS:|Next:|NEXT:", "", text)  # Remove context labels
-        text = re.sub(r"Translation:|TRANSLATION:", "", text, flags=re.IGNORECASE)
-        text = re.sub(r"Glossary|GLOSSARY|Reference|REFERENCE", "", text)
-        text = re.sub(r"Guidelines?|GUIDELINES?", "", text)
-        text = re.sub(r"Instructions?|INSTRUCTIONS?", "", text)
+        text = re.sub(r"\(.*?DO NOT.*?\)", "", text, flags=re.IGNORECASE)  # Remove instructions
+        text = re.sub(r"###.*?###", "", text, flags=re.DOTALL)  # Remove ### sections
 
-        # Clean up multiple newlines
-        text = re.sub(r"\n\n+", "\n", text)
+        # Remove common English instruction remnants (if model echoed them in translation)
+        text = re.sub(r"(Translate|Translation|Source|Output|Instructions?)", "", text, flags=re.IGNORECASE)
+
+        # Clean up whitespace
+        text = re.sub(r"\s+", " ", text)  # Collapse multiple spaces
+        text = re.sub(r"\n\n+", "\n", text)  # Collapse multiple newlines
 
         return text.strip()
 
@@ -264,7 +193,6 @@ CRITICAL: Output ONLY the translated verse text. Nothing else."""
 
 if __name__ == "__main__":
     from utils.logger import configure_logging
-    from inference.context_manager import ContextWindowBuilder
 
     configure_logging()
 
@@ -280,18 +208,23 @@ if __name__ == "__main__":
         {"text": "And the Spirit of God was hovering over the surface of the waters.", "reference": "Genesis 1:3"},
     ]
 
+    from inference.context_manager import ContextWindowBuilder
     windows = ContextWindowBuilder.build_windows(verses)
     prompt = builder.build_context_prompt(windows[1], "hat_Latn")
-    logger.info("=== Full Prompt ===")
+    logger.info("=== Minimal Input for NLLB ===")
     logger.info(prompt)
+    logger.info("\n(No instructions, no delimiters - just raw text)")
 
     # Test output extraction
     mock_output = (
-        "Some noise...\n"
-        "===TRANSLATION START===\n"
-        "Ansyen tan, Bondye te kreye syèl la ak latè.\n"
-        "===TRANSLATION END===\n"
-        "Some more noise..."
+        "Ansyen tan, Bondye te kreye syèl la ak latè. "
+        "Latè te dezè epi vid, ak fono te kouvri dlo yo. "
+        "Lèspri Bondye a te swiv sifas dlo yo."
     )
-    extracted = builder.extract_translation_from_output(mock_output)
-    logger.info(f"\n=== Extracted Translation ===\n{extracted}")
+    extracted = builder.extract_translation_from_output(
+        mock_output,
+        verses[1]["text"],
+        verses[0]["text"],
+        verses[2]["text"],
+    )
+    logger.info(f"\n=== Extracted Middle Verse ===\n{extracted}")

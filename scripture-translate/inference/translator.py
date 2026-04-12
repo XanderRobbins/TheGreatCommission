@@ -116,14 +116,14 @@ class ScriptureTranslator:
         source_text: str,
         target_lang: str,
     ) -> str:
-        """HARD enforcement: Replace source Tier 1 terms with their canonical translations.
+        """HARD enforcement: Inject Tier 1 terms (God, Jesus, Spirit, etc.).
 
-        This is deterministic post-processing, not probabilistic.
-        If "God" is in source and we have a Tier 1 mapping, we forcefully inject it.
+        Deterministic post-processing: if source has a Tier 1 term,
+        the translation MUST contain its canonical form.
 
         Args:
             translation: Generated translation to post-process.
-            source_text: Original source text (to extract Tier 1 terms from).
+            source_text: Original source text.
             target_lang: Target language code.
 
         Returns:
@@ -132,62 +132,121 @@ class ScriptureTranslator:
         if not self.tiered_terminology:
             return translation
 
-        # Extract source-language Tier 1 terms
         tier1_terms = self.tiered_terminology.get_terms_by_tier(TermTier.TIER_1)
+        translation_modified = translation
 
-        # For each Tier 1 term in source, ensure its translation is in output
-        for source_term, target_term in tier1_terms.items():
-            # Check if source term appears in source (case-insensitive)
+        for source_term, canonical_target in tier1_terms.items():
+            # Check if this Tier 1 term appears in source
             if re.search(r"\b" + re.escape(source_term) + r"\b", source_text, re.IGNORECASE):
-                # If target term is NOT in translation, inject it
-                if target_term not in translation:
-                    logger.debug(
-                        f"Injecting Tier 1 term: {source_term} → {target_term} "
-                        f"(was missing from output)"
-                    )
-                    # Simple heuristic: find similar-looking words and replace
-                    # This is crude but effective for core terms like God/Bondye
-                    replacement_made = self._inject_term(translation, source_term, target_term)
-                    if replacement_made:
-                        translation = replacement_made
+                # Check if canonical form is already in translation
+                if canonical_target.lower() in translation_modified.lower():
+                    continue  # Already there, skip
 
-        return translation
+                # Try to inject it at a plausible location
+                injected = self._inject_tier1_term(
+                    translation_modified, source_term, canonical_target
+                )
+                if injected:
+                    translation_modified = injected
+                    logger.debug(f"Injected Tier 1: {source_term} → {canonical_target}")
 
-    def _inject_term(
+        return translation_modified
+
+    def _inject_tier1_term(
         self, translation: str, source_term: str, target_term: str
     ) -> Optional[str]:
-        """Inject a missing canonical term into translation.
+        """Try to inject a Tier 1 term into the translation.
 
-        Uses fuzzy matching to find plausible replacement locations.
+        Attempts to find related words or similar phonetic forms and replace them
+        with the canonical term.
 
         Args:
             translation: Translation to modify.
-            source_term: English term that should appear.
-            target_term: Target language canonical translation.
+            source_term: English term (e.g., "god").
+            target_term: Canonical target term (e.g., "Bondye").
 
         Returns:
-            Modified translation, or None if no safe injection point found.
+            Modified translation, or None if no injection point found.
         """
-        # For now, use simple word-list approach
-        # Map of common mistranslations for Tier 1 terms to watch for
-        common_mistranslations = {
-            "god": ["bondieu", "dye", "Dye", "bondieu"],
-            "spirit": ["espri", "lèspri", "Espri"],
-            "jesus": ["jezi", "jezis", "Jezis"],
-            "holy": ["sen", "senm", "ho"],
+        # Map of English terms to likely mistranslations/variations
+        replacement_patterns = {
+            "god": [
+                (r"\bBondy\b", target_term),  # Misspelling
+                (r"\bbondieu\b", target_term),  # French variant
+                (r"\bDye\b", target_term),  # Phonetic variant
+            ],
+            "spirit": [
+                (r"\blespri\b", target_term),  # Lowercase variant
+                (r"\bespri\b", target_term),  # Missing l
+            ],
+            "jesus": [
+                (r"\bJezi\b", target_term),  # Variant spelling
+                (r"\bjezi\b", target_term),  # Lowercase
+            ],
+            "holy": [
+                (r"\bsen\b", target_term),  # Possible variant
+                (r"\bSen\b", target_term),  # Capitalized
+            ],
+            "lord": [
+                (r"\bSeyè\b", target_term),  # Variant
+                (r"\bseyè\b", target_term),  # Lowercase
+            ],
         }
 
         source_lower = source_term.lower()
-        if source_lower in common_mistranslations:
-            # Look for mistranslations and replace with canonical
-            for mistranslation in common_mistranslations[source_lower]:
-                pattern = r"\b" + re.escape(mistranslation) + r"\b"
+        if source_lower in replacement_patterns:
+            for pattern, replacement in replacement_patterns[source_lower]:
                 if re.search(pattern, translation, re.IGNORECASE):
-                    return re.sub(
-                        pattern, target_term, translation, flags=re.IGNORECASE, count=1
-                    )
+                    return re.sub(pattern, replacement, translation, flags=re.IGNORECASE, count=1)
+
+        # Fallback: if term is completely missing, try to insert it at the beginning
+        # (this is crude but ensures presence)
+        words = translation.split()
+        if words and len(words) > 2:
+            # Insert after first few words
+            words.insert(min(2, len(words)), target_term)
+            return " ".join(words)
 
         return None
+
+    def _aggressive_clean_output(self, text: str) -> str:
+        """Aggressively clean output to remove any system instruction text.
+
+        NLLB sometimes echoes back parts of the system message translated.
+        Remove these completely.
+
+        Args:
+            text: Output text to clean.
+
+        Returns:
+            Cleaned text.
+        """
+        # Remove anything that looks like translated instructions
+        text = re.sub(
+            r"###.*?###", "", text, flags=re.DOTALL | re.IGNORECASE
+        )  # Remove ### headers
+        text = re.sub(
+            r"(SISTEM|ENSTRIKSYON|PA.*?TRADUI|DO.*?NOT|TRANSLATION|GLOSSARY|CONTEXT|SYSTEM)",
+            "",
+            text,
+            flags=re.IGNORECASE,
+        )
+
+        # Remove common instruction markers
+        text = re.sub(r"===.*?===", "", text)  # Remove === markers
+        text = re.sub(r"\[.*?\]", "", text)  # Remove [brackets]
+
+        # Remove markdown-style elements
+        text = re.sub(r"^#+\s+", "", text, flags=re.MULTILINE)  # Remove # headers
+
+        # Remove numbered lists (instructions often use these)
+        text = re.sub(r"^\d+\.\s+", "", text, flags=re.MULTILINE)
+
+        # Clean whitespace
+        text = re.sub(r"\s+", " ", text)  # Collapse spaces
+        text = re.sub(r"\n\n+", "\n", text)  # Collapse newlines
+
+        return text.strip()
 
     def _detect_french_contamination(self, text: str) -> bool:
         """Detect if French words have leaked into Haitian Creole output.
@@ -460,9 +519,18 @@ class ScriptureTranslator:
                             outputs.sequences[i], skip_special_tokens=True
                         )
 
-                        # Extract translation from structured prompt output
+                        # Aggressively clean instruction text that model might have translated
+                        raw_output = self._aggressive_clean_output(raw_output)
+
+                        # Extract translation from output
+                        # If we included context in input, extract just the middle verse
                         if self.prompt_builder:
-                            verse_translation = self.prompt_builder.extract_translation_from_output(raw_output)
+                            verse_translation = self.prompt_builder.extract_translation_from_output(
+                                raw_output,
+                                window.current_verse,
+                                window.prev_verse,
+                                window.next_verse,
+                            )
                         else:
                             verse_translation = raw_output
                     else:
