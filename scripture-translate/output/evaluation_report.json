@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-04-11T23:32:56.772902",
+  "language_pair": "eng_Latn → hat_Latn",
+  "source_language": "eng_Latn",
+  "target_language": "hat_Latn",
+  "total_verses": 5,
+  "model": "facebook/nllb-200-distilled-600M",
+  "device": "cpu",
+  "batch_size": 8,
+  "metrics": {
+    "consistency_score": 1.0,
+    "unique_terms": 69,
+    "avg_term_usage": 2.0579710144927534,
+    "avg_confidence": 0.6509255766868591
+  }
+}

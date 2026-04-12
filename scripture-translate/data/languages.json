@@ -1,0 +1,62 @@
+{
+  "eng_Latn": {
+    "name": "English",
+    "script": "Latin",
+    "iso639_1": "en",
+    "iso639_3": "eng"
+  },
+  "hat_Latn": {
+    "name": "Haitian Creole",
+    "script": "Latin",
+    "iso639_1": "ht",
+    "iso639_3": "hat"
+  },
+  "spa_Latn": {
+    "name": "Spanish",
+    "script": "Latin",
+    "iso639_1": "es",
+    "iso639_3": "spa"
+  },
+  "fra_Latn": {
+    "name": "French",
+    "script": "Latin",
+    "iso639_1": "fr",
+    "iso639_3": "fra"
+  },
+  "por_Latn": {
+    "name": "Portuguese",
+    "script": "Latin",
+    "iso639_1": "pt",
+    "iso639_3": "por"
+  },
+  "swh_Latn": {
+    "name": "Swahili",
+    "script": "Latin",
+    "iso639_1": "sw",
+    "iso639_3": "swh"
+  },
+  "tur_Latn": {
+    "name": "Turkish",
+    "script": "Latin",
+    "iso639_1": "tr",
+    "iso639_3": "tur"
+  },
+  "kor_Hang": {
+    "name": "Korean",
+    "script": "Hangul",
+    "iso639_1": "ko",
+    "iso639_3": "kor"
+  },
+  "zho_Hans": {
+    "name": "Mandarin Chinese",
+    "script": "Han (Simplified)",
+    "iso639_1": "zh",
+    "iso639_3": "zho"
+  },
+  "amh_Ethi": {
+    "name": "Amharic",
+    "script": "Ge'ez",
+    "iso639_1": "am",
+    "iso639_3": "amh"
+  }
+}

@@ -1,0 +1,67 @@
+[
+  {
+    "primary": "Referans Terminoloji: bondye → Bondye syèl → Syèl [TIRANSE VÈS Sa a]: Nan kòmansman an Bondye",
+    "confidence": 0.6151561141014099,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "heaven": "Syèl"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 1:1: In the beginning God created the heavens and the earth.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Referans Terminoloji: bondye → Bondye lespri → Lespri [Anvan: Nan kòmansman an Bondye te kreye syèl la ak latè a.] [TRANSLATE THIS VERSE]: E tè a te dezè ak vid; ak fènwa te sou figi a nan gwo twou san fon an: ak Lespri Bondye a",
+    "confidence": 0.6511925458908081,
+    "alternatives": [],
+    "theological_terms": {
+      "spirit": "Lespri",
+      "god": "Bondye",
+      "water": "Dlo",
+      "darkness": "Fono"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 1:2: And the earth was waste and void; and darkness was upon the face of the deep: and the Spirit of God moved upon the face of the waters.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Referans Terminology: god → Bondye [Previous: Et la terre était déserte et vide; et l'obscurit",
+    "confidence": 0.6806168556213379,
+    "alternatives": [],
+    "theological_terms": {
+      "light": "Limyè",
+      "god": "Bondye"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 1:3: And God said, Let there be light: and there was light.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Referans Terminology: god → Bondye [Previous: Et Dieu dit, Qu'il y ait de la lumière: et il y eut de la lumière.] [traduction de ce verset]: Et Dieu vit",
+    "confidence": 0.6732109189033508,
+    "alternatives": [],
+    "theological_terms": {
+      "light": "Limyè",
+      "good": "Bon",
+      "god": "Bondye",
+      "darkness": "Fono"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 1:4: And God saw the light, that it was good: and God divided the light from the darkness.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Referans Terminoloji: god → Bondye [Previous: E Bondye te wè limyè a, ke li te bon: e Bondye separe limyè a soti nan fènwa a.] [TRANSLATE THIS VERSE]: E Bondye rele limyè a Jou, ak fènwa",
+    "confidence": 0.6344514489173889,
+    "alternatives": [],
+    "theological_terms": {
+      "light": "Limyè",
+      "god": "Bondye",
+      "darkness": "Fono"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 1:5: And God called the light Day, and the darkness he called Night. And there was evening and there was morning, one day.",
+    "target_language": "hat_Latn"
+  }
+]

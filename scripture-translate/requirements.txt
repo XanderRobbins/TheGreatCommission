@@ -1,11 +1,11 @@
-torch==2.0.1
+torch
 transformers==4.35.2
 datasets==2.14.5
 peft==0.7.1
 evaluate==0.4.1
 nltk==3.8.1
-numpy==1.24.3
-pandas==2.0.3
+numpy
+pandas
 pyyaml==6.0.1
 tqdm==4.66.1
 tensorboard==2.14.0
@@ -19,3 +19,5 @@ flask==3.0.0
 python-dotenv==1.0.0
 requests==2.31.0
 beautifulsoup4==4.12.2
+pythonbible>=0.7.2
+bbible>=0.1.0

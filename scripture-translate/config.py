@@ -31,6 +31,8 @@ class Config:
         "korean": "kor_Hang",
         "mandarin": "zho_Hans",
         "amharic": "amh_Ethi",
+        "haitian creole": "hat_Latn",
+        "haitian_creole": "hat_Latn",
     }
     
     # Training hyperparameters
