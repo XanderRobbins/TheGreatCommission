@@ -1,16 +1,17 @@
 import json
+import random
 import re
 from pathlib import Path
 from typing import List, Dict, Tuple, Optional
 import pandas as pd
 from datasets import Dataset, DatasetDict
 import torch
-from torch.utils.data import DataLoader, IterableDataset
+from torch.utils.data import DataLoader
 from tqdm import tqdm
-import logging
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 class BibleVerse:
@@ -101,32 +102,32 @@ class BibleDataLoader:
         logger.info(f"Loaded {loaded} verses in {language}")
         return loaded
     
-    def load_from_csv(self, csv_path: Path, language: str, 
+    def load_from_csv(self, csv_path: Path, language: str,
                      book_col: str = "book", chapter_col: str = "chapter",
                      verse_col: str = "verse", text_col: str = "text") -> int:
         """Load verses from CSV file"""
         df = pd.read_csv(csv_path)
         loaded = 0
-        
-        for idx, row in df.iterrows():
+
+        for row in df.itertuples(index=True, name='Row'):
             try:
                 verse = BibleVerse(
-                    book=row[book_col],
-                    chapter=int(row[chapter_col]),
-                    verse=int(row[verse_col]),
-                    text=row[text_col],
+                    book=getattr(row, book_col),
+                    chapter=int(getattr(row, chapter_col)),
+                    verse=int(getattr(row, verse_col)),
+                    text=getattr(row, text_col),
                     language=language
                 )
-                
+
                 if language not in self.verses:
                     self.verses[language] = []
-                
+
                 self.verses[language].append(verse)
                 loaded += 1
-            except (KeyError, ValueError) as e:
-                logger.warning(f"Error loading row {idx}: {e}")
+            except (AttributeError, ValueError) as e:
+                logger.warning(f"Error loading row {row.Index}: {e}")
                 continue
-        
+
         logger.info(f"Loaded {loaded} verses in {language}")
         return loaded
     
@@ -176,11 +177,11 @@ class BibleDataLoader:
         ]
     
     def save_parallel_corpus(self, source_lang: str, target_lang: str,
-                            output_path: Path, format: str = "jsonl"):
+                            output_path: Path, output_format: str = "jsonl"):
         """Save parallel corpus to file"""
         sources, targets = self.create_parallel_corpus(source_lang, target_lang)
-        
-        if format == "jsonl":
+
+        if output_format == "jsonl":
             with open(output_path, 'w', encoding='utf-8') as f:
                 for source, target in zip(sources, targets):
                     item = {
@@ -190,8 +191,8 @@ class BibleDataLoader:
                         "target_lang": target_lang,
                     }
                     f.write(json.dumps(item, ensure_ascii=False) + "\n")
-        
-        elif format == "csv":
+
+        elif output_format == "csv":
             df = pd.DataFrame({
                 "source": sources,
                 "target": targets,
@@ -257,13 +258,22 @@ class BibleTranslationDataset(torch.utils.data.Dataset):
 
 
 def create_data_splits(jsonl_path: Path, train_ratio: float = 0.9,
-                      val_ratio: float = 0.05) -> Tuple[Path, Path, Path]:
-    """Split data into train, validation, test sets"""
-    
+                      val_ratio: float = 0.05, seed: int = 42) -> Tuple[Path, Path, Path]:
+    """Split data into train, validation, test sets.
+
+    Args:
+        jsonl_path: Path to JSONL file with training data.
+        train_ratio: Proportion of data for training (default 0.9).
+        val_ratio: Proportion of data for validation (default 0.05).
+        seed: Random seed for reproducible splits (default 42).
+
+    Returns:
+        Tuple of (train_path, val_path, test_path) for split JSONL files.
+    """
     with open(jsonl_path, 'r', encoding='utf-8') as f:
         data = [json.loads(line) for line in f if line.strip()]
-    
-    import random
+
+    random.seed(seed)
     random.shuffle(data)
     
     n = len(data)
@@ -292,7 +302,12 @@ def create_data_splits(jsonl_path: Path, train_ratio: float = 0.9,
 
 
 if __name__ == "__main__":
+    from utils.logger import configure_logging
+    import logging
+
+    configure_logging()
+
     # Example usage
     loader = BibleDataLoader()
-    print(f"Available books: {len(loader.ALL_BOOKS)}")
-    print(f"Sample books: {loader.ALL_BOOKS[:5]}")
+    logger.info(f"Available books: {len(loader.ALL_BOOKS)}")
+    logger.info(f"Sample books: {loader.ALL_BOOKS[:5]}")

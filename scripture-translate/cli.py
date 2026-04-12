@@ -16,45 +16,27 @@ import sys
 import json
 from pathlib import Path
 from typing import List, Dict
-import logging
 
 from config import Config
-from data.loaders import BibleDataLoader, create_data_splits
 from data.generate_sample_data import generate_sample_data, create_test_dataset
-from models.base import ScriptureTranslationModel
-from models.terminology import TerminologyDB, TermExtractor
-from inference import ScriptureTranslator
-from evaluation import ScriptureEvaluator, HumanEvaluationInterface
+from models.terminology import TermExtractor
+from services.translation_service import TranslationService
+from services.terminology_service import TerminologyService
+from evaluation import ScriptureEvaluator
+from utils.logger import get_logger, configure_logging
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class ScriptureTranslationCLI:
     """Command-line interface for scripture translation"""
-    
+
     def __init__(self):
-        self.model_wrapper = None
-        self.translator = None
-        self.terminology_db = None
-        self.evaluator = None
-    
-    def init_system(self):
-        """Initialize the translation system"""
-        logger.info("Initializing system...")
-        
-        self.model_wrapper = ScriptureTranslationModel(use_lora=False)
-        self.terminology_db = TerminologyDB()
-        self.translator = ScriptureTranslator(
-            model=self.model_wrapper.get_model(),
-            tokenizer=self.model_wrapper.get_tokenizer(),
-            terminology_db=self.terminology_db,
-            device=Config.get_device(),
+        self.translation_service = TranslationService()
+        self.terminology_service = TerminologyService(
+            self.translation_service.get_terminology_db()
         )
-        self.evaluator = ScriptureEvaluator(self.terminology_db)
+        self.evaluator = ScriptureEvaluator(self.translation_service.get_terminology_db())
     
     # ========================================================================
     # TRANSLATE COMMANDS
@@ -62,32 +44,31 @@ class ScriptureTranslationCLI:
     
     def cmd_translate(self, args):
         """Translate a verse"""
-        if not self.translator:
-            self.init_system()
-        
-        result = self.translator.translate_verse(
+        self.translation_service.initialize()
+
+        result = self.translation_service.translate_verse(
             source_text=args.text,
             source_lang=args.source_lang,
             target_lang=args.target_lang,
             num_beams=args.num_beams,
         )
-        
-        print("\n" + "="*60)
-        print("TRANSLATION RESULT")
-        print("="*60)
-        print(f"Source ({args.source_lang}): {result.source_text}")
-        print(f"Target ({args.target_lang}): {result.primary}")
-        print(f"Confidence: {result.confidence:.2%}")
-        
+
+        logger.info("\n" + "="*60)
+        logger.info("TRANSLATION RESULT")
+        logger.info("="*60)
+        logger.info(f"Source ({args.source_lang}): {result.source_text}")
+        logger.info(f"Target ({args.target_lang}): {result.primary}")
+        logger.info(f"Confidence: {result.confidence:.2%}")
+
         if result.alternatives:
-            print(f"\nAlternatives:")
+            logger.info(f"\nAlternatives:")
             for i, alt in enumerate(result.alternatives[:3], 1):
-                print(f"  {i}. {alt}")
-        
+                logger.info(f"  {i}. {alt}")
+
         if result.theological_terms:
-            print(f"\nTheological Terms:")
+            logger.info(f"\nTheological Terms:")
             for en, tgt in result.theological_terms.items():
-                print(f"  {en} → {tgt}")
+                logger.info(f"  {en} → {tgt}")
     
     def cmd_translate_file(self, args):
         """Translate verses from a file"""
@@ -108,7 +89,7 @@ class ScriptureTranslationCLI:
             return
         
         logger.info(f"Loaded {len(verses)} verses from {input_path}")
-        
+
         # Translate
         results = self.translator.translate_batch(
             verses,
@@ -116,21 +97,21 @@ class ScriptureTranslationCLI:
             target_lang=args.target_lang,
             show_progress=True,
         )
-        
+
         # Save results
         output_path = Path(args.output_file)
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        
+
         with open(output_path, 'w', encoding='utf-8') as f:
             output_data = [r.to_dict() for r in results]
             json.dump(output_data, f, ensure_ascii=False, indent=2)
-        
+
         logger.info(f"Saved results to {output_path}")
-        
+
         # Statistics
         avg_confidence = sum(r.confidence for r in results) / len(results) if results else 0
-        print(f"\nTranslated {len(results)} verses")
-        print(f"Average confidence: {avg_confidence:.2%}")
+        logger.info(f"\nTranslated {len(results)} verses")
+        logger.info(f"Average confidence: {avg_confidence:.2%}")
     
     # ========================================================================
     # TERMINOLOGY COMMANDS
@@ -140,49 +121,49 @@ class ScriptureTranslationCLI:
         """Add a term to the database"""
         if not self.terminology_db:
             self.terminology_db = TerminologyDB()
-        
+
         success = self.terminology_db.add_term(
             args.english,
             args.language,
             args.target,
             confidence=args.confidence,
         )
-        
+
         if success:
-            print(f"✓ Added: {args.english} → {args.target} ({args.language})")
+            logger.info(f"✓ Added: {args.english} → {args.target} ({args.language})")
         else:
-            print(f"✗ Conflict: {args.english} already has different translation")
-        
+            logger.info(f"✗ Conflict: {args.english} already has different translation")
+
         self.terminology_db.save()
     
     def cmd_term_lookup(self, args):
         """Look up a term"""
         if not self.terminology_db:
             self.terminology_db = TerminologyDB()
-        
+
         result = self.terminology_db.get_with_confidence(args.term, args.language)
-        
+
         if result:
             target, confidence = result
-            print(f"{args.term} → {target} ({confidence:.2%})")
+            logger.info(f"{args.term} → {target} ({confidence:.2%})")
         else:
-            print(f"Term not found: {args.term}")
+            logger.info(f"Term not found: {args.term}")
     
     def cmd_term_extract(self, args):
         """Extract terms from text"""
         if not self.terminology_db:
             self.terminology_db = TerminologyDB()
-        
+
         extractor = TermExtractor(self.terminology_db)
         terms = extractor.extract_theological_terms(args.text)
-        
-        print(f"Found {len(terms)} terms:")
+
+        logger.info(f"Found {len(terms)} terms:")
         for term in sorted(terms):
             translation = self.terminology_db.lookup(term, args.language) if args.language else None
             if translation:
-                print(f"  {term} → {translation}")
+                logger.info(f"  {term} → {translation}")
             else:
-                print(f"  {term}")
+                logger.info(f"  {term}")
     
     def cmd_term_stats(self, args):
         """Show terminology statistics"""
@@ -195,10 +176,10 @@ class ScriptureTranslationCLI:
         """Export terminology database"""
         if not self.terminology_db:
             self.terminology_db = TerminologyDB()
-        
+
         output_path = Path(args.output_file)
         self.terminology_db.export_for_review(output_path, args.language)
-        print(f"Exported to {output_path}")
+        logger.info(f"Exported to {output_path}")
     
     # ========================================================================
     # EVALUATION COMMANDS
@@ -245,8 +226,8 @@ class ScriptureTranslationCLI:
         """Generate sample data"""
         logger.info("Generating sample data...")
         data_dir = generate_sample_data(Path(args.output_dir))
-        print(f"✓ Sample data generated in {data_dir}")
-    
+        logger.info(f"✓ Sample data generated in {data_dir}")
+
     def cmd_create_test_set(self, args):
         """Create test dataset"""
         logger.info(f"Creating test dataset with {args.num_samples} samples...")
@@ -254,7 +235,7 @@ class ScriptureTranslationCLI:
             Path(args.output_file),
             num_samples=args.num_samples
         )
-        print(f"✓ Test dataset created: {test_path}")
+        logger.info(f"✓ Test dataset created: {test_path}")
     
     # ========================================================================
     # SERVER COMMANDS
@@ -263,11 +244,12 @@ class ScriptureTranslationCLI:
     def cmd_server_start(self, args):
         """Start the web server"""
         import subprocess
-        
+
         logger.info("Starting Scripture Translation Web Server...")
         logger.info("Visit: http://localhost:5000")
-        
-        subprocess.run([sys.executable, "app.py"])
+
+        app_path = Path(__file__).parent / "app.py"
+        subprocess.run([sys.executable, str(app_path)])
     
     # ========================================================================
     # INFO COMMANDS
@@ -275,19 +257,22 @@ class ScriptureTranslationCLI:
     
     def cmd_system_info(self, args):
         """Show system information"""
-        print("\n" + "="*60)
-        print("SCRIPTURE TRANSLATION SYSTEM - INFO")
-        print("="*60)
-        print(f"Model: {Config.MODEL_NAME}")
-        print(f"Device: {Config.get_device()}")
-        print(f"Supported Languages: {len(Config.LANGUAGE_CODES)}")
-        print(f"\nSample Languages:")
+        logger.info("\n" + "="*60)
+        logger.info("SCRIPTURE TRANSLATION SYSTEM - INFO")
+        logger.info("="*60)
+        logger.info(f"Model: {Config.MODEL_NAME}")
+        logger.info(f"Device: {Config.get_device()}")
+        logger.info(f"Supported Languages: {len(Config.LANGUAGE_CODES)}")
+        logger.info(f"\nSample Languages:")
         for lang, code in list(Config.LANGUAGE_CODES.items())[:5]:
-            print(f"  {lang}: {code}")
-        print("\n" + "="*60)
+            logger.info(f"  {lang}: {code}")
+        logger.info("\n" + "="*60)
 
 
 def main():
+    # Setup logging
+    configure_logging()
+
     parser = argparse.ArgumentParser(
         description="Scripture Translation System CLI",
         formatter_class=argparse.RawDescriptionHelpFormatter,

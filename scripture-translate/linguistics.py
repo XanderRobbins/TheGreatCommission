@@ -11,11 +11,10 @@ Includes:
 
 import re
 from typing import List, Dict, Set, Tuple, Optional
-from collections import defaultdict
-import logging
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 class BiblicalNER:
@@ -280,19 +279,23 @@ class LanguageSpecificRules:
     def apply_rules(self, text: str) -> Tuple[str, List[str]]:
         """
         Apply language-specific rules to text.
-        
+
+        TODO: Full implementation requires:
+        - spaCy model for target language (python -m spacy download es_core_news_sm)
+        - POS tagging and dependency parsing for grammatical agreement checks
+        - Morphological analyzer for verb conjugation and agreement validation
+        - Custom rule engine for language-specific phonological rules
+
         Returns:
             (corrected_text, issues_found)
         """
         issues = []
         corrected = text
-        
-        # This is a simplified version
-        # In production, would use actual NLP tools like spaCy
-        
+
+        # Stub implementation
         if not self.rules:
             return corrected, ["No rules for this language"]
-        
+
         return corrected, issues
 
 
@@ -350,10 +353,16 @@ class MorphologicalAnalyzer:
         return analysis
     
     def _extract_morphemes(self, word: str) -> List[str]:
-        """Extract morphemes from word"""
-        # Simplified morpheme extraction
-        # In production, use actual morphological analyzers
-        morphemes = [word]  # At minimum, the word itself
+        """Extract morphemes from word.
+
+        TODO: Full implementation requires:
+        - Finite-state morphological transducers (FOMA, HFST)
+        - Language-specific morphological rules and lexica
+        - Tools like APERTIUM or XFST for morphological analysis
+        - Example: Swahili 'waliona' -> 'wa' (class prefix) + 'li' (past tense) + 'on' (root) + 'a' (final vowel)
+        """
+        # Stub: At minimum, the word itself
+        morphemes = [word]
         return morphemes
 
 
@@ -421,17 +430,21 @@ class DiscourseAnalyzer:
 
 
 if __name__ == "__main__":
+    from utils.logger import configure_logging
+
+    configure_logging()
+
     # Test NER
     ner = BiblicalNER()
     text = "Jesus went to Jerusalem with his disciples."
     entities = ner.extract_entities(text)
-    print(f"Entities: {entities}")
-    
+    logger.info(f"Entities: {entities}")
+
     # Test semantic analysis
     analyzer = SemanticAnalyzer()
     metaphors = analyzer.detect_metaphor("The Lord is my shepherd")
-    print(f"Metaphors: {metaphors}")
-    
+    logger.info(f"Metaphors: {metaphors}")
+
     # Test language rules
     rules = LanguageSpecificRules('spa_Latn')
-    print(f"Spanish rules: {rules.rules}")
+    logger.info(f"Spanish rules: {rules.rules}")

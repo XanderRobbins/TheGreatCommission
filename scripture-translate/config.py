@@ -1,11 +1,12 @@
 import os
 from pathlib import Path
 from typing import Dict, List
-import yaml
+
+from exceptions import LanguageNotSupportedError
 
 class Config:
     """Central configuration for scripture translation system"""
-    
+
     # Paths
     PROJECT_ROOT = Path(__file__).parent.parent
     DATA_DIR = PROJECT_ROOT / "data"
@@ -13,13 +14,11 @@ class Config:
     CHECKPOINTS_DIR = MODELS_DIR / "checkpoints"
     LOGS_DIR = PROJECT_ROOT / "logs"
     RESULTS_DIR = PROJECT_ROOT / "results"
-    
-    # Create directories
-    for dir_path in [DATA_DIR, MODELS_DIR, CHECKPOINTS_DIR, LOGS_DIR, RESULTS_DIR]:
-        dir_path.mkdir(parents=True, exist_ok=True)
-    
+
     # Model Configuration
-    MODEL_NAME = "facebook/nllb-200-distilled-600M"  # Can switch to 1.3B or 3.3B
+    MODEL_NAME = os.environ.get(
+        "SCRIPTURE_MODEL_NAME", "facebook/nllb-200-distilled-600M"
+    )  # Can switch to 1.3B or 3.3B
     
     # Supported language codes (NLLB format)
     LANGUAGE_CODES = {
@@ -75,7 +74,7 @@ class Config:
     # Loss weights
     LOSS_WEIGHTS = {
         "translation_loss": 1.0,
-        "consistency_loss": 0.1,
+        "consistency_loss": float(os.environ.get("CONSISTENCY_LOSS_WEIGHT", "0.0")),
     }
     
     # Evaluation thresholds
@@ -86,27 +85,51 @@ class Config:
     }
     
     @classmethod
+    def ensure_dirs(cls) -> None:
+        """Create necessary directories. Call this once in entrypoints."""
+        for dir_path in [cls.DATA_DIR, cls.MODELS_DIR, cls.CHECKPOINTS_DIR, cls.LOGS_DIR, cls.RESULTS_DIR]:
+            dir_path.mkdir(parents=True, exist_ok=True)
+
+    @classmethod
     def get_device(cls):
         """Get appropriate device (GPU if available, else CPU)"""
         import torch
         return "cuda" if torch.cuda.is_available() else "cpu"
-    
+
     @classmethod
     def load_from_yaml(cls, yaml_path: str) -> Dict:
         """Load configuration from YAML file"""
-        with open(yaml_path, 'r') as f:
+        import yaml
+        with open(yaml_path, 'r', encoding='utf-8') as f:
             return yaml.safe_load(f)
-    
+
     @classmethod
     def save_to_yaml(cls, config_dict: Dict, save_path: str):
         """Save configuration to YAML file"""
-        with open(save_path, 'w') as f:
-            yaml.dump(config_dict, f, default_flow_style=False)
+        import yaml
+        with open(save_path, 'w', encoding='utf-8') as f:
+            yaml.dump(config_dict, f, default_flow_style=False, allow_unicode=True)
     
     @classmethod
     def get_language_code(cls, lang_name: str) -> str:
-        """Get NLLB language code from friendly name"""
-        return cls.LANGUAGE_CODES.get(lang_name.lower())
+        """Get NLLB language code from friendly name.
+
+        Args:
+            lang_name: Friendly language name (e.g., "english", "spanish").
+
+        Returns:
+            NLLB language code (e.g., "eng_Latn", "spa_Latn").
+
+        Raises:
+            LanguageNotSupportedError: If language is not supported.
+        """
+        code = cls.LANGUAGE_CODES.get(lang_name.lower())
+        if code is None:
+            raise LanguageNotSupportedError(
+                f"Language '{lang_name}' not supported. "
+                f"Supported languages: {', '.join(cls.LANGUAGE_CODES.keys())}"
+            )
+        return code
     
     @classmethod
     def get_all_configs(cls) -> Dict:
@@ -124,8 +147,14 @@ class Config:
 
 
 if __name__ == "__main__":
-    config = Config()
-    print(f"Project root: {config.PROJECT_ROOT}")
-    print(f"Device: {config.get_device()}")
-    print(f"Model: {config.MODEL_NAME}")
-    print(f"Available languages: {len(config.LANGUAGE_CODES)}")
+    from utils.logger import get_logger, configure_logging
+    import logging
+
+    configure_logging()
+    logger = get_logger(__name__)
+
+    Config.ensure_dirs()
+    logger.info(f"Project root: {Config.PROJECT_ROOT}")
+    logger.info(f"Device: {Config.get_device()}")
+    logger.info(f"Model: {Config.MODEL_NAME}")
+    logger.info(f"Available languages: {len(Config.LANGUAGE_CODES)}")
