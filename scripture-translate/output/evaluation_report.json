@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-04-12T16:22:46.462632",
-  "language_pair": "eng_Latn → hat_Latn",
+  "timestamp": "2026-04-12T18:15:23.969977",
+  "language_pair": "eng_Latn → min_Latn",
   "source_language": "eng_Latn",
-  "target_language": "hat_Latn",
-  "total_verses": 100,
+  "target_language": "min_Latn",
+  "total_verses": 10,
   "model": "facebook/nllb-200-distilled-600M",
   "device": "cpu",
   "batch_size": 4,
   "metrics": {
     "consistency_score": 1.0,
-    "unique_terms": 467,
-    "avg_term_usage": 5.338329764453961,
-    "avg_confidence": 0.827412880778614
+    "unique_terms": 95,
+    "avg_term_usage": 1.9894736842105263,
+    "avg_confidence": 0.9602999999999999
   }
 }

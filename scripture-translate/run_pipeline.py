@@ -104,8 +104,8 @@ Examples:
     )
     parser.add_argument(
         "--target-lang",
-        default="hat_Latn",
-        help="Target language code (default: hat_Latn)",
+        default="min_Latn",
+        help="Target language code (default: min_Latn)",
     )
     parser.add_argument(
         "--model",
@@ -248,7 +248,7 @@ Examples:
         translations_list = [r.to_dict() for r in results]
 
         # Save JSON
-        json_path = args.output_dir / "haitian_creole_bible.json"
+        json_path = args.output_dir / f"{args.target_lang}_bible.json"
         json_path.parent.mkdir(parents=True, exist_ok=True)
         with open(json_path, "w", encoding="utf-8") as f:
             json.dump(translations_list, f, indent=2, ensure_ascii=False)
@@ -265,7 +265,7 @@ Examples:
             })
 
         df = pd.DataFrame(csv_data)
-        csv_path = args.output_dir / "haitian_creole_bible.csv"
+        csv_path = args.output_dir / f"{args.target_lang}_bible.csv"
         df.to_csv(csv_path, index=False, encoding="utf-8")
         logger.info(f"Saved CSV: {csv_path}")
 

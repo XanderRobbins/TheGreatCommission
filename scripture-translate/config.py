@@ -33,6 +33,7 @@ class Config:
         "amharic": "amh_Ethi",
         "haitian creole": "hat_Latn",
         "haitian_creole": "hat_Latn",
+        "minangkabau": "min_Latn",
     }
     
     # Training hyperparameters

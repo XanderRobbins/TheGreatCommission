@@ -857,47 +857,90 @@ class ScriptureTranslator:
             batch_end = min(batch_start + batch_size, len(verses))
             batch_verses = verses[batch_start:batch_end]
 
-            # Input: ONLY verse text
-            texts = [v["text"] for v in batch_verses]
+            language_pair = f"{source_lang}→{target_lang}"
             refs = [v.get("reference", "") for v in batch_verses]
 
-            # Tokenize and generate
-            inputs = self.tokenizer(
-                texts,
-                return_tensors="pt",
-                max_length=MAX_SOURCE_LENGTH,
-                truncation=True,
-                padding=True,
-            )
-            inputs = {k: v.to(self.device) for k, v in inputs.items()}
-            self.tokenizer.src_lang = source_lang
+            # Pre-check translation memory — only run model on cache misses
+            tm_hits = {}  # local index -> (translation, confidence)
+            miss_indices = []
+            for i, verse in enumerate(batch_verses):
+                cached = self.translation_memory.lookup(verse["text"], language_pair)
+                if cached:
+                    tm_hits[i] = cached
+                    logger.debug(f"TM HIT: {refs[i] or verse['text'][:40]}")
+                else:
+                    miss_indices.append(i)
 
-            with torch.no_grad():
-                outputs = self.model.generate(
-                    **inputs,
-                    max_length=MAX_TARGET_LENGTH,
-                    num_beams=DEFAULT_NUM_BEAMS,
-                    num_return_sequences=1,
-                    early_stopping=True,
-                    no_repeat_ngram_size=3,
-                    repetition_penalty=1.3,
-                    output_scores=True,
-                    return_dict_in_generate=True,
-                    forced_bos_token_id=self.tokenizer.convert_tokens_to_ids(target_lang),
+            # Only tokenize/generate for cache misses
+            outputs = None
+            if miss_indices:
+                miss_texts = [batch_verses[i]["text"] for i in miss_indices]
+                inputs = self.tokenizer(
+                    miss_texts,
+                    return_tensors="pt",
+                    max_length=MAX_SOURCE_LENGTH,
+                    truncation=True,
+                    padding=True,
                 )
+                inputs = {k: v.to(self.device) for k, v in inputs.items()}
+                self.tokenizer.src_lang = source_lang
 
-            # Decode results
-            num_outputs = outputs.sequences.shape[0]
+                with torch.no_grad():
+                    outputs = self.model.generate(
+                        **inputs,
+                        max_length=MAX_TARGET_LENGTH,
+                        num_beams=DEFAULT_NUM_BEAMS,
+                        num_return_sequences=1,
+                        early_stopping=True,
+                        no_repeat_ngram_size=3,
+                        repetition_penalty=1.3,
+                        output_scores=True,
+                        return_dict_in_generate=True,
+                        forced_bos_token_id=self.tokenizer.convert_tokens_to_ids(target_lang),
+                    )
+
             for i in range(len(batch_verses)):
-                if i >= num_outputs:
-                    break
-
                 verse = batch_verses[i]
                 ref = refs[i]
 
+                # Use cached result if available
+                if i in tm_hits:
+                    translation, confidence = tm_hits[i]
+                    theological_terms = self.term_extractor.extract_theological_terms(verse["text"])
+                    for term in theological_terms:
+                        self.terminology_db.record_usage(term, target_lang)
+                    canonical_terms = self.term_extractor.get_canonical_terms(verse["text"], target_lang)
+                    if self.tiered_terminology:
+                        tier1_terms = self.tiered_terminology.get_terms_by_tier(TermTier.TIER_1)
+                        for source_term, target_term in tier1_terms.items():
+                            if re.search(r"\b" + re.escape(source_term) + r"\b", verse["text"], re.IGNORECASE):
+                                canonical_terms[source_term] = target_term
+                    results.append(TranslationResult(
+                        primary=translation,
+                        confidence=confidence,
+                        alternatives=[],
+                        theological_terms=canonical_terms,
+                        consistency_enforced=False,
+                        source_text=f"{ref}: {verse['text']}" if ref else verse["text"],
+                        target_language=target_lang,
+                    ))
+                    continue
+
+                # Decode from model output (map local index back to miss position)
+                miss_pos = miss_indices.index(i)
+                if outputs is None or miss_pos >= outputs.sequences.shape[0]:
+                    logger.warning(f"Missing output for verse {ref}")
+                    results.append(TranslationResult(
+                        primary="", confidence=0.0, alternatives=[],
+                        theological_terms={}, consistency_enforced=False,
+                        source_text=f"{ref}: {verse['text']}" if ref else verse["text"],
+                        target_language=target_lang,
+                    ))
+                    continue
+
                 # Decode raw translation
                 translation = self.tokenizer.decode(
-                    outputs.sequences[i], skip_special_tokens=True
+                    outputs.sequences[miss_pos], skip_special_tokens=True
                 )
 
                 # Clean minimal junk
@@ -914,8 +957,15 @@ class ScriptureTranslator:
 
                 canonical_terms = self.term_extractor.get_canonical_terms(verse["text"], target_lang)
 
+                # Overlay Tier 1 terms into metadata (enforcement already applied to text)
+                if self.tiered_terminology:
+                    tier1_terms = self.tiered_terminology.get_terms_by_tier(TermTier.TIER_1)
+                    for source_term, target_term in tier1_terms.items():
+                        if re.search(r"\b" + re.escape(source_term) + r"\b", verse["text"], re.IGNORECASE):
+                            canonical_terms[source_term] = target_term
+
                 # Base confidence: length-normalized per-token log-probability
-                confidence = self._compute_calibrated_confidence(outputs, i)
+                confidence = self._compute_calibrated_confidence(outputs, miss_pos)
 
                 # QUALITY SIGNAL 1: Tier 1 term injection (hard theological requirements)
                 if self.tiered_terminology:
@@ -1001,6 +1051,10 @@ class ScriptureTranslator:
                     # Replace model log-prob with the round-trip semantic score
                     confidence = bt_similarity
                     logger.debug(f"Back-translation similarity: {bt_similarity:.2f} for {verse.get('reference', '?')}")
+
+                # Store in translation memory (floor at 0.65 — low-confidence verses re-attempt on next run)
+                if translation and confidence >= 0.65:
+                    self.translation_memory.store(verse["text"], translation, language_pair, confidence)
 
                 # Create result
                 result = TranslationResult(

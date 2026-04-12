@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "total_entries": 5,
-    "cache_hits": 0,
-    "cache_misses": 0,
-    "hit_rate": 0.0
+    "total_entries": 60,
+    "cache_hits": 10,
+    "cache_misses": 46,
+    "hit_rate": 0.17857142857142858
   },
   "entries": {
     "5bbb646788ac4f13": {
@@ -45,6 +45,446 @@
       "timestamp": "2026-04-11T23:43:15.441574",
       "confidence": 0.2927743953466415,
       "hit_count": 4
+    },
+    "e3bad83cd861df76": {
+      "source_text": "In the beginning God created the heavens and the earth.",
+      "translation": "Pado mulonyo Bondye Allah manjadikan langik jo bumi.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:09:58.247390",
+      "confidence": 0.99,
+      "hit_count": 2
+    },
+    "d023bf9aeaed62fd": {
+      "source_text": "And the earth was waste and void; and darkness was upon the face of the deep: and the Spirit of God moved upon the face of the waters.",
+      "translation": "Bumi manjadi Lespri Bondye padang gurun, sarato indak ado lai sasuatu di dirinyo. Di ateh lauik lauik, tampaklah kalam; Roh Allah bajalan di ateh ayie.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:09:58.250486",
+      "confidence": 0.99,
+      "hit_count": 2
+    },
+    "1b75171059be95c3": {
+      "source_text": "And God said, Let there be light: and there was light.",
+      "translation": "Sasudah tu Bondye Allah bakato, \"Biyalah ado nan tarang!\" Sudah tu, ado pulo nan bakcando itu.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:09:58.252483",
+      "confidence": 0.99,
+      "hit_count": 2
+    },
+    "d35f30b8b0787e48": {
+      "source_text": "And God saw the light, that it was good: and God divided the light from the darkness.",
+      "translation": "Allah manampak, Bondye baraso nan tarang tu baiak. Allah mampasisiahkan tarang dari nan kalam.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:09:58.253457",
+      "confidence": 0.99,
+      "hit_count": 2
+    },
+    "892f91fbf871de41": {
+      "source_text": "And God called the light Day, and the darkness he called Night. And there was evening and there was morning, one day.",
+      "translation": "Allah ma Bondye imbau nan tarang tu, \"Urang\", nan kalam tu pulo, \"Malam\". Mako malam jo pagi pun manjadi ari nan partamu.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:10:18.538569",
+      "confidence": 0.99,
+      "hit_count": 2
+    },
+    "423c243ee7ababcc": {
+      "source_text": "And God said, Let there be a firmament in the midst of the waters, and let it divide the waters from the waters.",
+      "translation": "Sasudah tu, Bondye Allah bakato pulo, \"Biyalah ado langik di tangah-tangah ayie, nan mamisahkan ayie dari ayie\".",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:10:18.539560",
+      "confidence": 0.99,
+      "hit_count": 2
+    },
+    "5ffa89de8248eb8e": {
+      "source_text": "And God made the firmament, and divided the waters which were under the firmament from the waters which were above the firmament: and it was so.",
+      "translation": "Sasudah tu, Bondye Allah mambuwek langik, inyo mampasisiahkan ayie di bawah langik tu, dari ayie nan di ateh langik.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:10:18.540563",
+      "confidence": 0.99,
+      "hit_count": 2
+    },
+    "041fff07d652f7b4": {
+      "source_text": "And God called the firmament Heaven. And there was evening and there was morning, a second day.",
+      "translation": "Mako, Allah Bondye ma imbau langik tu, \"Langik\". Sudah tu malam jo pagi, iyolah ari nan kaduwo.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:10:18.541523",
+      "confidence": 0.99,
+      "hit_count": 2
+    },
+    "139b084e85f4ab99": {
+      "source_text": "And God said, Let the waters under the heavens be gathered together unto one place, and let the dry land appear: and it was so.",
+      "translation": "Sudah tu, Bondye Allah bakato pulo, \"Biyai ayie-ayie nan di bawah langik tingga di sabuwah tampaik, sudah tu barulah nampak tanah nan kariang\". Kasadonyo tu tajadi pulo.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:10:38.514104",
+      "confidence": 0.99,
+      "hit_count": 2
+    },
+    "e996bb9aad362506": {
+      "source_text": "And God called the dry land Earth; and the gathering together of the waters called he Seas: and God saw that it was good.",
+      "translation": "Mako, Allah Bondye ma imbau tanah nan kariang tu, \"Tanah\", sarato jo ayie-ayie nan biasonyo ko, \"Lawah Lauik\". Allah manampak sagalo sasuatu tu elok.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:10:38.515099",
+      "confidence": 0.693,
+      "hit_count": 2
+    },
+    "a2b2ecea964791e9": {
+      "source_text": "And God said, Let the earth put forth grass, herbs yielding seed, [and] fruit-trees bearing fruit after their kind, wherein is the seed thereof, upon the earth: and it was so.",
+      "translation": "Sasudah tu Bondye Allah bakato pulo, \"Biyalah sagalo ramuan nan ado di bumi, iyolah rumpuik-rumpuik nan mananam bibitnyo, sarato jo batang-batang buwah nan mambuah buah-buahan manuruik jinihnyo\". Kasadonyo tu tajadi pulo.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:20:13.970097",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "f5f62229f7719d6c": {
+      "source_text": "And the earth brought forth grass, herbs yielding seed after their kind, and trees bearing fruit, wherein is the seed thereof, after their kind: and God saw that it was good.",
+      "translation": "Bumi ma Bondye ambiak-i rumpuik nan mananam, sarato jo batang-batang nan mambuah buah-buahan. Allah manampak sagalo sasuatu tu elok-elok.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:20:13.978370",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "67ca8e054e3f7e54": {
+      "source_text": "And there was evening and there was morning, a third day.",
+      "translation": "Malam jo subuh lah tajadi, ari nan katigo.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:20:13.983607",
+      "confidence": 0.9632762112876936,
+      "hit_count": 0
+    },
+    "cf5428b857cbef00": {
+      "source_text": "And God said, Let there be lights in the firmament of heaven to divide the day from the night; and let them be for signs, and for seasons, and for days and years:",
+      "translation": "Sasudah tu, Bondye Allah bakato pulo, \"Biyalah ado cahayo-cahayo di langik, nan ka mamisahkan siang jo malam. Inyolah nan ka manjadi tando-tando, untuak manyatokan musiman, ari-ari, sarato jo tawun-taun.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:20:13.996229",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "58e2d4deb1049c5f": {
+      "source_text": "and let them be for lights in the firmament of heaven to give light upon the earth: and it was so.",
+      "translation": "Biyapun baitu, ka manjadi tarang-tarang di langik, untuak mambari tarang di bumi\".",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:20:14.000230",
+      "confidence": 0.8270755471022023,
+      "hit_count": 0
+    },
+    "ded777df38334e08": {
+      "source_text": "And God made the two great lights; the greater light to rule the day, and the lesser light to rule the night: [he made] the stars also.",
+      "translation": "Kudian Allah Bondye mambuwek nan duwo cahayo nan gadang tu, nan labiah gadang untuak manguwasoi ari siang, nan ketek pulo untuak manjago malam. Inyo manjadikan pulo bintang-bintang.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:20:14.005848",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "ca3bed6b70d2588d": {
+      "source_text": "And God set them in the firmament of heaven to give light upon the earth,",
+      "translation": "Allah manjadikan Bondye bintang-bintang tu, manjadi tarang di bumi.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:21:01.978539",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "2a8367d8dd080d5e": {
+      "source_text": "and to rule over the day and over the night, and to divide the light from the darkness: and God saw that it was good.",
+      "translation": "untuak manguwasoi Bondye siang jo malam, sarato untuak mamisahkan tarang dari nan kalam. Allah manampak, baraso itu elok.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:21:01.982442",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "bea3e7712816dcbd": {
+      "source_text": "And there was evening and there was morning, a fourth day.",
+      "translation": "Malam jo subuah pun tajadi, iyolah ari nan ka ampek.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:21:01.983358",
+      "confidence": 0.9634358522181318,
+      "hit_count": 0
+    },
+    "fbe8d132169cb490": {
+      "source_text": "And God said, Let the waters swarm with swarms of living creatures, and let birds fly above the earth in the open firmament of heaven.",
+      "translation": "Sasudah tu, Bondye Allah bakato pulo, \"Jikok di dalam ayie, banyaklah binatang-binatang nan iduik. Biaso pulolah buruang-buruang tabang di ateh langik\".",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:21:01.993360",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "e5b2b845654d4aff": {
+      "source_text": "And seeing the multitudes, he went up into the mountain: and when he had sat down, his disciples came unto him:",
+      "translation": "Kutiko Isa Almasih maliyek urang nan banyak tu, Baliau nayiak ka bukik. Sasudah Baliau duduak, pangikuik-pangikuik-Nyo bi tibo kabake Baliau.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:21:02.001448",
+      "confidence": 0.8285988622562063,
+      "hit_count": 0
+    },
+    "fafddf80773ec277": {
+      "source_text": "and he opened his mouth and taught them, saying,",
+      "translation": "Isa Almasih muloi mambarikan pangajaran kabake urang-urang tu, bakcando iko,",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:21:02.002387",
+      "confidence": 0.9647805142278648,
+      "hit_count": 0
+    },
+    "00127225cb8d7e0f": {
+      "source_text": "Blessed are the poor in spirit: for theirs is the kingdom of heaven.",
+      "translation": "Babahagialah urang-urang Lespri nan bansaik ati; dek karano, inyo tu lah nan punyo Karajaan Sarugo.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:21:02.008365",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "70f6d8041b65ad8c": {
+      "source_text": "Blessed are they that mourn: for they shall be comforted.",
+      "translation": "Babahagialah urang nan manangih, dek karano inyo ka dihiburkan!",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:21:02.011436",
+      "confidence": 0.8274382260001243,
+      "hit_count": 0
+    },
+    "800cb57fda21923e": {
+      "source_text": "Blessed are the meek: for they shall inherit the earth.",
+      "translation": "Babahagialah urang-urang nan lamah lambuik, dek karano inyo ka mandapekkan bumi.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:00.523418",
+      "confidence": 0.8275595340400583,
+      "hit_count": 0
+    },
+    "08c7eb8c1878f1f0": {
+      "source_text": "Blessed are they that hunger and thirst after righteousness: for they shall be filled.",
+      "translation": "Babahagialah urang-urang nan maraso lapar, sarato jo haid manuruik kabanaran; dek karano, inyo ka bi makan sampai kanyang!",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:00.535416",
+      "confidence": 0.8273629019799957,
+      "hit_count": 0
+    },
+    "0f138e1f3b26d9a8": {
+      "source_text": "Blessed are the merciful: for they shall obtain mercy.",
+      "translation": "Babahagialah urang-urang nan suko mangasiahi, dek karano, Allah ka ma ibo kabake inyo!",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:00.540540",
+      "confidence": 0.827493577249823,
+      "hit_count": 0
+    },
+    "4fe35a5443d0ed4f": {
+      "source_text": "Blessed are the pure in heart: for they shall see God.",
+      "translation": "Babahagialah urang Bondye nan barasiah ati, dek karano inyo ka maliyek Allah!",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:00.544632",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "46def76b6ed191cf": {
+      "source_text": "Blessed are the peacemakers: for they shall be called sons of God.",
+      "translation": "Babahagialah urang-urang Bondye nan babuwek damai; dek karano, inyo tu ka dinamokan anak-anak Allah.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:00.549623",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "abafa60130674b15": {
+      "source_text": "Blessed are they that have been persecuted for righteousness’ sake: for theirs is the kingdom of heaven.",
+      "translation": "Babahagialah urang nan di aniayo dek karano babuwek baiak. Dek karano, inyo tu lah nan punyo Karajaan Sarugo.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:00.556631",
+      "confidence": 0.8282802136644177,
+      "hit_count": 0
+    },
+    "2623881f29a0d6b8": {
+      "source_text": "Blessed are ye when [men] shall reproach you, and persecute you, and say all manner of evil against you falsely, for my sake.",
+      "translation": "Babahagialah angku-angku, jikok dek karano di Ambo, urang-urang tu ma ang-kau, sarato ma aniayo angkau, sarato jo bakato-kato nan jahek taradok angkau.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:00.564628",
+      "confidence": 0.827904913943465,
+      "hit_count": 0
+    },
+    "9aa0102e749693a7": {
+      "source_text": "Rejoice, and be exceeding glad: for great is your reward in heaven: for so persecuted they the prophets that were before you.",
+      "translation": "Andaklah angku-angku bagadang ati, sarato basukocito! Dek karano, gadanglah upahnyo di sarugo. Baitu pulo jo caro nan baitu, urang-urang tu ma aniayo nabi-nabi nan di jaman sabalunnyo.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:00.578723",
+      "confidence": 0.8282827225555941,
+      "hit_count": 0
+    },
+    "73e20443984e0d50": {
+      "source_text": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+      "translation": "Pado mulonyo, Bondye nan Sabda tu ado juwo. Sabda itu samo-samo jo Allah, nan Salah tu adolah Allah.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:17.811605",
+      "confidence": 0.693,
+      "hit_count": 0
+    },
+    "c39b319a7a6510ef": {
+      "source_text": "The same was in the beginning with God.",
+      "translation": "Pado mulonyo Bondye Baliau samo-samo jo Allah.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:17.812541",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "20e533cdbb174cc7": {
+      "source_text": "All things were made through him; and without him was not anything made that hath been made.",
+      "translation": "Kasadonyo lah dijadikan malalui Baliau, indak ciyek juwo doh sasuatu nan dijadikan, jikok Allah indak basatu jo Baliau.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:17.814597",
+      "confidence": 0.9649401576132383,
+      "hit_count": 0
+    },
+    "2a323e74e81be861": {
+      "source_text": "In him was life; and the life was the light of men.",
+      "translation": "Dalam Baliaulah ado iduik, nan iduik tu adolah tarang untuak manusia.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:17.816572",
+      "confidence": 0.8266449890919291,
+      "hit_count": 0
+    },
+    "f8d6c0510fe2b776": {
+      "source_text": "And the light shineth in the darkness; and the darkness apprehended it not.",
+      "translation": "Tarang tu tarang di nan kalam, tapi, nan kalam tu indak dapek doh mancegakkannyo.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:17.818580",
+      "confidence": 0.8270306758836924,
+      "hit_count": 0
+    },
+    "291e631b1ede595c": {
+      "source_text": "There came a man, sent from God, whose name was John.",
+      "translation": "Tibolah surang Bondye urang nan di utuih dek Allah, nan banamo si Yahya.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:17.819585",
+      "confidence": 0.693,
+      "hit_count": 0
+    },
+    "bccd1e2e4787c707": {
+      "source_text": "The same came for witness, that he might bear witness of the light, that all might believe through him.",
+      "translation": "Inyo datang sabagai sasi, untuak mancuritokan tarang tu, supayo kasadonyo urang bi picayo malalui inyo.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:17.823545",
+      "confidence": 0.8282503152140668,
+      "hit_count": 0
+    },
+    "c7cbd6f99d4dd8d4": {
+      "source_text": "He was not the light, but [came] that he might bear witness of the light.",
+      "translation": "Inyo tu indak tarang doh, tapi datang untuak mambaritokan tarang tu.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:22:17.823545",
+      "confidence": 0.8273206070725356,
+      "hit_count": 0
+    },
+    "8cb3b3f15969a087": {
+      "source_text": "There was the true light, [even the light] which lighteth every man, coming into the world.",
+      "translation": "Pado suatu ari, tarang nan sabana-bana tarang tu datang ka dunia. Inyo tu lah nan mambari tarang kabake satiyok urang.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:23:32.111941",
+      "confidence": 0.8276660905756306,
+      "hit_count": 0
+    },
+    "c1c37dc59500e01f": {
+      "source_text": "He was in the world, and the world was made through him, and the world knew him not.",
+      "translation": "Baliau lah ado di dunia ko, dunia dijadikan malalui Baliau, tapi dunia indak tawu jo Baliau.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:23:32.119970",
+      "confidence": 0.9648557126696556,
+      "hit_count": 0
+    },
+    "752ef0a2db423bb7": {
+      "source_text": "He came unto his own, and they that were his own received him not.",
+      "translation": "Baliau datang kabake umaik-Nyo sandiri, tapi urang-urang tu indak manarimo Baliau.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:23:32.127427",
+      "confidence": 0.9652213579997192,
+      "hit_count": 0
+    },
+    "e3d554cae133948a": {
+      "source_text": "But as many as received him, to them gave he the right to become children of God, [even] to them that believe on his name:",
+      "translation": "Tapi kasadonyo Bondye urang nan manarimo Baliau, Baliau mambarikan kuwaso untuak manjadi anak-anak Allah, kabake urang-urang nan picayo kabake Baliau.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:23:32.132180",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "0bc94919fb24c5ce": {
+      "source_text": "who were born, not of blood, nor of the will of the flesh, nor of the will of man, but of God.",
+      "translation": "Anak-anak tu Bondye lah dilayiekan, indak dari darah doh, indak pulo doh dari kahandak manusia, sarato indak pulo dari paratuaran manusia doh, tapi dari Allah.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:23:32.141401",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "4c69883ce3867601": {
+      "source_text": "And the Word became flesh, and dwelt among us ( and we beheld his glory, glory as of the only begotten from the Father), full of grace and truth.",
+      "translation": "Firman tu Papa manjadi manusia, mako inyo tingga di tangah-tangah kito. Kami manampak kamuliaan-Nyo, iyolah kamuliyaan Anak Tungga dari Bapak. Inyo sabana mampunyoi raso ibo kapado Allah, sarato jo batua.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:23:32.156055",
+      "confidence": 0.693,
+      "hit_count": 0
+    },
+    "b2a56aebd99b5382": {
+      "source_text": "( and the life was manifested, and we have seen, and bear witness, and declare unto you the life, the eternal [life], which was with the Father, and was manifested unto us);",
+      "translation": "Nah, iduik Papa tu lah dinyatokan. Kami lah maliyek, kami mambarikan pangakuan, sarato mambaritokan kabake angku-angku tantang iduik tu, iyolah iduik sajati nan kaka, nan lah ado samo-samo jo Bapak, sarato lah didatokan kabake kami.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:23:32.174332",
+      "confidence": 0.693,
+      "hit_count": 0
+    },
+    "9caf01e95ba2519e": {
+      "source_text": "that which we have seen and heard declare we unto you also, that ye also may have fellowship with us: yea, and our fellowship is with the Father, and with his Son Jesus Christ:",
+      "translation": "Nan lah Pitit Papa Kris Jezi kami liyek jo nan lah kami danga, itu pulolah nan kami baritokan kabake angkau, supayo angkau bi sato samo-samo jo kami. Kasadonyo nan kami tarimo tu, adolah basatu jo Bapak sarato jo Anak-Nyo Isa Almasih.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:24:36.013634",
+      "confidence": 0.693,
+      "hit_count": 0
+    },
+    "dafdb7d73681945c": {
+      "source_text": "and these things we write, that our joy may be made full.",
+      "translation": "Kami manulihkan kasadonyo tu, supayo angku-angku buliah sabana-bana bagadang ati.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:24:36.020086",
+      "confidence": 0.9646666292040421,
+      "hit_count": 0
+    },
+    "295594b3bab35b6b": {
+      "source_text": "And this is the message which we have heard from him and announce unto you, that God is light, and in him is no darkness at all.",
+      "translation": "Ikolah pasan Bondye nan kami danga dari Isa Almasih, nan kami baritokan kabake angku-angku: Allah adolah tarang, di dalam Baliau indak ado ciyek juwo doh nan kalam.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:24:36.026668",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "b875913432e5e5d7": {
+      "source_text": "If we say that we have fellowship with him and walk in the darkness, we lie, and do not the truth:",
+      "translation": "Jikok kito bakato, baraso kito basatu jo Allah, tapi nan kiniko kito iduik di nan kalam, mako kito baduto, sarato indak mangarajokan nan bana.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:24:36.032115",
+      "confidence": 0.828124826784584,
+      "hit_count": 0
+    },
+    "9720f94471b79fba": {
+      "source_text": "but if we walk in the light, as he is in the light, we have fellowship one with another, and the blood of Jesus his Son cleanseth us from all sin.",
+      "translation": "Tapi, jikok Pitit Jezi kito iduik di nan tarang, samo jo bakcando Isa Almasih, nan iduik di dalam tarang tu, mako kito samo-samo mamatuahi, sarato darah Isa Almasih Anak-Nyo, mambasiahkan kito dari sagalo doso.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:24:36.040083",
+      "confidence": 0.693,
+      "hit_count": 0
+    },
+    "129cf4bd3646ff25": {
+      "source_text": "If we say that we have no sin, we deceive ourselves, and the truth is not in us.",
+      "translation": "Jikok kito bakato, baraso kito indak badoso doh, mako kito mangicuahkan diri kito sandiri, sarato indak ado doh kabanaran di dalam diri kito.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:24:36.042021",
+      "confidence": 0.8283041004416339,
+      "hit_count": 0
+    },
+    "0d948f69a54ddc06": {
+      "source_text": "If we confess our sins, he is faithful and righteous to forgive us our sins, and to cleanse us from all unrighteousness.",
+      "translation": "Tapi, jikok kito ma-akui doso-doso kito, Allah dapek dipicayoi sarato jo batua. Baliau ka ma-ampunan doso urang, sarato ka mambarasiahkan kito dari sagalo karajo-karajo nan jahek.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:24:36.049505",
+      "confidence": 0.8284268585360622,
+      "hit_count": 0
+    },
+    "7bd8729e3d485b50": {
+      "source_text": "If we say that we have not sinned, we make him a liar, and his word is not in us.",
+      "translation": "Jikok kito bakato, baraso kito indak panah babuwek doso, mako kito manjadikan Allah panduto, sarato kato-kato Allah indak ado di dalam diri kito.",
+      "language_pair": "eng_Latn→min_Latn",
+      "timestamp": "2026-04-12T18:24:36.052492",
+      "confidence": 0.8284115951725848,
+      "hit_count": 0
     }
   }
 }
