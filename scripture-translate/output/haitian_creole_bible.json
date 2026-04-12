@@ -16,9 +16,9 @@
     "confidence": 0.2927857232093811,
     "alternatives": [],
     "theological_terms": {
+      "darkness": "Fono",
       "god": "Bondye",
       "water": "Dlo",
-      "darkness": "Fono",
       "spirit": "Lespri"
     },
     "consistency_enforced": true,
@@ -30,8 +30,8 @@
     "confidence": 0.291120223402977,
     "alternatives": [],
     "theological_terms": {
-      "light": "Limyè",
-      "god": "Bondye"
+      "god": "Bondye",
+      "light": "Limyè"
     },
     "consistency_enforced": true,
     "source_text": "Genesis 1:3: And God said, Let there be light: and there was light.",
@@ -42,9 +42,9 @@
     "confidence": 0.2921281260251999,
     "alternatives": [],
     "theological_terms": {
-      "light": "Limyè",
       "god": "Bondye",
       "darkness": "Fono",
+      "light": "Limyè",
       "good": "Bon"
     },
     "consistency_enforced": true,
@@ -56,9 +56,9 @@
     "confidence": 0.2927743953466415,
     "alternatives": [],
     "theological_terms": {
-      "light": "Limyè",
       "god": "Bondye",
-      "darkness": "Fono"
+      "darkness": "Fono",
+      "light": "Limyè"
     },
     "consistency_enforced": true,
     "source_text": "Genesis 1:5: And God called the light Day, and the darkness he called Night. And there was evening and there was morning, one day.",

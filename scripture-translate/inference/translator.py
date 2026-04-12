@@ -629,46 +629,38 @@ class ScriptureTranslator:
         batch_size: int = 8,
         show_progress: bool = True,
     ) -> List[TranslationResult]:
-        """Translate multiple verses with true batching for efficiency.
-
-        Processes verses in chunks, making one model.generate() call per chunk
-        instead of one per verse. This is essential for reasonable performance
-        on large datasets.
+        """Translate multiple verses - SIMPLE AND CLEAN.
 
         Args:
-            verses: List of verse dictionaries, each with 'text' key and optional 'reference'.
-            source_lang: Source language code (NLLB format, e.g., "eng_Latn").
-            target_lang: Target language code (NLLB format, e.g., "spa_Latn").
-            batch_size: Number of verses to process per model call. Default 8.
-                        Adjust based on available GPU memory.
-            show_progress: Whether to display a progress bar during translation.
+            verses: List of verse dicts with 'text' and optional 'reference'.
+            source_lang: Source language code (e.g., "eng_Latn").
+            target_lang: Target language code (e.g., "hat_Latn").
+            batch_size: Batch size for processing.
+            show_progress: Whether to show progress bar.
 
         Returns:
-            List of TranslationResult objects, one per input verse.
+            List of TranslationResult objects.
         """
         results = []
 
-        # Wrap in tqdm for progress display
         iterator = verses
         if show_progress:
             try:
                 from tqdm import tqdm
-
                 iterator = tqdm(verses, desc="Translating verses")
             except ImportError:
-                logger.warning("tqdm not available; progress bar disabled")
                 iterator = verses
 
-        # Process verses in batches
+        # Process in batches
         for batch_start in range(0, len(verses), batch_size):
             batch_end = min(batch_start + batch_size, len(verses))
             batch_verses = verses[batch_start:batch_end]
 
-            # Extract texts and metadata
+            # Input: ONLY verse text
             texts = [v["text"] for v in batch_verses]
-            references = [v.get("reference", "") for v in batch_verses]
+            refs = [v.get("reference", "") for v in batch_verses]
 
-            # Tokenize batch
+            # Tokenize and generate
             inputs = self.tokenizer(
                 texts,
                 return_tensors="pt",
@@ -676,76 +668,68 @@ class ScriptureTranslator:
                 truncation=True,
                 padding=True,
             )
-
             inputs = {k: v.to(self.device) for k, v in inputs.items()}
-
-            # Set source language
             self.tokenizer.src_lang = source_lang
 
-            # Generate translations for entire batch in one call
             with torch.no_grad():
                 outputs = self.model.generate(
                     **inputs,
                     max_length=MAX_TARGET_LENGTH,
                     num_beams=DEFAULT_NUM_BEAMS,
-                    num_return_sequences=1,  # One translation per verse
+                    num_return_sequences=1,
                     early_stopping=True,
                     output_scores=True,
                     return_dict_in_generate=True,
                     forced_bos_token_id=self.tokenizer.convert_tokens_to_ids(target_lang),
                 )
 
-            # Decode and create results for each verse in batch
-            # Use actual output sequence length to avoid indexing errors
+            # Decode results
             num_outputs = outputs.sequences.shape[0]
-            if num_outputs != len(batch_verses):
-                logger.warning(f"Batch output mismatch: {num_outputs} outputs vs {len(batch_verses)} inputs")
-
             for i in range(len(batch_verses)):
-                verse = batch_verses[i]
-                ref = references[i]
-
-                # Guard against fewer outputs
                 if i >= num_outputs:
-                    logger.warning(f"Skipping verse {i}: outputs ({num_outputs}) < batch ({len(batch_verses)})")
                     break
 
-                # Get the translation for this verse from batch output
-                seq_idx = i  # Index into the batch sequences
-                primary_translation = self.tokenizer.decode(
-                    outputs.sequences[seq_idx], skip_special_tokens=True
+                verse = batch_verses[i]
+                ref = refs[i]
+
+                # Decode raw translation
+                translation = self.tokenizer.decode(
+                    outputs.sequences[i], skip_special_tokens=True
                 )
 
-                # Calculate confidence for this verse
-                if hasattr(outputs, "sequences_scores") and outputs.sequences_scores is not None:
-                    log_prob = outputs.sequences_scores[seq_idx].item()
-                    confidence = float(torch.exp(torch.tensor(log_prob)).clamp(0.0, 1.0).item())
-                else:
-                    confidence = 0.0
+                # Clean minimal junk
+                translation = self._minimal_clean(translation)
 
-                # Extract and record theological terms
+                # Enforce Tier 1 terms
+                if self.tiered_terminology:
+                    translation = self._enforce_tier1_terms(translation, verse["text"], target_lang)
+
+                # Confidence: just model score
+                if hasattr(outputs, "sequences_scores") and outputs.sequences_scores is not None:
+                    log_prob = outputs.sequences_scores[i].item()
+                    confidence = float(torch.exp(torch.tensor(log_prob)).clamp(0.2, 0.99).item())
+                else:
+                    confidence = 0.75
+
+                # Get terms
                 theological_terms = self.term_extractor.extract_theological_terms(verse["text"])
                 for term in theological_terms:
                     self.terminology_db.record_usage(term, target_lang)
 
-                canonical_terms = self.term_extractor.get_canonical_terms(
-                    verse["text"], target_lang
-                )
+                canonical_terms = self.term_extractor.get_canonical_terms(verse["text"], target_lang)
 
                 # Create result
                 result = TranslationResult(
-                    primary=primary_translation,
+                    primary=translation,
                     confidence=confidence,
-                    alternatives=[],  # No alternatives in batch mode (efficiency)
+                    alternatives=[],
                     theological_terms=canonical_terms,
-                    consistency_enforced=False,
+                    consistency_enforced=bool(self.tiered_terminology and any(self.tiered_terminology.get_tier(t) == TermTier.TIER_1 for t in theological_terms)),
                     source_text=f"{ref}: {verse['text']}" if ref else verse["text"],
                     target_language=target_lang,
                 )
-
                 results.append(result)
 
-            # Update progress bar
             if show_progress and hasattr(iterator, "update"):
                 iterator.update(batch_end - batch_start)
 

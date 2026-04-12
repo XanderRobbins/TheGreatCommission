@@ -148,18 +148,6 @@ Examples:
         choices=["cpu", "cuda"],
         help="Device to use (auto-detect if not specified)",
     )
-    parser.add_argument(
-        "--use-context",
-        action="store_true",
-        default=True,
-        help="Use context windows (prev/current/next verses) for translation (default: enabled)",
-    )
-    parser.add_argument(
-        "--no-context",
-        action="store_false",
-        dest="use_context",
-        help="Disable context windows (faster but lower quality)",
-    )
 
     args = parser.parse_args()
 
@@ -177,7 +165,6 @@ Examples:
     logger.info(f"Target language: {args.target_lang}")
     logger.info(f"Model: {args.model}")
     logger.info(f"Batch size: {args.batch_size}")
-    logger.info(f"Context windows: {'Enabled' if args.use_context else 'Disabled'}")
     logger.info(f"Output directory: {args.output_dir}")
 
     try:
@@ -237,25 +224,14 @@ Examples:
 
         # Step 4: Translate verses
         logger.info(f"\n[Step 4/5] Translating {len(verses)} verses...")
-        if args.use_context:
-            logger.info("Using context windows (prev/current/next verses)")
         try:
-            if args.use_context:
-                results = translator.translate_batch_with_context(
-                    verses,
-                    source_lang=args.source_lang,
-                    target_lang=args.target_lang,
-                    batch_size=args.batch_size,
-                    show_progress=True,
-                )
-            else:
-                results = translator.translate_batch(
-                    verses,
-                    source_lang=args.source_lang,
-                    target_lang=args.target_lang,
-                    batch_size=args.batch_size,
-                    show_progress=True,
-                )
+            results = translator.translate_batch(
+                verses,
+                source_lang=args.source_lang,
+                target_lang=args.target_lang,
+                batch_size=args.batch_size,
+                show_progress=True,
+            )
             logger.info(f"Translated {len(results)} verses")
         except Exception as e:
             logger.error(f"Translation failed: {e}")
