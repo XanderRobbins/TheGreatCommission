@@ -48,12 +48,16 @@ class ConfidenceScorer:
         self.tiered = tiered_terminology
         self.term_extractor = TermExtractor(terminology_db)
 
+    # Characters never valid in Haitian Creole
+    NON_HC_PATTERN = re.compile(r'[čňěřžůďťľśćźąęłóżĺĽŃŌ]', re.IGNORECASE)
+
     def score(
         self,
         translation: str,
         source_text: str,
         target_lang: str,
         model_confidence: float = 0.5,
+        back_translation_score: Optional[float] = None,
     ) -> Tuple[float, Dict[str, float]]:
         """Compute composite confidence score.
 
@@ -61,19 +65,35 @@ class ConfidenceScorer:
             translation: Generated translation.
             source_text: Original source text.
             target_lang: Target language code.
-            model_confidence: Base confidence from model (log-prob based).
+            model_confidence: Base confidence from model (length-normalized log-prob).
+            back_translation_score: Optional semantic similarity from back-translation
+                validator (0-1). When provided, replaces model_confidence as semantic
+                anchor. Leave None to skip (saves a full inference pass).
 
         Returns:
             Tuple of (composite_score: 0-1, component_scores: dict).
         """
         components = {}
 
+        # Short-circuit: repetition collapse = unusable output
+        if self._detect_repetition_collapse(translation):
+            logger.warning("Confidence scorer: repetition collapse detected")
+            return 0.05, {"repetition_collapse": 0.05}
+
+        # Short-circuit: non-HC script contamination
+        if self.NON_HC_PATTERN.search(translation):
+            logger.warning("Confidence scorer: non-HC script characters detected")
+            # Don't zero-out entirely — partial info is still recoverable
+            components["non_hc_script"] = 0.10
+            components["model_confidence"] = model_confidence * 0.5
+            return float(self._weighted_average(components)), components
+
         # Component 1: Lexical consistency (glossary term presence)
         components["lexical_consistency"] = self._score_lexical_consistency(
             translation, source_text, target_lang
         )
 
-        # Component 2: Glossary match rate (% of expected terms)
+        # Component 2: Glossary match rate (% of expected Tier 1 terms)
         components["glossary_match_rate"] = self._score_glossary_match_rate(
             translation, source_text, target_lang
         )
@@ -81,20 +101,23 @@ class ConfidenceScorer:
         # Component 3: Language purity (Creole vs French)
         components["language_purity"] = self._score_language_purity(translation)
 
-        # Component 4: Model token confidence
-        components["model_confidence"] = model_confidence
+        # Component 4: Semantic similarity — back-translation if available,
+        # otherwise fall back to the model's own calibrated confidence
+        if back_translation_score is not None:
+            components["semantic_similarity"] = float(back_translation_score)
+        else:
+            components["model_confidence"] = model_confidence
+
+        # Component 5: Numerical fidelity
+        components["numerical_fidelity"] = self._score_numerical_fidelity(
+            translation, source_text
+        )
 
         # Composite: weighted average
         composite = self._weighted_average(components)
 
-        logger.debug(
-            f"Confidence breakdown: "
-            f"lexical={components['lexical_consistency']:.2f}, "
-            f"glossary={components['glossary_match_rate']:.2f}, "
-            f"purity={components['language_purity']:.2f}, "
-            f"model={components['model_confidence']:.2f} → "
-            f"composite={composite:.2f}"
-        )
+        debug_parts = ", ".join(f"{k}={v:.2f}" for k, v in components.items())
+        logger.debug(f"Confidence breakdown: {debug_parts} → composite={composite:.2f}")
 
         return float(composite), components
 
@@ -202,6 +225,40 @@ class ConfidenceScorer:
         creole_bonus = min(creole_count * 0.1, 0.3)
         return min(0.7 + creole_bonus, 1.0)
 
+    def _detect_repetition_collapse(self, text: str) -> bool:
+        """Return True if any word-trigram repeats 3+ times (degenerate loop)."""
+        words = text.split()
+        if len(words) < 9:
+            return False
+        seen: Dict[tuple, int] = {}
+        for i in range(len(words) - 2):
+            tg = (words[i], words[i + 1], words[i + 2])
+            seen[tg] = seen.get(tg, 0) + 1
+            if seen[tg] >= 3:
+                return True
+        return False
+
+    def _score_numerical_fidelity(self, translation: str, source_text: str) -> float:
+        """Score how well digit sequences from source appear in translation.
+
+        If source has "601" and translation contains "6100" instead, that is
+        a numerical corruption — penalize it.
+
+        Args:
+            translation: Generated translation.
+            source_text: Original source verse.
+
+        Returns:
+            Score 0-1 (1.0 = all numbers preserved, 0.0 = all missing/corrupted).
+        """
+        source_numbers = re.findall(r'\d+', source_text)
+        if not source_numbers:
+            return 1.0  # No numbers to check
+        preserved = sum(1 for n in source_numbers if n in translation)
+        fidelity = preserved / len(source_numbers)
+        # Map: 0→0.1, 0.5→0.55, 1.0→1.0
+        return 0.1 + (fidelity * 0.9)
+
     def _weighted_average(self, components: Dict[str, float]) -> float:
         """Compute weighted average of component scores.
 
@@ -214,13 +271,31 @@ class ConfidenceScorer:
         Returns:
             Weighted average score 0-1.
         """
-        # Weights: what matters most
-        weights = {
-            "lexical_consistency": 0.25,  # Glossary terms matter
-            "glossary_match_rate": 0.30,  # Tier 1 terms are critical
-            "language_purity": 0.30,      # Must be Creole, not French
-            "model_confidence": 0.15,     # Model's own score
-        }
+        # Weights differ depending on whether back-translation is available.
+        # When semantic_similarity is present it replaces model_confidence and
+        # gets a higher weight (it's a stronger signal than raw log-prob).
+        if "semantic_similarity" in components:
+            weights = {
+                "lexical_consistency": 0.15,
+                "glossary_match_rate": 0.20,
+                "language_purity": 0.20,
+                "semantic_similarity": 0.30,  # Strongest: round-trip meaning preserved
+                "numerical_fidelity": 0.15,
+            }
+        elif "non_hc_script" in components:
+            # Partial-score path for script contamination
+            weights = {
+                "non_hc_script": 0.60,
+                "model_confidence": 0.40,
+            }
+        else:
+            weights = {
+                "lexical_consistency": 0.20,
+                "glossary_match_rate": 0.25,
+                "language_purity": 0.25,
+                "model_confidence": 0.15,
+                "numerical_fidelity": 0.15,
+            }
 
         total_score = 0
         total_weight = 0

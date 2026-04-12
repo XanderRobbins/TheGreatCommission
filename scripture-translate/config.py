@@ -94,9 +94,8 @@ class Config:
 
     @classmethod
     def get_device(cls):
-        """Get appropriate device (GPU if available, else CPU)"""
-        import torch
-        return "cuda" if torch.cuda.is_available() else "cpu"
+        """Get appropriate device (CPU only due to GPU compatibility issues)"""
+        return "cpu"
 
     @classmethod
     def load_from_yaml(cls, yaml_path: str) -> Dict:

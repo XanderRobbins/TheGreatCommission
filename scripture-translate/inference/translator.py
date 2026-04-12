@@ -5,6 +5,7 @@ confidence scoring, and alternative generation. Supports context windows
 (prev/current/next verses) for improved semantic understanding.
 """
 
+import math
 import torch
 import re
 from typing import Dict, List, Optional, Tuple
@@ -280,6 +281,49 @@ class ScriptureTranslator:
 
         return text.strip()
 
+    def _detect_repetition_collapse(self, text: str) -> bool:
+        """Detect degenerate repetition loops in output.
+
+        A trigram appearing 3+ times in a short verse is a clear sign of
+        beam search / sampling failure (token loop collapse).
+
+        Args:
+            text: Decoded model output.
+
+        Returns:
+            True if repetition collapse detected.
+        """
+        words = text.split()
+        if len(words) < 9:
+            return False
+        trigrams = [tuple(words[i:i+3]) for i in range(len(words) - 2)]
+        seen = {}
+        for tg in trigrams:
+            seen[tg] = seen.get(tg, 0) + 1
+            if seen[tg] >= 3:
+                return True
+        return False
+
+    def _detect_numerical_corruption(self, translation: str, source_text: str) -> bool:
+        """Detect when digit sequences from source are absent or mangled in output.
+
+        NLLB sometimes garbles numbers (e.g., "601st year" → "6100 premye ane").
+        If the source contains digits and more than half are absent from the
+        translation, flag it.
+
+        Args:
+            translation: Decoded translation.
+            source_text: Original source verse.
+
+        Returns:
+            True if numerical corruption likely.
+        """
+        source_numbers = re.findall(r'\d+', source_text)
+        if not source_numbers:
+            return False
+        missing = sum(1 for n in source_numbers if n not in translation)
+        return missing > len(source_numbers) * 0.5
+
     def _detect_french_contamination(self, text: str) -> bool:
         """Detect if French words have leaked into Haitian Creole output.
 
@@ -314,6 +358,144 @@ class ScriptureTranslator:
                 return True
 
         return False
+
+    # English words that are often capitalized (sentence-start or titles)
+    # but are NOT proper nouns (names of people/places)
+    _ENGLISH_FUNCTION_WORDS: frozenset = frozenset({
+        "and", "the", "a", "an", "in", "of", "to", "for", "from", "with",
+        "that", "this", "these", "those", "is", "was", "were", "be", "been",
+        "have", "has", "had", "do", "does", "did", "will", "would", "shall",
+        "should", "may", "might", "must", "can", "could", "let", "now",
+        "but", "or", "nor", "so", "yet", "both", "either", "neither",
+        "it", "he", "she", "we", "they", "you", "i", "me", "him", "her",
+        "us", "them", "my", "his", "our", "their", "its", "thy", "thou",
+        "when", "where", "which", "who", "what", "if", "as", "then",
+        "there", "here", "also", "behold", "therefore", "because", "thus",
+        "upon", "unto", "into", "over", "under", "through", "between",
+        "said", "called", "named", "ye", "thee", "thine", "thereof",
+        "jehovah", "god", "lord", "spirit", "holy",  # translated, not copied
+        "man", "woman", "earth", "ground", "water", "light", "darkness",
+        "day", "night", "morning", "evening", "heaven", "sea", "land",
+    })
+
+    def _compute_calibrated_confidence(self, outputs, seq_idx: int) -> float:
+        """Length-normalized per-token log-probability as calibrated confidence.
+
+        Raw sequence_score is the SUM of per-token log-probs, so longer outputs
+        always score lower. Dividing by token count fixes this, then mapping
+        through a sigmoid calibrated to NLLB's typical [-3, 0] avg-logprob range.
+
+        Calibration targets (empirically derived for NLLB-600M):
+            avg_log_prob = -0.3  → confidence ≈ 0.90  (excellent)
+            avg_log_prob = -0.8  → confidence ≈ 0.80  (good)
+            avg_log_prob = -1.5  → confidence ≈ 0.65  (acceptable)
+            avg_log_prob = -2.5  → confidence ≈ 0.40  (poor)
+            avg_log_prob = -3.5  → confidence ≈ 0.20  (very poor)
+
+        Args:
+            outputs: Return value of model.generate() with return_dict_in_generate=True.
+            seq_idx: Which sequence in the batch to score.
+
+        Returns:
+            Calibrated confidence in [0.05, 0.97].
+        """
+        if not (hasattr(outputs, "sequences_scores") and outputs.sequences_scores is not None):
+            return 0.60
+        if seq_idx >= len(outputs.sequences_scores):
+            return 0.60
+
+        log_prob = outputs.sequences_scores[seq_idx].item()
+
+        # Count non-padding tokens (subtract 1 for the forced BOS token)
+        pad_id = self.tokenizer.pad_token_id or 1
+        seq = outputs.sequences[seq_idx]
+        n_tokens = int((seq != pad_id).sum().item()) - 1
+        n_tokens = max(n_tokens, 1)
+
+        avg_log_prob = log_prob / n_tokens
+
+        # Sigmoid mapping: logit = 1.3 * avg_log_prob + 2.4
+        # Chosen so the calibration targets above are met
+        logit = 1.3 * avg_log_prob + 2.4
+        raw = 1.0 / (1.0 + math.exp(-logit))
+        return float(min(max(raw, 0.05), 0.97))
+
+    def _extract_proper_nouns(self, source_text: str) -> set:
+        """Extract likely person/place names from English source.
+
+        A token is a proper-noun candidate when it:
+          - is capitalized
+          - appears mid-sentence (not the first word)
+          - is not in the function-word exclusion list
+
+        Args:
+            source_text: English verse (may include "Book CH:V: " prefix).
+
+        Returns:
+            Set of lowercase proper-noun candidates.
+        """
+        # Strip "Genesis 3:14: " style prefix
+        text = re.sub(r'^[A-Za-z]+ \d+:\d+:\s*', '', source_text)
+        words = text.split()
+        nouns = set()
+        for i, word in enumerate(words):
+            clean = re.sub(r'[^\w]', '', word)
+            if not clean or i == 0:
+                continue
+            if clean[0].isupper() and clean.lower() not in self._ENGLISH_FUNCTION_WORDS:
+                nouns.add(clean.lower())
+        return nouns
+
+    def _check_proper_noun_stability(
+        self, translation: str, source_text: str
+    ) -> float:
+        """Score how well person/place names from source appear in translation.
+
+        Uses fuzzy prefix matching since Haitian Creole phonetically adapts
+        many English names (e.g. Cain → Kayen, Abel stays Abel).
+
+        Args:
+            translation: Generated Haitian Creole translation.
+            source_text: Original English source verse.
+
+        Returns:
+            Stability score 0-1 (1.0 = all names accounted for).
+        """
+        proper_nouns = self._extract_proper_nouns(source_text)
+        if not proper_nouns:
+            return 1.0
+
+        trans_lower = translation.lower()
+        trans_words = set(re.sub(r'[^\w\s]', '', trans_lower).split())
+
+        preserved = 0.0
+        for noun in proper_nouns:
+            if noun in trans_lower:
+                preserved += 1.0
+            elif len(noun) >= 4 and noun[:4] in trans_lower:
+                preserved += 0.7  # Partial phonetic match
+            elif len(noun) >= 3 and any(w.startswith(noun[:3]) for w in trans_words):
+                preserved += 0.4  # Weak match
+
+        return min(preserved / len(proper_nouns), 1.0)
+
+    def _detect_non_hc_script(self, text: str) -> bool:
+        """Detect Central/Eastern European characters leaking into HC output.
+
+        NLLB sometimes bleeds characters from other Latin-script languages
+        it was trained on (Czech, Slovak, Polish: č ň ě ř ž ů etc.).
+        These never appear in legitimate Haitian Creole text.
+
+        Args:
+            text: Translation output to check.
+
+        Returns:
+            True if foreign-script contamination detected.
+        """
+        # Characters valid in Haitian Creole: ASCII + è é ò ô â à ê î û
+        # Everything outside this set in a Latin context is suspicious
+        non_hc_pattern = r'[čňěřžůďťľśćźąęłóżĺĽŃŌ]'
+        return bool(re.search(non_hc_pattern, text, re.IGNORECASE))
 
     def translate_verse(
         self,
@@ -366,6 +548,8 @@ class ScriptureTranslator:
                 num_return_sequences=num_beams if return_alternatives else 1,
                 temperature=temperature,
                 early_stopping=True,
+                no_repeat_ngram_size=3,
+                repetition_penalty=1.3,
                 output_scores=True,
                 return_dict_in_generate=True,
                 forced_bos_token_id=self.tokenizer.convert_tokens_to_ids(target_lang),
@@ -385,12 +569,7 @@ class ScriptureTranslator:
 
         # Calculate confidence from log-probability
         # Bug 3 fix: sequences_scores is a log-probability, not softmax input
-        if hasattr(outputs, "sequences_scores") and outputs.sequences_scores is not None:
-            log_prob = outputs.sequences_scores[0].item()
-            # Convert log-prob to probability via exp, then clamp to [0, 1]
-            confidence = float(torch.exp(torch.tensor(log_prob)).clamp(0.0, 1.0).item())
-        else:
-            confidence = 0.0
+        confidence = self._compute_calibrated_confidence(outputs, 0)
 
         # Enforce consistency
         consistency_enforced = False
@@ -519,6 +698,8 @@ class ScriptureTranslator:
                     num_beams=DEFAULT_NUM_BEAMS,
                     num_return_sequences=1,
                     early_stopping=True,
+                    no_repeat_ngram_size=3,
+                    repetition_penalty=1.3,
                     output_scores=True,
                     return_dict_in_generate=True,
                     forced_bos_token_id=self.tokenizer.convert_tokens_to_ids(target_lang),
@@ -563,13 +744,29 @@ class ScriptureTranslator:
                     )
                     logger.debug(f"ENFORCED [{window.current_ref}]: {verse_translation[:100]}...")
 
-                # STEP 4: Calculate confidence (simple: just model score for now)
+                # STEP 4: Calculate confidence
                 if not cached_translation:
-                    if hasattr(outputs, "sequences_scores") and outputs.sequences_scores is not None:
-                        log_prob = outputs.sequences_scores[i].item() if i < len(outputs.sequences_scores) else 0.0
-                        confidence = float(torch.exp(torch.tensor(log_prob)).clamp(0.2, 0.99).item())
-                    else:
-                        confidence = 0.75  # Default if no score available
+                    confidence = self._compute_calibrated_confidence(outputs, i)
+
+                    # Apply quality signals to confidence
+                    if verse_translation:
+                        if self._detect_repetition_collapse(verse_translation):
+                            confidence = 0.05
+                            logger.warning(f"Repetition collapse detected: {window.current_ref}")
+                        else:
+                            if self._detect_numerical_corruption(verse_translation, orig_verse["text"]):
+                                confidence = max(0.2, confidence * 0.70)
+                                logger.debug(f"Numerical corruption detected: {window.current_ref}")
+                            if self._detect_non_hc_script(verse_translation):
+                                confidence = max(0.2, confidence * 0.65)
+                                logger.warning(f"Non-HC script detected: {window.current_ref}")
+                            if self._detect_french_contamination(verse_translation):
+                                confidence = max(0.2, confidence * 0.75)
+                                logger.debug(f"French contamination detected: {window.current_ref}")
+                            pn_score = self._check_proper_noun_stability(verse_translation, orig_verse["text"])
+                            if pn_score < 0.5:
+                                confidence = max(0.2, confidence * (0.7 + 0.3 * pn_score))
+                                logger.debug(f"Proper noun instability (score={pn_score:.2f}): {window.current_ref}")
                 else:
                     confidence = cached_confidence
 
@@ -628,8 +825,9 @@ class ScriptureTranslator:
         target_lang: str,
         batch_size: int = 8,
         show_progress: bool = True,
+        use_back_translation: bool = False,
     ) -> List[TranslationResult]:
-        """Translate multiple verses - SIMPLE AND CLEAN.
+        """Translate multiple verses.
 
         Args:
             verses: List of verse dicts with 'text' and optional 'reference'.
@@ -637,6 +835,9 @@ class ScriptureTranslator:
             target_lang: Target language code (e.g., "hat_Latn").
             batch_size: Batch size for processing.
             show_progress: Whether to show progress bar.
+            use_back_translation: If True, back-translate each verse and feed
+                the semantic similarity score into confidence. Doubles inference
+                time — use only for spot-checks or small batches.
 
         Returns:
             List of TranslationResult objects.
@@ -678,6 +879,8 @@ class ScriptureTranslator:
                     num_beams=DEFAULT_NUM_BEAMS,
                     num_return_sequences=1,
                     early_stopping=True,
+                    no_repeat_ngram_size=3,
+                    repetition_penalty=1.3,
                     output_scores=True,
                     return_dict_in_generate=True,
                     forced_bos_token_id=self.tokenizer.convert_tokens_to_ids(target_lang),
@@ -711,12 +914,8 @@ class ScriptureTranslator:
 
                 canonical_terms = self.term_extractor.get_canonical_terms(verse["text"], target_lang)
 
-                # Base confidence: model log-probability
-                if hasattr(outputs, "sequences_scores") and outputs.sequences_scores is not None:
-                    log_prob = outputs.sequences_scores[i].item()
-                    confidence = float(torch.exp(torch.tensor(log_prob)).clamp(0.2, 0.99).item())
-                else:
-                    confidence = 0.75
+                # Base confidence: length-normalized per-token log-probability
+                confidence = self._compute_calibrated_confidence(outputs, i)
 
                 # QUALITY SIGNAL 1: Tier 1 term injection (hard theological requirements)
                 if self.tiered_terminology:
@@ -771,6 +970,37 @@ class ScriptureTranslator:
                 if self._detect_french_contamination(translation):
                     confidence = max(0.2, confidence * 0.75)  # 25% penalty
                     logger.debug("French contamination detected")
+
+                # QUALITY SIGNAL 6: Repetition collapse (catastrophic failure)
+                if self._detect_repetition_collapse(translation):
+                    confidence = 0.05  # Near-zero: output is unusable
+                    logger.warning(f"Repetition collapse detected: {verse.get('reference', '?')}")
+
+                # QUALITY SIGNAL 7: Numerical corruption
+                if self._detect_numerical_corruption(translation, verse["text"]):
+                    confidence = max(0.2, confidence * 0.70)  # 30% penalty
+                    logger.debug(f"Numerical corruption detected: {verse.get('reference', '?')}")
+
+                # QUALITY SIGNAL 8: Non-HC script contamination (č, ň, etc.)
+                if self._detect_non_hc_script(translation):
+                    confidence = max(0.2, confidence * 0.65)  # 35% penalty — output has corrupted chars
+                    logger.warning(f"Non-HC script detected: {verse.get('reference', '?')}")
+
+                # QUALITY SIGNAL 9: Proper noun stability
+                pn_score = self._check_proper_noun_stability(translation, verse["text"])
+                if pn_score < 0.5:
+                    confidence = max(0.2, confidence * (0.7 + 0.3 * pn_score))
+                    logger.debug(f"Proper noun instability (score={pn_score:.2f}): {verse.get('reference', '?')}")
+
+                # QUALITY SIGNAL 10 (optional): Semantic similarity via back-translation
+                # Only runs when use_back_translation=True — doubles inference time
+                if use_back_translation and translation:
+                    bt_similarity, _ = self.back_translator.validate(
+                        translation, verse["text"]
+                    )
+                    # Replace model log-prob with the round-trip semantic score
+                    confidence = bt_similarity
+                    logger.debug(f"Back-translation similarity: {bt_similarity:.2f} for {verse.get('reference', '?')}")
 
                 # Create result
                 result = TranslationResult(

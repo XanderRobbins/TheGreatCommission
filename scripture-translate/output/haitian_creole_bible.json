@@ -12,26 +12,26 @@
     "target_language": "hat_Latn"
   },
   {
-    "primary": "Lè sa a, latè a te vide, li pa t' gen anyen sou li, li te fè fènwa sou lanmè a. Lespri Bondye a t'ap deplase sou dlo a.",
-    "confidence": 0.5709109693765639,
+    "primary": "Lè sa a, tè a te vide, li pa t' gen anyen sou li, li te fè fènwa sou lanmè a. Lespri Bondye a t'ap deplase sou dlo a.",
+    "confidence": 0.7424999999999999,
     "alternatives": [],
     "theological_terms": {
-      "water": "Dlo",
-      "darkness": "Fono",
       "spirit": "Lespri",
-      "god": "Bondye"
+      "god": "Bondye",
+      "water": "Dlo",
+      "darkness": "fènwa"
     },
     "consistency_enforced": true,
     "source_text": "Genesis 1:2: And the earth was waste and void; and darkness was upon the face of the deep: and the Spirit of God moved upon the face of the waters.",
     "target_language": "hat_Latn"
   },
   {
-    "primary": "Apre sa, Bondye di: - Se pou gen limyè. Se pou gen limyè.",
-    "confidence": 0.8733505487442017,
+    "primary": "Apre sa, Bondye di: - Se pou gen limyè. Se konsa, limyè te parèt.",
+    "confidence": 0.99,
     "alternatives": [],
     "theological_terms": {
-      "light": "Limyè",
-      "god": "Bondye"
+      "god": "Bondye",
+      "light": "Limyè"
     },
     "consistency_enforced": true,
     "source_text": "Genesis 1:3: And God said, Let there be light: and there was light.",
@@ -39,13 +39,13 @@
   },
   {
     "primary": "Bondye wè limyè a, li te bon. Bondye separe limyè a ak fènwa a.",
-    "confidence": 0.9487091422080993,
+    "confidence": 0.99,
     "alternatives": [],
     "theological_terms": {
+      "darkness": "fènwa",
+      "god": "Bondye",
       "good": "Bon",
-      "darkness": "Fono",
-      "light": "Limyè",
-      "god": "Bondye"
+      "light": "Limyè"
     },
     "consistency_enforced": true,
     "source_text": "Genesis 1:4: And God saw the light, that it was good: and God divided the light from the darkness.",
@@ -53,15 +53,1047 @@
   },
   {
     "primary": "Bondye rele limyè a Jou, li rele fènwa a lannwit. Se konsa, te gen aswè ak maten, se te yon sèl jou.",
-    "confidence": 0.8408877849578857,
+    "confidence": 0.99,
     "alternatives": [],
     "theological_terms": {
-      "darkness": "Fono",
-      "light": "Limyè",
-      "god": "Bondye"
+      "darkness": "fènwa",
+      "god": "Bondye",
+      "light": "Limyè"
     },
     "consistency_enforced": true,
     "source_text": "Genesis 1:5: And God called the light Day, and the darkness he called Night. And there was evening and there was morning, one day.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye di: -Se pou yon gwo syèl parèt nan mitan dlo yo. Se pou li separe dlo yo!",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "water": "Dlo"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:6: And God said, Let there be a firmament in the midst of the waters, and let it divide the waters from the waters.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Bondye fè syèl la, li separe dlo ki anba syèl la ak dlo ki anwo syèl la.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "water": "Dlo"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:7: And God made the firmament, and divided the waters which were under the firmament from the waters which were above the firmament: and it was so.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye rele syèl la. Se konsa, gen yon aswè ak yon maten. Se te dezyèm jou a.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "heaven": "Syèl",
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:8: And God called the firmament Heaven. And there was evening and there was morning, a second day.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye di: \"Se pou tout dlo ki anba syèl la rasanble nan yon sèl kote. Se pou tout tè sèk la parèt\". Se konsa bagay la rive.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "heaven": "Syèl",
+      "god": "Bondye",
+      "water": "Dlo"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:9: And God said, Let the waters under the heavens be gathered together unto one place, and let the dry land appear: and it was so.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Bondye rele tè ki sèk la tè, li rele dlo ki te rasanble a lanmè. Bondye wè sa te bon.",
+    "confidence": 0.5197499999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "good": "Bon",
+      "water": "Dlo"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:10: And God called the dry land Earth; and the gathering together of the waters called he Seas: and God saw that it was good.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye di: - Se pou tè a pote zèb, fèy ki bay grenn, pyebwa ki bay fwi dapre kalite yo. Se konsa li rive.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:11: And God said, Let the earth put forth grass, herbs yielding seed, [and] fruit-trees bearing fruit after their kind, wherein is the seed thereof, upon the earth: and it was so.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, tè a te pote tout zèb ki t'ap bay pitit pitit li yo, ak tout pyebwa ki te bay fwi ki gen pitit pitit yo. Bondye wè sa te bon.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "good": "Bon"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:12: And the earth brought forth grass, herbs yielding seed after their kind, and trees bearing fruit, wherein is the seed thereof, after their kind: and God saw that it was good.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, gen yon aswè ak yon maten. Se te twazyèm jou a.",
+    "confidence": 0.9638529322164296,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 1:13: And there was evening and there was morning, a third day.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye di: - Se pou gen limyè nan syèl la pou yo divize jounen an ak lannwit la. Se pou yo sèvi kòm siy pou montre tan, tan, jou ak ane.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "son": "Pitit",
+      "god": "Bondye",
+      "light": "Limyè",
+      "heaven": "Syèl"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:14: And God said, Let there be lights in the firmament of heaven to divide the day from the night; and let them be for signs, and for seasons, and for days and years:",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Se pou yo tounen limyè nan syèl la pou yo klere tè a. Se konsa sa te rive.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "heaven": "Syèl",
+      "light": "Limyè"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 1:15: and let them be for lights in the firmament of heaven to give light upon the earth: and it was so.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye fè de gwo limyè yo: pi gwo limyè a pou l' gouvène jounen an, ki pi piti a pou li gouvènnen lannwit la. Li fè tou zetwal yo.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "light": "Limyè"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:16: And God made the two great lights; the greater light to rule the day, and the lesser light to rule the night: [he made] the stars also.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Bondye mete yo nan syèl la pou yo klere latè.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "heaven": "Syèl",
+      "god": "Bondye",
+      "light": "Limyè"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:17: And God set them in the firmament of heaven to give light upon the earth,",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Pou l' gouvène jounen an ak lannwit la, pou l' separe limyè a ak fènwa a. Bondye wè sa te bon.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "darkness": "fènwa",
+      "god": "Bondye",
+      "good": "Bon",
+      "light": "Limyè"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:18: and to rule over the day and over the night, and to divide the light from the darkness: and God saw that it was good.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, gen yon aswè ak yon maten. Se te katriyèm jou a.",
+    "confidence": 0.9643145681833627,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 1:19: And there was evening and there was morning, a fourth day.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye di: Se pou dlo yo plen ak bèt vivan. Se pou zwazo yo vole sou latè nan syèl la.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "heaven": "Syèl",
+      "god": "Bondye",
+      "water": "Dlo"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:20: And God said, Let the waters swarm with swarms of living creatures, and let birds fly above the earth in the open firmament of heaven.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye kreye gwo bèt ki nan lanmè yo, ak tout bèt vivan k'ap mache nan dlo yo, dapre espès yo. Li kreye tou zwazo ki gen zèl. Bondye wè sa te bon.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "good": "Bon",
+      "water": "Dlo"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:21: And God created the great sea-monsters, and every living creature that moveth, wherewith the waters swarmed, after their kind, and every winged bird after its kind: and God saw that it was good.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye beni yo. Li di yo: \"Se pou nou fè pitit, se pou nou vin anpil. Se pou nou ranpli dlo ki nan lanmè a, se konsa zwazo yo vin anpil sou latè\".",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "water": "Dlo",
+      "blessed": "Beni"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:22: And God blessed them, saying, Be fruitful, and multiply, and fill the waters in the seas, and let birds multiply on the earth.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, gen yon aswè ak yon maten, ki se senkèm jou a.",
+    "confidence": 0.9634200950644907,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 1:23: And there was evening and there was morning, a fifth day.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye di: - Se pou latè bay tout bèt vivan ki gen espès yo: bèt kay, bèt k'ap rasanble ak bèt ki sou latè. Se konsa bagay la rive.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:24: And God said, Let the earth bring forth living creatures after their kind, cattle, and creeping things, and beasts of the earth after their kind: and it was so.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye fè bèt yo, bèt yo ak tout bagay k'ap mache sou tè a. Bondye wè sa te bon.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "good": "Bon"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:25: And God made the beasts of the earth after their kind, and the cattle after their kind, and everything that creepeth upon the ground after its kind: and God saw that it was good.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye di: - Se pou nou fè moun tankou nou. Se pou yo pran pouvwa sou pwason ki nan lanmè a, sou zwazo ki nan syèl la, sou bèt kay yo, sou tout tè a ak sou tout bèt k'ap viv sou latè.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "heaven": "Syèl",
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:26: And God said, Let us make man in our image, after our likeness: and let them have dominion over the fish of the sea, and over the birds of the heavens, and over the cattle, and over all the earth, and over every creeping thing that creepeth upon the earth.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye kreye nonm lan nan imaj li, li kreye l' nan imaj Bondye. Li kreye yo gason ak fi.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:27: And God created man in his own image, in the image of God created he him; male and female created he them.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye beni yo. Bondye di yo: -Se pou nou fè pitit, se pou nou bay anpil pitit. Se pou nou ranpli peyi a, nou mèt gouvène li. Nou gen pouvwa sou pwason ki nan lanmè a, sou zwazo ki nan syèl la, sou tout bagay k'ap viv sou latè.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "heaven": "Syèl",
+      "god": "Bondye",
+      "blessed": "Beni"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:28: And God blessed them: and God said unto them, Be fruitful, and multiply, and replenish the earth, and subdue it; and have dominion over the fish of the sea, and over the birds of the heavens, and over every living thing that moveth upon the earth.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye di: - M'ap ban nou tout zèb ki bay grenn sou tout tè a, tout pyebwa ki bay fwi. Se pou nou manje.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:29: And God said, Behold, I have given you every herb yielding seed, which is upon the face of all the earth, and every tree, in which is the fruit of a tree yielding seed; to you it shall be for food:",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Tout bèt ki sou latè, tout zwazo ki nan syèl la, tout bèt k'ap mache sou latè ki gen lavi, mwen ba yo tout zèb vèt pou yo manje. Se konsa sa te rive.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "heaven": "Syèl",
+      "life": "Lavi"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 1:30: and to every beast of the earth, and to every bird of the heavens, and to everything that creepeth upon the earth, wherein there is life, [I have given] every green herb for food: and it was so.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Lè Bondye wè tout bagay li te fè, li wè li trè bon. Se konsa, gen yon aswè ak yon maten, se sizyèm jou a.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "good": "Bon"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 1:31: And God saw everything that he had made, and, behold, it was very good. And there was evening and there was morning, the sixth day.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Lè sa a, syèl la, tè a ak tout lame yo te fini.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "heaven": "Syèl"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 2:1: And the heavens and the earth were finished, and all the host of them.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Sou setyèm jou a, Bondye fini travay li te fè a. Li pran repo sou setyčm jou a nan tout travay li t'ap fè la.",
+    "confidence": 0.48262499999999997,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:2: And on the seventh day God finished his work which he had made; and he rested on the seventh day from all his work which he had made.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye beni jou setyèm lan, li mete l' apa pou li. Paske, nan jou sa a, li t'ap repoze nan tout travay li te fè.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "blessed": "Beni"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:3: And God blessed the seventh day, and hallowed it; because that in it he rested from all his work which God had created and made.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Sa a Bondye se istwa syèl la ak tè a lè yo te kreye, nan jou Seyè a fè latè ak syèl la.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "heaven": "Syèl",
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:4: These are the generations of the heavens and of the earth when they were created, in the day that Jehovah God made earth and heaven.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Menm lè sa a, pa t' gen okenn plant nan peyi a ankò. Pa te gen okenn zèb nan jaden an ankò. Paske, Seyè a, Bondye a, pat fè lapli sou tè a. Pa t' genyen moun k'ap plante tè a tou.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:5: And no plant of the field was yet in the earth, and no herb of the field had yet sprung up; for Jehovah God had not caused it to rain upon the earth: and there was not a man to till the ground;",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Men, yon nwaj leve soti nan tè a, li vide tout tè a.",
+    "confidence": 0.6195983895263456,
+    "alternatives": [],
+    "theological_terms": {
+      "water": "Dlo"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 2:6: but there went up a mist from the earth, and watered the whole face of the ground.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Seyè a, Bondye a, fè nonm lan soti nan pousyè tè, li respire souf lavi nan nen l' yo. Lè sa a, nonm lan vin tounen yon moun vivan.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "life": "Lavi"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:7: And Jehovah God formed man of the dust of the ground, and breathed into his nostrils the breath of life; and man became a living soul.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Seyè a, Bondye a, plante yon jaden nan Eden, bò solèy leve a. Li mete moun li te fè a la.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:8: And Jehovah God planted a garden eastward, in Eden; and there he put the man whom he had formed.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Seyè a, Bondye a, fè tout pyebwa ki bèl pou wè, ki bon pou manje, pouse soti nan tè a. Se pyebwa k'ap bay lavi ki te nan mitan jaden an, se pye bwa ki te konn sa ki bon ak sa ki mal tou.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "evil": "Mal",
+      "life": "Lavi",
+      "good": "Bon"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:9: And out of the ground made Jehovah God to grow every tree that is pleasant to the sight, and good for food; the tree of life also in the midst of the garden, and the tree of the knowledge of good and evil.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Yon larivyè Lefrat te soti nan Eden pou l' te bwè jaden an. Li kraze soti nan jaden an, li vin tounen kat tèt.",
+    "confidence": 0.8270671593879947,
+    "alternatives": [],
+    "theological_terms": {
+      "water": "Dlo"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 2:10: And a river went out of Eden to water the garden; and from thence it was parted, and became four heads.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Non premye larivyè Lefrat la se Pison. Li kouvri tout peyi Havila a, kote gen lò.",
+    "confidence": 0.722597623134161,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 2:11: The name of the first is Pishon: that is it which compasseth the whole land of Havilah, where there is gold;",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "E lò peyi sa a bon. Li gen bdelyòm ak wòch oniks.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "good": "Bon"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 2:12: and the gold of that land is good: there is bdellium and the onyx stone.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Dezyèm larivyè Lefrat la rele Gihon. Se li menm ki kouvri tout peyi Kus la.",
+    "confidence": 0.7233073933460992,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 2:13: And the name of the second river is Gihon: the same is it that compasseth the whole land of Cush.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Twazyèm larivyè Lefrat la rele Hiddekel. Se li ki pase devan peyi Asiryen an. Katriyèm rivyè a se Eufrat la.",
+    "confidence": 0.5789192853705885,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 2:14: And the name of the third river is Hiddekel: that is it which goeth in front of Assyria. And the fourth river is the Euphrates.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Se konsa, Seyè a, Bondye a, pran nonm lan, li mete l' nan jaden Eden an pou l' okipe l'.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:15: And Jehovah God took the man, and put him into the garden of Eden to dress it and to keep it.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Seyè a, Bondye a, bay nonm lan lòd konsa: - Ou ka manje tout pyebwa nan jaden an.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:16: And Jehovah God commanded the man, saying, Of every tree of the garden thou mayest freely eat:",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Men, pa manje nan pyebwa k'ap fè konnen ki bon ak ki mal. Jou w'a manje ladan l, ou pral mouri\".",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "evil": "Mal",
+      "good": "Bon"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 2:17: but of the tree of the knowledge of good and evil, thou shalt not eat of it: for in the day that thou eatest thereof thou shalt surely die.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye Seyè a di: - Li pa bon pou nonm lan rete pou kont li. M'ap fè l' yon moun pou l' ede l'.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "good": "Bon"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:18: And Jehovah God said, It is not good that the man should be alone; I will make him a help meet for him.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Seyè a, Bondye a, te fè tout bèt nan jaden ak tout zwazo nan syèl la soti nan tè a. Li te pote yo bay nonm lan pou l wè ki non l' ta vle rele yo. Se konsa nonm lan te rele chak bèt vivan.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "heaven": "Syèl",
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:19: And out of the ground Jehovah God formed every beast of the field, and every bird of the heavens; and brought them unto the man to see what he would call them: and whatsoever the man called every living creature, that was the name thereof.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, nonm lan te rele tout bèt yo, tout zwazo yo ak tout bèt nan jaden yo. Men, pa t' gen okenn moun ki t'ap ede l'.",
+    "confidence": 0.8279174595526656,
+    "alternatives": [],
+    "theological_terms": {
+      "heaven": "Syèl"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 2:20: And the man gave names to all cattle, and to the birds of the heavens, and to every beast of the field; but for man there was not found a help meet for him.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye Seyè a fè nonm lan tonbe nan gwo dòmi, li dòmi. Li pran youn nan kòt kò l' yo, li fèmen vyann lan.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:21: And Jehovah God caused a deep sleep to fall upon the man, and he slept; and he took one of his ribs, and closed up the flesh instead thereof:",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye Seyè a fè yon fi nan kòt la, li mennen l' bay nonm lan.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:22: and the rib, which Jehovah God had taken from the man, made he a woman, and brought her unto the man.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, nonm lan di: - Sa a se zo ki soti nan zo mwen ak vyann ki sòti nan vyann mwen. Li pral rele Fanm, paske li te pran nan nonm lan.",
+    "confidence": 0.9651918508906853,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 2:23: And the man said, This is now bone of my bones, and flesh of my flesh: she shall be called Woman, because she was taken out of Man.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Se poutèt sa, lè yon nonm kite papa l ak manman l, li rete ansanm ak madanm li, yo tounen yon sèl kò.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "father": "Papa"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 2:24: Therefore shall a man leave his father and his mother, and shall cleave unto his wife: and they shall be one flesh.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Yo tou de te toutouni, nonm lan ak madanm li, epi yo pa t' wont.",
+    "confidence": 0.7230860358620521,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 2:25: And they were both naked, the man and his wife, and were not ashamed.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Serp la te pi fèb pase tout bèt nan jaden Seyè a, Bondye a, te fè yo. Li di fanm lan: - Wi, Bondye di nou pa dwe manje nan tout pyebwa nan jaden an.",
+    "confidence": 0.5197499999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 3:1: Now the serpent was more subtle than any beast of the field which Jehovah God had made. And he said unto the woman, Yea, hath God said, Ye shall not eat of any tree of the garden?",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Fanm lan reponn sèpan an: Nou ka manje fwi pyebwa nan jaden an.",
+    "confidence": 0.9644043227451865,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:2: And the woman said unto the serpent, Of the fruit of the trees of the garden we may eat:",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Men, Bondye te di nou pa dwe manje nan pyebwa ki nan mitan jaden an, ni manyen l' pou nou pa mouri.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 3:3: but of the fruit of the tree which is in the midst of the garden, God hath said, Ye shall not eat of it, neither shall ye touch it, lest ye die.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Lè sa a, sèpan an di fanm lan: - Nou p'ap mouri.",
+    "confidence": 0.9646420180993378,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:4: And the serpent said unto the woman, Ye shall not surely die:",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Paske, Bondye konnen lè nou manje nan pye bwa sa a, je nou yo pral louvri, nou pral tankou Bondye, n'a konnen ki bon ak ki mal\".",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "evil": "Mal",
+      "good": "Bon"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 3:5: for God doth know that in the day ye eat thereof, then your eyes shall be opened, and ye shall be as God, knowing good and evil.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Lè fanm lan wè pyebwa a te bon pou manje, li te bèl pou wè, l te vle fè moun vin konprann. Li pran kèk nan fwi yo, li manje. Apre sa, li bay mari l' la tou, li menm tou, manje.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "good": "Bon",
+      "light": "Limyè"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:6: And when the woman saw that the tree was good for food, and that it was a delight to the eyes, and that the tree was to be desired to make one wise, she took of the fruit thereof, and did eat; and she gave also unto her husband with her, and he did eat.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Lè sa a, je tou de yo louvri, yo wè yo te toutouni. Yo koud fèy fig ansanm, yo fè rad pou tèt yo.",
+    "confidence": 0.7233209943767864,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:7: And the eyes of them both were opened, and they knew that they were naked; and they sewed fig-leaves together, and made themselves aprons.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Yo tande Seyè a, Bondye a, ap mache nan jaden an pandan solèy la fè frèt. Lè sa a, nonm lan ak madanm li kache tèt yo nan mitan pyebwa yo nan jaden nan pou yo pa wè Seyè a.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "king": "Wa"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 3:8: And they heard the voice of Jehovah God walking in the garden in the cool of the day: and the man and his wife hid themselves from the presence of Jehovah God amongst the trees of the garden.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Seyè a Bondye rele nonm lan, li mande l' konsa: - Ki kote ou ye?",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 3:9: And Jehovah God called unto the man, and said unto him, Where art thou?",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Li reponn li: - Mwen te tande vwa ou nan jaden an. Mwen te pè paske m te toutouni. Se konsa mwen te kache m.",
+    "confidence": 0.9650343567677087,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:10: And he said, I heard thy voice in the garden, and I was afraid, because I was naked; and I hid myself.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Bondye mande l' konsa: - Ki moun ki di ou ke ou toutouni? Eske ou manje nan pyebwa m' te ban ou lòd pou ou pa manje ladan l?",
+    "confidence": 0.6756858880453777,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:11: And he said, Who told thee that thou wast naked? Hast thou eaten of the tree, whereof I commanded thee that thou shouldest not eat?",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "nonm lan reponn: - Fanm lan ou ban m' la, se li menm ki ba m' pyebwa a, mwen manje.",
+    "confidence": 0.7235224599937802,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:12: And the man said, The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Seyè a, Bondye a, mande fanm lan: - Kisa ou fè a? Fanm lan reponn li: - Se sèpan an ki twonpe m' pou m' manje.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 3:13: And Jehovah God said unto the woman, What is this thou hast done? And the woman said, The serpent beguiled me, and I did eat.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Seyè a, Bondye a, di sèpan an: - Paske ou fè bagay sa a, se pou Bondye lanmen w pi plis pase tout bèt yo ak tout bèt nan jaden an. Tout jou w ap viv ou pral mache sou vant ou, ou pral manje tè.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "curse": "Madichon",
+      "god": "Bondye",
+      "life": "Lavi"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 3:14: And Jehovah God said unto the serpent, Because thou hast done this, cursed art thou above all cattle, and above every beast of the field; upon thy belly shalt thou go, and dust shalt thou eat all the days of thy life:",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "M'ap mete lènmi ant ou ak fanm lan, ant pitit pitit ou ak pitit pitit li a. Li pral kraze tèt ou, ou pral kraze pye l'.",
+    "confidence": 0.965470509647516,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:15: and I will put enmity between thee and the woman, and between thy seed and her seed: he shall bruise thy head, and thou shalt bruise his heel.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Li di fanm lan: M'ap ogmante anpil doulè ou ak gwosès ou. Ou pral fè pitit avèk doulèr, ou pral renmen mari ou, epi li pral gouvène ou.",
+    "confidence": 0.9648224472609347,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:16: Unto the woman he said, I will greatly multiply thy pain and thy conception; in pain thou shalt bring forth children; and thy desire shall be to thy husband, and he shall rule over thee.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye di Adan konsa: - Paske ou koute madanm ou, ou manje nan pyebwa m' te ban ou lòd pou ou pa manje ladan l la, se pou ou mete lanmen sou tè a. Tout jou w ap viv ou pral manje nan travay di.",
+    "confidence": 0.5093115410154929,
+    "alternatives": [],
+    "theological_terms": {
+      "curse": "Madichon",
+      "life": "Lavi"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:17: And unto Adam he said, Because thou hast hearkened unto the voice of thy wife, and hast eaten of the tree, of which I commanded thee, saying, Thou shalt not eat of it: cursed is the ground for thy sake; in toil shalt thou eat of it all the days of thy life;",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Li p'ap fè ou gen tout espenn ak twonb, epi ou pral manje tout zèb nan jaden an.",
+    "confidence": 0.962749084560639,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:18: thorns also and thistles shall it bring forth to thee; and thou shalt eat the herb of the field;",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Ou pral manje manje nan swe figi ou a jiskaske ou tounen nan tè a, paske se nan tè ou te pran. Paske, ou se pousyè tè, epi ou pral tounen nan pousyè.",
+    "confidence": 0.8278562127945635,
+    "alternatives": [],
+    "theological_terms": {
+      "bread": "Pan"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:19: in the sweat of thy face shalt thou eat bread, till thou return unto the ground; for out of it wast thou taken: for dust thou art, and unto dust shalt thou return.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Adam rele madanm li Ev, paske li te manman tout moun k'ap viv.",
+    "confidence": 0.6749840621176088,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:20: And the man called his wife’s name Eve; because she was the mother of all living.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Se konsa, Bondye Seyè a fè Adan ak madanm li yon rad po, li mete yo sou yo.",
+    "confidence": 0.8118,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 3:21: And Jehovah God made for Adam and for his wife coats of skins, and clothed them.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Bondye Seyè a di: - Men, lèzòm la vin tankou yonn nan nou, li ka konnen ki bon ak ki mal. Koulye a, se pou l pa mete men l' sou pyebwa ki bay lavi a pou l' pran manje l' epi l' viv pou tout tan.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye",
+      "evil": "Mal",
+      "life": "Lavi",
+      "good": "Bon"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 3:22: And Jehovah God said, Behold, the man is become as one of us, to know good and evil; and now, lest he put forth his hand, and take also of the tree of life, and eat, and live for ever—",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Se poutèt sa, Seyè a, Bondye a, voye l' soti nan jaden Eden an pou l' travay tè kote yo te pran l'.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "god": "Bondye"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 3:23: therefore Jehovah God sent him forth from the garden of Eden, to till the ground from whence he was taken.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Se konsa, Bondye mete nonm lan deyò. Li mete nan bò solèy leve jaden Eden an, cherubi yo ansanm ak yon gwo lňt espya ki t'ap vire tout bò kote yo, pou yo pwoteje wout pyebwa ki bay lavi a.",
+    "confidence": 0.6435,
+    "alternatives": [],
+    "theological_terms": {
+      "life": "Lavi"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 3:24: So he drove out the man; and he placed at the east of the garden of Eden the Cherubim, and the flame of a sword which turned every way, to keep the way of the tree of life.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Lè sa a, nonm lan fè madanm li Ev la konnen. Li vin ansent, li fè Kayen fèt. Li di: - Se avèk èd Seyè a mwen jwenn yon nonm.",
+    "confidence": 0.5065320981902309,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:1: And the man knew Eve his wife; and she conceived, and bare Cain, and said, I have gotten a man with [the help of] Jehovah.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Yon lòt fwa ankò, li fè pitit Abraram, frè l' lan. Abèl te kenbe mouton, Kayen t'ap travay nan peyi a.",
+    "confidence": 0.6749609045105448,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:2: And again she bare his brother Abel. And Abel was a keeper of sheep, but Cain was a tiller of the ground.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre yon ti tan, Kayen te pote kèk nan fwi tè a pou l' ofri Seyè a.",
+    "confidence": 0.578695559325076,
+    "alternatives": [],
+    "theological_terms": {
+      "offering": "Ofrann"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:3: And in process of time it came to pass, that Cain brought of the fruit of the ground an offering unto Jehovah.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Apre sa, Abèl menm tou, l'ap pote premye pitit mouton l' yo ansanm ak tout grès yo. Seyè a pran Abel ak ofrann l' lan.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "offering": "Ofrann"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:4: And Abel, he also brought of the firstlings of his flock and of the fat thereof. And Jehovah had respect unto Abel and to his offering:",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Men, Bondye pa t' gen respè pou Kayen ak ofrann l' te ofri a. Kayen te fache anpil.",
+    "confidence": 0.693,
+    "alternatives": [],
+    "theological_terms": {
+      "offering": "Ofrann"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:5: but unto Cain and to his offering he had not respect. And Cain was very wroth, and his countenance fell.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Seyè a mande Kayen: - Poukisa w fache konsa? Poukisa ou fè tèt chaje?",
+    "confidence": 0.6740892754662741,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:6: And Jehovah said unto Cain, Why art thou wroth? and why is thy countenance fallen?",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Si ou fè byen, ou p'ap resevwa lwanj. Men, si ou pa fè sa ki byen, peche ap kouche nan pòt la. Se ou menm k'ap chache l', men gouvène l'.",
+    "confidence": 0.7424999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "sin": "Peche"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:7: If thou doest well, shall it not be lifted up? and if thou doest not well, sin coucheth at the door; and unto thee shall be its desire; but do thou rule over it.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Kayen di Abel frè l' la sa. Lè yo te nan jaden an, Kayen leve kont Abel, frè l', li touye l'.",
+    "confidence": 0.7234143588679747,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:8: And Cain told Abel his brother. And it came to pass, when they were in the field, that Cain rose up against Abel his brother, and slew him.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Seyè a mande Kayen: - Ki kote Abèl, frè ou a? Li reponn li: - Mwen pa konnen. Eske m'ap kenbe frè m' la?",
+    "confidence": 0.5068290214312923,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:9: And Jehovah said unto Cain, Where is Abel thy brother? And he said, I know not: am I my brother’s keeper?",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Li di: - Ki sa ou fè? San frè ou a ap rele m' soti nan tè a.",
+    "confidence": 0.9639950140371015,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:10: And he said, What hast thou done? the voice of thy brother’s blood crieth unto me from the ground.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Koulye a, se ou menm ki blese anba tè a ki louvri bouch li pou l' pran san frè ou a nan men ou.",
+    "confidence": 0.8271966280304139,
+    "alternatives": [],
+    "theological_terms": {
+      "curse": "Madichon"
+    },
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:11: And now cursed art thou from the ground, which hath opened its mouth to receive thy brother’s blood from thy hand;",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Lè w'ap travay tè a, li p'ap bay ou ankò fòs li. Ou pral tounen yon moun k'ap kouri kite peyi a ak yon moun ki pa konnen ki kote ou ye.",
+    "confidence": 0.9646526196622074,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:12: when thou tillest the ground, it shall not henceforth yield unto thee its strength; a fugitive and a wanderer shalt thou be in the earth.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Lè sa a, Kayen di Seyè a: - M'ap resevwa pi gwo pinisyon pase mwen.",
+    "confidence": 0.674433589671062,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:13: And Cain said unto Jehovah, My punishment is greater than I can bear.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Se ou menm ki mete m' deyò jodi a. Mwen kache m' pou ou pa wè m'. M'ap kouri kite peyi a, m'ap mache tankou yon moun k'ap viv toupatou. Moun ki jwenn m' yo pral touye m'.",
+    "confidence": 0.965224104728338,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:14: Behold, thou hast driven me out this day from the face of the ground; and from thy face shall I be hid; and I shall be a fugitive and a wanderer in the earth; and it will come to pass, that whosoever findeth me will slay me.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Seyè a di l' konsa: - Se poutèt sa, si yon moun touye Kayen, Bondye va ranvwaye l' sèt fwa. Se konsa, Seyè a mete yon siy pou Kayen pou tout moun k'ap chache l' pa touye l'.",
+    "confidence": 0.6759203456571566,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:15: And Jehovah said unto him, Therefore whosoever slayeth Cain, vengeance shall be taken on him sevenfold. And Jehovah appointed a sign for Cain, lest any finding him should smite him.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Lè sa a, Kayen kite Seyè a, li rete nan peyi Nod, bò solèy leve Edèn.",
+    "confidence": 0.7715728264678229,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:16: And Cain went out from the presence of Jehovah, and dwelt in the land of Nod, on the east of Eden.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Kayen te fè madanm li konnen. Li vin ansent, li fè Enok fèt. Li bati yon lavil, li rele lavil la Anok, non pitit gason l' lan.",
+    "confidence": 0.5642999999999999,
+    "alternatives": [],
+    "theological_terms": {
+      "son": "Pitit"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 4:17: And Cain knew his wife; and she conceived, and bare Enoch: and he builded a city, and called the name of the city, after the name of his son, Enoch.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Enòk te gen yon pitit gason ki rele Irad. Irad te fè Mehuyaèl, Mehujaèl te fè Metwosaèl, Matwosayèl te fè Lamech.",
+    "confidence": 0.9648102692453798,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:18: And unto Enoch was born Irad: and Irad begat Mehujael; and Mehujael begat Methushael; and Methushael begat Lamech.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Lamech pran de madanm pou li. Non yonn se Ada, non lòt la se Zila.",
+    "confidence": 0.7231597726107282,
+    "alternatives": [],
+    "theological_terms": {},
+    "consistency_enforced": false,
+    "source_text": "Genesis 4:19: And Lamech took unto him two wives: the name of the one was Adah, and the name of the other Zillah.",
+    "target_language": "hat_Latn"
+  },
+  {
+    "primary": "Ada gen yon pitit gason ki rele Jabal. Li se te papa moun k'ap viv nan tant ak ki gen bèt.",
+    "confidence": 0.99,
+    "alternatives": [],
+    "theological_terms": {
+      "father": "Papa"
+    },
+    "consistency_enforced": true,
+    "source_text": "Genesis 4:20: And Adah bare Jabal: he was the father of such as dwell in tents and [have] cattle.",
     "target_language": "hat_Latn"
   }
 ]

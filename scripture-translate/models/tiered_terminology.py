@@ -104,7 +104,7 @@ class TieredTerminologyDB:
         "death": "Lamò",
         "truth": "Verite",
         "light": "Limyè",
-        "darkness": "Fono",
+        "darkness": "fènwa",   # Fixed: "Fono" was wrong; standard HC is fènwa/nwa
         "water": "Dlo",
         "bread": "Pan",
         "eternal": "Eternal",  # Fixed: was "etwèl" (means star-like)
@@ -128,7 +128,7 @@ class TieredTerminologyDB:
     AFTERLIFE_TERMS = {
         "heaven": "Syèl",
         "hell": "Lanfè",  # Fixed: was "lanfe" (spelling correction)
-        "resurrection": "Rezirekireksyon",
+        "resurrection": "Rezireksyon",  # Fixed: "Rezirekireksyon" was garbled
         "judgment day": "Jou Jijman an",
     }
 
