@@ -110,6 +110,38 @@ class ScriptureTranslator:
         self.model.eval()
         logger.info("ScriptureTranslator initialized")
 
+    def _minimal_clean(self, text: str) -> str:
+        """Minimal cleaning: only remove obvious junk, NOT complex parsing.
+
+        Args:
+            text: Raw model output.
+
+        Returns:
+            Minimally cleaned text.
+        """
+        text = text.strip()
+
+        # Only remove if starts with clear instruction markers
+        if text.startswith("###") or text.startswith(">>>") or text.startswith("==="):
+            # These look like prompt echoes - skip to after the marker
+            lines = text.split("\n")
+            for i, line in enumerate(lines):
+                if not (line.startswith("###") or line.startswith(">>>") or line.startswith("===")):
+                    text = "\n".join(lines[i:]).strip()
+                    break
+
+        # Remove if it contains excessive English/French keywords that suggest echoed instructions
+        if text.count("DO NOT") > 2 or text.count("INSTRUCTION") > 1:
+            # This looks like instructions were echoed back
+            # Try to extract just the translation part
+            lines = text.split("\n")
+            # Take the last non-empty line or longest line
+            non_empty_lines = [l.strip() for l in lines if l.strip() and len(l.strip()) > 10]
+            if non_empty_lines:
+                text = non_empty_lines[-1]
+
+        return text.strip()
+
     def _enforce_tier1_terms(
         self,
         translation: str,
@@ -459,16 +491,13 @@ class ScriptureTranslator:
             batch_end = min(batch_start + batch_size, len(windows))
             batch_windows = windows[batch_start:batch_end]
 
-            # Build prompts with strict delimiter separation
-            prompts = []
-            if self.prompt_builder:
-                prompts = [
-                    self.prompt_builder.build_context_prompt(w, target_lang)
-                    for w in batch_windows
-                ]
-            else:
-                # Fallback: just use verse text without conditioning
-                prompts = [w.current_verse for w in batch_windows]
+            # Build input: ONLY verse text, NO instructions or context labels
+            # Model sees just the verse to translate, nothing else
+            prompts = [w.current_verse for w in batch_windows]
+
+            # Log what we're sending
+            for w, prompt in zip(batch_windows, prompts):
+                logger.debug(f"SENDING TO MODEL [{w.current_ref}]: {prompt[:80]}...")
 
             # Tokenize batch
             inputs = self.tokenizer(
@@ -518,79 +547,35 @@ class ScriptureTranslator:
                         raw_output = self.tokenizer.decode(
                             outputs.sequences[i], skip_special_tokens=True
                         )
+                        logger.debug(f"RAW OUTPUT [{window.current_ref}]: {raw_output[:100]}...")
 
-                        # Aggressively clean instruction text that model might have translated
-                        raw_output = self._aggressive_clean_output(raw_output)
-
-                        # Extract translation from output
-                        # If we included context in input, extract just the middle verse
-                        if self.prompt_builder:
-                            verse_translation = self.prompt_builder.extract_translation_from_output(
-                                raw_output,
-                                window.current_verse,
-                                window.prev_verse,
-                                window.next_verse,
-                            )
-                        else:
-                            verse_translation = raw_output
+                        # MINIMAL cleaning - only remove obvious junk, NOT complex parsing
+                        verse_translation = self._minimal_clean(raw_output)
+                        logger.debug(f"CLEANED [{window.current_ref}]: {verse_translation[:100]}...")
                     else:
                         logger.warning(f"Missing output for verse {window.current_ref}")
                         verse_translation = ""
 
-                # Skip post-processing if from cache
-                if not cached_translation:
-                    # STEP 3: HARD POST-PROCESSING: Enforce Tier 1 terminology
-                    if self.tiered_terminology and verse_translation:
-                        verse_translation = self._enforce_tier1_terms(
-                            verse_translation, orig_verse["text"], target_lang
-                        )
+                # STEP 3: Enforce Tier 1 terminology (if not cached)
+                if not cached_translation and verse_translation:
+                    verse_translation = self._enforce_tier1_terms(
+                        verse_translation, orig_verse["text"], target_lang
+                    )
+                    logger.debug(f"ENFORCED [{window.current_ref}]: {verse_translation[:100]}...")
 
-                    # STEP 4: Calculate composite confidence from multiple signals
-                    model_base_confidence = 0.5
+                # STEP 4: Calculate confidence (simple: just model score for now)
+                if not cached_translation:
                     if hasattr(outputs, "sequences_scores") and outputs.sequences_scores is not None:
                         log_prob = outputs.sequences_scores[i].item() if i < len(outputs.sequences_scores) else 0.0
-                        model_base_confidence = float(torch.exp(torch.tensor(log_prob)).clamp(0.0, 1.0).item())
-
-                    # Use multi-metric scorer for real confidence grounding
-                    confidence, confidence_components = self.confidence_scorer.score(
-                        verse_translation,
-                        orig_verse["text"],
-                        target_lang,
-                        model_base_confidence,
-                    )
-
-                    quality_tier = self.confidence_scorer.get_quality_tier(confidence)
-                    if quality_tier in ["acceptable", "poor"]:
-                        logger.debug(f"{window.current_ref}: {quality_tier} quality (conf={confidence:.2f})")
-                        logger.debug(f"  Components: {confidence_components}")
+                        confidence = float(torch.exp(torch.tensor(log_prob)).clamp(0.2, 0.99).item())
+                    else:
+                        confidence = 0.75  # Default if no score available
                 else:
-                    # Use cached confidence
                     confidence = cached_confidence
-                    confidence_components = {"source": "cache"}
 
-                # STEP 5: Back-translation validation (optional, for good-quality translations)
-                if confidence >= 0.75 and not cached_translation:
-                    try:
-                        back_trans = self.back_translator.back_translate(
-                            verse_translation, target_lang, source_lang
-                        )
-                        similarity, bt_metrics = self.back_translator.validate(
-                            verse_translation, orig_verse["text"], back_trans
-                        )
+                logger.debug(f"CONFIDENCE [{window.current_ref}]: {confidence:.2f}")
 
-                        # Adjust confidence based on back-translation similarity
-                        confidence = confidence * 0.7 + similarity * 0.3
-                        confidence_components["back_translation_similarity"] = similarity
-                        confidence_components["hallucination"] = self.back_translator.detect_hallucination(
-                            verse_translation, back_trans
-                        )
-
-                        if confidence_components["hallucination"]:
-                            logger.debug(f"{window.current_ref}: Hallucination detected via back-translation")
-                    except Exception as e:
-                        logger.debug(f"Back-translation validation skipped: {e}")
-
-                # STEP 6: Store in translation memory for future lookups
+                # STEP 5: Store in translation memory (if not cached)
                 if not cached_translation and verse_translation:
                     self.translation_memory.store(
                         orig_verse["text"],
