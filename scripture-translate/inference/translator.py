@@ -18,6 +18,9 @@ from constants import MAX_SOURCE_LENGTH, MAX_TARGET_LENGTH, DEFAULT_NUM_BEAMS
 from utils.logger import get_logger
 from inference.context_manager import ContextWindowBuilder, ContextWindow
 from inference.prompt_builder import PromptBuilder
+from inference.confidence_scorer import ConfidenceScorer
+from inference.translation_memory import TranslationMemory
+from inference.back_translator import BackTranslationValidator
 
 logger = get_logger(__name__)
 
@@ -99,6 +102,10 @@ class ScriptureTranslator:
         self.use_prompt_conditioning = use_prompt_conditioning
         self.term_extractor = TermExtractor(self.terminology_db)
         self.prompt_builder = PromptBuilder(self.terminology_db, tiered_terminology) if use_prompt_conditioning else None
+
+        self.confidence_scorer = ConfidenceScorer(self.terminology_db, self.tiered_terminology)
+        self.translation_memory = TranslationMemory()
+        self.back_translator = BackTranslationValidator(model, tokenizer, device)
 
         self.model.eval()
         logger.info("ScriptureTranslator initialized")
@@ -435,42 +442,94 @@ class ScriptureTranslator:
                 window = batch_windows[i]
                 orig_verse = verses[window.index]
 
-                # Decode raw output
-                if i < num_outputs:
-                    raw_output = self.tokenizer.decode(
-                        outputs.sequences[i], skip_special_tokens=True
-                    )
+                # STEP 1: Check translation memory (cache hit = no recomputation)
+                language_pair = f"{source_lang}→{target_lang}"
+                cached_translation = self.translation_memory.lookup(
+                    orig_verse["text"], language_pair
+                )
 
-                    # Extract translation from structured prompt output
-                    if self.prompt_builder:
-                        verse_translation = self.prompt_builder.extract_translation_from_output(raw_output)
+                if cached_translation:
+                    verse_translation, cached_confidence = cached_translation
+                    logger.debug(
+                        f"Translation memory HIT: {window.current_ref}"
+                    )
+                else:
+                    # STEP 2: Decode raw output if not cached
+                    if i < num_outputs:
+                        raw_output = self.tokenizer.decode(
+                            outputs.sequences[i], skip_special_tokens=True
+                        )
+
+                        # Extract translation from structured prompt output
+                        if self.prompt_builder:
+                            verse_translation = self.prompt_builder.extract_translation_from_output(raw_output)
+                        else:
+                            verse_translation = raw_output
                     else:
-                        verse_translation = raw_output
-                else:
-                    logger.warning(f"Missing output for verse {window.current_ref}")
-                    verse_translation = ""
+                        logger.warning(f"Missing output for verse {window.current_ref}")
+                        verse_translation = ""
 
-                # HARD POST-PROCESSING: Enforce Tier 1 terminology
-                if self.tiered_terminology and verse_translation:
-                    verse_translation = self._enforce_tier1_terms(
-                        verse_translation, orig_verse["text"], target_lang
+                # Skip post-processing if from cache
+                if not cached_translation:
+                    # STEP 3: HARD POST-PROCESSING: Enforce Tier 1 terminology
+                    if self.tiered_terminology and verse_translation:
+                        verse_translation = self._enforce_tier1_terms(
+                            verse_translation, orig_verse["text"], target_lang
+                        )
+
+                    # STEP 4: Calculate composite confidence from multiple signals
+                    model_base_confidence = 0.5
+                    if hasattr(outputs, "sequences_scores") and outputs.sequences_scores is not None:
+                        log_prob = outputs.sequences_scores[i].item() if i < len(outputs.sequences_scores) else 0.0
+                        model_base_confidence = float(torch.exp(torch.tensor(log_prob)).clamp(0.0, 1.0).item())
+
+                    # Use multi-metric scorer for real confidence grounding
+                    confidence, confidence_components = self.confidence_scorer.score(
+                        verse_translation,
+                        orig_verse["text"],
+                        target_lang,
+                        model_base_confidence,
                     )
 
-                # Check for French contamination
-                has_french = self._detect_french_contamination(verse_translation)
-                if has_french:
-                    logger.debug(f"French contamination detected in {window.current_ref}")
-
-                # Calculate confidence
-                if hasattr(outputs, "sequences_scores") and outputs.sequences_scores is not None:
-                    log_prob = outputs.sequences_scores[i].item() if i < len(outputs.sequences_scores) else 0.0
-                    confidence = float(torch.exp(torch.tensor(log_prob)).clamp(0.0, 1.0).item())
+                    quality_tier = self.confidence_scorer.get_quality_tier(confidence)
+                    if quality_tier in ["acceptable", "poor"]:
+                        logger.debug(f"{window.current_ref}: {quality_tier} quality (conf={confidence:.2f})")
+                        logger.debug(f"  Components: {confidence_components}")
                 else:
-                    confidence = 0.0
+                    # Use cached confidence
+                    confidence = cached_confidence
+                    confidence_components = {"source": "cache"}
 
-                # Adjust confidence for French contamination
-                if has_french:
-                    confidence *= 0.6  # Penalize French-contaminated output
+                # STEP 5: Back-translation validation (optional, for good-quality translations)
+                if confidence >= 0.75 and not cached_translation:
+                    try:
+                        back_trans = self.back_translator.back_translate(
+                            verse_translation, target_lang, source_lang
+                        )
+                        similarity, bt_metrics = self.back_translator.validate(
+                            verse_translation, orig_verse["text"], back_trans
+                        )
+
+                        # Adjust confidence based on back-translation similarity
+                        confidence = confidence * 0.7 + similarity * 0.3
+                        confidence_components["back_translation_similarity"] = similarity
+                        confidence_components["hallucination"] = self.back_translator.detect_hallucination(
+                            verse_translation, back_trans
+                        )
+
+                        if confidence_components["hallucination"]:
+                            logger.debug(f"{window.current_ref}: Hallucination detected via back-translation")
+                    except Exception as e:
+                        logger.debug(f"Back-translation validation skipped: {e}")
+
+                # STEP 6: Store in translation memory for future lookups
+                if not cached_translation and verse_translation:
+                    self.translation_memory.store(
+                        orig_verse["text"],
+                        verse_translation,
+                        language_pair,
+                        confidence,
+                    )
 
                 # Extract theological terms
                 theological_terms = self.term_extractor.extract_theological_terms(

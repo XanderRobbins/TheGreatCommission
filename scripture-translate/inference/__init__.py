@@ -10,6 +10,9 @@ from inference.context_manager import (
     ContextWindowBuilder,
 )
 from inference.prompt_builder import PromptBuilder
+from inference.confidence_scorer import ConfidenceScorer
+from inference.translation_memory import TranslationMemory
+from inference.back_translator import BackTranslationValidator
 
 __all__ = [
     "ScriptureTranslator",
@@ -18,4 +21,7 @@ __all__ = [
     "ContextWindow",
     "ContextWindowBuilder",
     "PromptBuilder",
+    "ConfidenceScorer",
+    "TranslationMemory",
+    "BackTranslationValidator",
 ]

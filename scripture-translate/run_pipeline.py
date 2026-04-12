@@ -261,8 +261,12 @@ Examples:
             logger.error(f"Translation failed: {e}")
             sys.exit(1)
 
-        # Step 5: Save results
-        logger.info(f"\n[Step 5/5] Saving results...")
+        # Step 5: Save translation memory and results
+        logger.info(f"\n[Step 5/5] Saving results and translation memory...")
+
+        # Save translation memory for future runs
+        translator.translation_memory.save()
+        translator.translation_memory.print_stats()
 
         # Prepare data for JSON
         translations_list = [r.to_dict() for r in results]

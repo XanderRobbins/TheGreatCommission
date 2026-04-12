@@ -137,26 +137,32 @@ CRITICAL: Output ONLY the translated verse text. Nothing else."""
         )
 
     def _build_context_reference(self, context_window: ContextWindow) -> Optional[str]:
-        """Build context reference (semantic understanding, not text to translate).
+        """Build context reference using structural cues only (no labels).
 
-        Uses careful wording to prevent model from translating/copying context.
+        Provides context without labels that could be translated or copied.
+        Model infers context from position and structure, not from "Previous:"/"Next:" markers.
 
         Args:
             context_window: Context window.
 
         Returns:
-            Formatted context section.
+            Formatted context section (unlabeled).
         """
         if not context_window.prev_verse and not context_window.next_verse:
             return None
 
-        parts = ["### CONTEXT (FOR UNDERSTANDING ONLY - DO NOT TRANSLATE)"]
+        # Just provide the raw verses with minimal structure - no labels
+        parts = ["### CONTEXT"]
+        parts.append("")  # Blank line
 
         if context_window.prev_verse:
-            parts.append(f"(Previous verse for context: {context_window.prev_verse[:80]}...)")
+            # No "Previous:" label - just the text
+            parts.append(context_window.prev_verse[:100])
+            parts.append("")
 
         if context_window.next_verse:
-            parts.append(f"(Next verse for context: {context_window.next_verse[:80]}...)")
+            # No "Next:" label - just the text
+            parts.append(context_window.next_verse[:100])
 
         return "\n".join(parts)
 

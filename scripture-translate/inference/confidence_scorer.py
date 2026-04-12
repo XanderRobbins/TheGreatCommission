@@ -1,0 +1,285 @@
+"""Multi-metric confidence scoring for translations.
+
+Confidence is grounded in actual translation quality signals:
+- Lexical consistency: Are glossary terms present?
+- Glossary match rate: What % of expected terms appear?
+- Language purity: Is it Creole or French-contaminated?
+- Token confidence: What was the model's own confidence?
+"""
+
+import re
+from typing import Dict, Optional, Tuple
+from models.terminology import TerminologyDB, TermExtractor
+from models.tiered_terminology import TieredTerminologyDB, TermTier
+from utils.logger import get_logger
+
+logger = get_logger(__name__)
+
+
+class ConfidenceScorer:
+    """Score translation confidence using multiple signals."""
+
+    # French word patterns (for contamination detection)
+    FRENCH_WORDS = {
+        r"\bla\b", r"\ble\b", r"\bdes\b", r"\bet\b", r"\best\b",
+        r"\bde\b", r"\bétat\b", r"\bdésert\b", r"\bconformé\b",
+        r"\bétait\b", r"\bvide\b", r"\beau\b", r"\bcouvert\b", r"\bplus\b",
+    }
+
+    # Common Haitian Creole words (for language purity)
+    CREOLE_INDICATORS = {
+        r"\bak\b", r"\bepi\b", r"\bse\b", r"\bnan\b", r"\bpou\b",
+        r"\bte\b", r"\bpa\b", r"\bap\b", r"\bgran\b", r"\bbon\b",
+        r"\blespri\b", r"\bseyè\b", r"\bbondye\b", r"\bjezi\b",
+    }
+
+    def __init__(
+        self,
+        terminology_db: TerminologyDB,
+        tiered_terminology: Optional[TieredTerminologyDB] = None,
+    ):
+        """Initialize confidence scorer.
+
+        Args:
+            terminology_db: Terminology database for lookups.
+            tiered_terminology: Optional tiered terminology system.
+        """
+        self.db = terminology_db
+        self.tiered = tiered_terminology
+        self.term_extractor = TermExtractor(terminology_db)
+
+    def score(
+        self,
+        translation: str,
+        source_text: str,
+        target_lang: str,
+        model_confidence: float = 0.5,
+    ) -> Tuple[float, Dict[str, float]]:
+        """Compute composite confidence score.
+
+        Args:
+            translation: Generated translation.
+            source_text: Original source text.
+            target_lang: Target language code.
+            model_confidence: Base confidence from model (log-prob based).
+
+        Returns:
+            Tuple of (composite_score: 0-1, component_scores: dict).
+        """
+        components = {}
+
+        # Component 1: Lexical consistency (glossary term presence)
+        components["lexical_consistency"] = self._score_lexical_consistency(
+            translation, source_text, target_lang
+        )
+
+        # Component 2: Glossary match rate (% of expected terms)
+        components["glossary_match_rate"] = self._score_glossary_match_rate(
+            translation, source_text, target_lang
+        )
+
+        # Component 3: Language purity (Creole vs French)
+        components["language_purity"] = self._score_language_purity(translation)
+
+        # Component 4: Model token confidence
+        components["model_confidence"] = model_confidence
+
+        # Composite: weighted average
+        composite = self._weighted_average(components)
+
+        logger.debug(
+            f"Confidence breakdown: "
+            f"lexical={components['lexical_consistency']:.2f}, "
+            f"glossary={components['glossary_match_rate']:.2f}, "
+            f"purity={components['language_purity']:.2f}, "
+            f"model={components['model_confidence']:.2f} → "
+            f"composite={composite:.2f}"
+        )
+
+        return float(composite), components
+
+    def _score_lexical_consistency(
+        self, translation: str, source_text: str, target_lang: str
+    ) -> float:
+        """Score based on glossary term presence.
+
+        If source has "God" and translation has "Bondye", high score.
+        If source has "God" but translation missing Bondye, low score.
+
+        Args:
+            translation: Generated translation.
+            source_text: Original source.
+            target_lang: Target language code.
+
+        Returns:
+            Score 0-1.
+        """
+        # Extract theological terms from source
+        terms = self.term_extractor.extract_theological_terms(source_text)
+        if not terms:
+            return 0.8  # No terms to match = assume acceptable
+
+        # Check how many have translations in the output
+        matched = 0
+        for term in terms:
+            target_term = self.db.lookup(term, target_lang)
+            if target_term and target_term in translation:
+                matched += 1
+
+        consistency_rate = matched / len(terms) if terms else 0
+        # Map: 0->0.3, 0.5->0.6, 1.0->1.0
+        return min(0.3 + (consistency_rate * 0.7), 1.0)
+
+    def _score_glossary_match_rate(
+        self, translation: str, source_text: str, target_lang: str
+    ) -> float:
+        """Score based on match rate of Tier 1 terms specifically.
+
+        High priority: Tier 1 terms must appear.
+
+        Args:
+            translation: Generated translation.
+            source_text: Original source.
+            target_lang: Target language code.
+
+        Returns:
+            Score 0-1.
+        """
+        if not self.tiered:
+            return 0.7  # No tiered system = skip this metric
+
+        # Extract Tier 1 terms from source
+        terms = self.term_extractor.extract_theological_terms(source_text)
+        tier1_terms = [
+            t for t in terms if self.tiered.get_tier(t) == TermTier.TIER_1
+        ]
+
+        if not tier1_terms:
+            return 0.8  # No Tier 1 terms to match
+
+        # Check presence in translation
+        matched = 0
+        for term in tier1_terms:
+            target_term = self.db.lookup(term, target_lang)
+            if target_term and target_term in translation:
+                matched += 1
+
+        # Tier 1 is critical: 0->0.2, 0.5->0.5, 1.0->1.0
+        match_rate = matched / len(tier1_terms) if tier1_terms else 0
+        return min(0.2 + (match_rate * 0.8), 1.0)
+
+    def _score_language_purity(self, translation: str) -> float:
+        """Score language purity (Creole vs French contamination).
+
+        Check for French word patterns and Creole indicators.
+
+        Args:
+            translation: Generated translation.
+
+        Returns:
+            Score 0-1 (1.0 = pure Creole, 0.0 = French contaminated).
+        """
+        translation_lower = translation.lower()
+
+        # Count French word hits
+        french_count = 0
+        for pattern in self.FRENCH_WORDS:
+            if re.search(pattern, translation_lower):
+                french_count += 1
+
+        # Count Creole word hits
+        creole_count = 0
+        for pattern in self.CREOLE_INDICATORS:
+            if re.search(pattern, translation_lower):
+                creole_count += 1
+
+        # Score: if French words present, penalize heavily
+        if french_count > 0:
+            # Heavy penalty: -0.1 per French word detected
+            return max(0.3 - (french_count * 0.1), 0.0)
+
+        # Bonus for Creole indicators
+        creole_bonus = min(creole_count * 0.1, 0.3)
+        return min(0.7 + creole_bonus, 1.0)
+
+    def _weighted_average(self, components: Dict[str, float]) -> float:
+        """Compute weighted average of component scores.
+
+        Weights prioritize language purity (avoid garbage) and
+        glossary match (theological accuracy).
+
+        Args:
+            components: Dictionary of component scores.
+
+        Returns:
+            Weighted average score 0-1.
+        """
+        # Weights: what matters most
+        weights = {
+            "lexical_consistency": 0.25,  # Glossary terms matter
+            "glossary_match_rate": 0.30,  # Tier 1 terms are critical
+            "language_purity": 0.30,      # Must be Creole, not French
+            "model_confidence": 0.15,     # Model's own score
+        }
+
+        total_score = 0
+        total_weight = 0
+
+        for component, weight in weights.items():
+            if component in components:
+                total_score += components[component] * weight
+                total_weight += weight
+
+        return total_score / total_weight if total_weight > 0 else 0.5
+
+    def get_quality_tier(self, confidence: float) -> str:
+        """Classify translation quality by confidence.
+
+        Args:
+            confidence: Confidence score 0-1.
+
+        Returns:
+            Quality tier: "excellent", "good", "acceptable", "poor".
+        """
+        if confidence >= 0.85:
+            return "excellent"
+        elif confidence >= 0.75:
+            return "good"
+        elif confidence >= 0.60:
+            return "acceptable"
+        else:
+            return "poor"
+
+
+if __name__ == "__main__":
+    from utils.logger import configure_logging
+    from models.tiered_terminology import TieredTerminologyDB
+
+    configure_logging()
+
+    # Test the scorer
+    db = TerminologyDB()
+    tiered = TieredTerminologyDB(db)
+    scorer = ConfidenceScorer(db, tiered)
+
+    # Test with good translation
+    good_source = "In the beginning, God created the heavens and the earth."
+    good_translation = "Ansyen tan, Bondye te kreye syèl la ak latè."
+    score, components = scorer.score(good_translation, good_source, "hat_Latn", 0.85)
+    tier = scorer.get_quality_tier(score)
+    logger.info(f"Good translation: {score:.2f} ({tier})")
+    logger.info(f"  Components: {components}")
+
+    # Test with French contamination
+    bad_translation = "Au début, le Bondye a créé le ciel et la terre."
+    score, components = scorer.score(bad_translation, good_source, "hat_Latn", 0.75)
+    tier = scorer.get_quality_tier(score)
+    logger.info(f"\nFrench-contaminated: {score:.2f} ({tier})")
+    logger.info(f"  Components: {components}")
+
+    # Test with missing glossary term
+    incomplete_translation = "Ansyen tan, Bondye te kreye tèren an ak dlo."
+    score, components = scorer.score(incomplete_translation, good_source, "hat_Latn", 0.70)
+    tier = scorer.get_quality_tier(score)
+    logger.info(f"\nIncomplete translation: {score:.2f} ({tier})")
+    logger.info(f"  Components: {components}")
