@@ -1,9 +1,9 @@
 {
   "metadata": {
     "total_entries": 5,
-    "cache_hits": 5,
+    "cache_hits": 0,
     "cache_misses": 0,
-    "hit_rate": 1.0
+    "hit_rate": 0.0
   },
   "entries": {
     "5bbb646788ac4f13": {

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-12T00:03:23.026049",
+  "timestamp": "2026-04-12T00:19:41.827586",
   "language_pair": "eng_Latn → hat_Latn",
   "source_language": "eng_Latn",
   "target_language": "hat_Latn",
@@ -9,8 +9,8 @@
   "batch_size": 8,
   "metrics": {
     "consistency_score": 1.0,
-    "unique_terms": 63,
-    "avg_term_usage": 5.968253968253968,
-    "avg_confidence": 0.29218112111091615
+    "unique_terms": 51,
+    "avg_term_usage": 1.7450980392156863,
+    "avg_confidence": 0.7952716890573501
   }
 }
