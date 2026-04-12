@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scripture Translation System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .card h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .features {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .features h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .feature-item {
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            background: #f9f9f9;
+        }
+        
+        .feature-item h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .feature-item p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔤 Scripture Translation System</h1>
+            <p class="subtitle">Low-resource Bible translation powered by AI and community validation</p>
+        </header>
+        
+        <div class="grid">
+            <div class="card">
+                <h2>📝 Translate Verses</h2>
+                <p>Translate Bible verses using the pretrained NLLB model with consistency enforcement.</p>
+                <a href="/translate" class="btn">Start Translating</a>
+            </div>
+            
+            <div class="card">
+                <h2>📚 Terminology</h2>
+                <p>Manage theological terminology to ensure consistent translations across all verses.</p>
+                <a href="/terminology" class="btn">Manage Terms</a>
+            </div>
+            
+            <div class="card">
+                <h2>📊 Evaluate</h2>
+                <p>Evaluate translation quality using BLEU scores and custom scripture metrics.</p>
+                <a href="/evaluate" class="btn">Evaluate Now</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>System Statistics</h2>
+            <div class="stats" id="stats">
+                <div class="stat">
+                    <div class="stat-value" id="total-terms">-</div>
+                    <div class="stat-label">Terms</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="languages">-</div>
+                    <div class="stat-label">Languages</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="conflicts">-</div>
+                    <div class="stat-label">Conflicts</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="avg-confidence">-</div>
+                    <div class="stat-label">Avg Confidence</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h2>Key Features</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>✓ NLLB-200</h3>
+                    <p>Supports 200+ languages with shared embedding space</p>
+                </div>
+                <div class="feature-item">
+                    <h3>✓ LoRA Fine-tuning</h3>
+                    <p>Efficient adaptation with only 3% of model parameters</p>
+                </div>
+                <div class="feature-item">
+                    <h3>✓ Consistency Database</h3>
+                    <p>Ensure theological terms translate consistently</p>
+                </div>
+                <div class="feature-item">
+                    <h3>✓ Human Validation</h3>
+                    <p>Community review interface for quality assurance</p>
+                </div>
+                <div class="feature-item">
+                    <h3>✓ Custom Metrics</h3>
+                    <p>BLEU + scripture-specific evaluation</p>
+                </div>
+                <div class="feature-item">
+                    <h3>✓ Batch Processing</h3>
+                    <p>Translate entire books efficiently</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Built for Bible translation | Last updated: 2026-04-10</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Load system statistics
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/system/info');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const stats = data.terminology_stats;
+                    document.getElementById('total-terms').textContent = stats.total_terms || 0;
+                    document.getElementById('languages').textContent = stats.languages || 0;
+                    document.getElementById('conflicts').textContent = stats.conflicts || 0;
+                    document.getElementById('avg-confidence').textContent = 
+                        (stats.avg_confidence * 100).toFixed(0) + '%';
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+        
+        // Load on page load
+        window.addEventListener('load', loadStats);
+    </script>
+</body>
+</html>
