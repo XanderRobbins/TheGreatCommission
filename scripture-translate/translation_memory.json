@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "total_entries": 135,
-    "cache_hits": 0,
-    "cache_misses": 100,
-    "hit_rate": 0.0
+    "total_entries": 141,
+    "cache_hits": 75,
+    "cache_misses": 25,
+    "hit_rate": 0.75
   },
   "entries": {
     "5bbb646788ac4f13": {
@@ -492,7 +492,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:57:53.769686",
       "confidence": 0.891,
-      "hit_count": 0
+      "hit_count": 1
     },
     "c64f0be7da42f4cd": {
       "source_text": "And God created man in his own image, in the image of God created he him; male and female created he them.",
@@ -500,7 +500,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:57:53.793738",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "bffba364dbae3964": {
       "source_text": "and I will put enmity between thee and the woman, and between thy seed and her seed: he shall bruise thy head, and thou shalt bruise his heel.",
@@ -508,7 +508,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:57:53.816737",
       "confidence": 0.9163332031573325,
-      "hit_count": 0
+      "hit_count": 1
     },
     "50e6aea3807cb42e": {
       "source_text": "and I will bless them that bless thee, and him that curseth thee will I curse: and in thee shall all the families of the earth be blessed.",
@@ -516,7 +516,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:57:53.827738",
       "confidence": 0.8282814241469227,
-      "hit_count": 0
+      "hit_count": 1
     },
     "4fdaf74a5c64191f": {
       "source_text": "and in thy seed shall all the nations of the earth be blessed; because thou hast obeyed my voice.",
@@ -524,7 +524,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:57:53.830738",
       "confidence": 0.8282085443844389,
-      "hit_count": 0
+      "hit_count": 1
     },
     "1c4c33d163f135d5": {
       "source_text": "Thou shalt have no other gods before me.",
@@ -532,7 +532,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:57:53.834737",
       "confidence": 0.8229960452602009,
-      "hit_count": 0
+      "hit_count": 1
     },
     "1d3d777d106ef90f": {
       "source_text": "Honor thy father and thy mother, that thy days may be long in the land which Jehovah thy God giveth thee.",
@@ -540,7 +540,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:57:53.849737",
       "confidence": 0.7424999999999999,
-      "hit_count": 0
+      "hit_count": 1
     },
     "0d0edcd277398023": {
       "source_text": "Thou shalt not kill.",
@@ -548,7 +548,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:57:53.851739",
       "confidence": 0.9491314997315121,
-      "hit_count": 0
+      "hit_count": 1
     },
     "9a252bc3f757e12b": {
       "source_text": "Hear, O Israel: Jehovah our God is one Jehovah:",
@@ -556,7 +556,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:58:16.772188",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "4d10f89917a9dac0": {
       "source_text": "and thou shalt love Jehovah thy God with all thy heart, and with all thy soul, and with all thy might.",
@@ -564,7 +564,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:58:16.778187",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "51d8a61a3e6704aa": {
       "source_text": "Blessed is the man that walketh not in the counsel of the wicked, Nor standeth in the way of sinners, Nor sitteth in the seat of scoffers:",
@@ -572,7 +572,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:58:16.848244",
       "confidence": 0.8283366154990388,
-      "hit_count": 0
+      "hit_count": 1
     },
     "fc7d2b9bf47de8fb": {
       "source_text": "Jehovah is my shepherd; I shall not want.",
@@ -580,7 +580,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:58:16.861748",
       "confidence": 0.7216368071369602,
-      "hit_count": 0
+      "hit_count": 1
     },
     "7225a1cbd9add980": {
       "source_text": "God is our refuge and strength, A very present help in trouble.",
@@ -588,7 +588,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:58:26.766667",
       "confidence": 0.7424999999999999,
-      "hit_count": 0
+      "hit_count": 1
     },
     "e4aee040c3af1b55": {
       "source_text": "Be still, and know that I am God: I will be exalted among the nations, I will be exalted in the earth.",
@@ -596,7 +596,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:58:26.772667",
       "confidence": 0.7424999999999999,
-      "hit_count": 0
+      "hit_count": 1
     },
     "ae326e685d99c96f": {
       "source_text": "Create in me a clean heart, O God; And renew a right spirit within me.",
@@ -604,7 +604,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:58:26.780854",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "68cfe210cdedbeda": {
       "source_text": "Bless Jehovah, O my soul; And all that is within me, [bless] his holy name.",
@@ -612,7 +612,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:58:26.791862",
       "confidence": 0.8259963002140954,
-      "hit_count": 0
+      "hit_count": 1
     },
     "7ee25b4cd1ac0344": {
       "source_text": "Thy word is a lamp unto my feet, And light unto my path.",
@@ -620,7 +620,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:58:26.794855",
       "confidence": 0.8265123412760876,
-      "hit_count": 0
+      "hit_count": 1
     },
     "c537c3f76394e782": {
       "source_text": "I will give thanks unto thee; for I am fearfully and wonderfully made: Wonderful are thy works; And that my soul knoweth right well.",
@@ -628,7 +628,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:58:26.801861",
       "confidence": 0.675533471589745,
-      "hit_count": 0
+      "hit_count": 1
     },
     "21ce2da7e00be40d": {
       "source_text": "Great is Jehovah, and greatly to be praised; And his greatness is unsearchable.",
@@ -636,7 +636,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-12T23:58:26.803861",
       "confidence": 0.7234190953147916,
-      "hit_count": 0
+      "hit_count": 1
     },
     "4e3abb0b8a73eedc": {
       "source_text": "The fear of Jehovah is the beginning of knowledge; [But] the foolish despise wisdom and instruction.",
@@ -644,7 +644,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:17.329125",
       "confidence": 0.7236307701376765,
-      "hit_count": 0
+      "hit_count": 1
     },
     "e3c78b8f2e499a8d": {
       "source_text": "Trust in Jehovah with all thy heart, And lean not upon thine own understanding:",
@@ -652,7 +652,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:17.339126",
       "confidence": 0.7234653184143065,
-      "hit_count": 0
+      "hit_count": 1
     },
     "34165ad5b0f8236b": {
       "source_text": "In all thy ways acknowledge him, And he will direct thy paths.",
@@ -660,7 +660,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:17.344126",
       "confidence": 0.7232140758180188,
-      "hit_count": 0
+      "hit_count": 1
     },
     "c9dc7af5b8bf669f": {
       "source_text": "Train up a child in the way he should go, And even when he is old he will not depart from it.",
@@ -668,7 +668,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:17.351124",
       "confidence": 0.7236273622625494,
-      "hit_count": 0
+      "hit_count": 1
     },
     "a4b50ca638a5f15f": {
       "source_text": "but they that wait for Jehovah shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; they shall walk, and not faint.",
@@ -676,7 +676,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:17.382143",
       "confidence": 0.9660235678482316,
-      "hit_count": 0
+      "hit_count": 1
     },
     "963af3ae74e2aa9b": {
       "source_text": "But he was wounded for our transgressions, he was bruised for our iniquities; the chastisement of our peace was upon him; and with his stripes we are healed.",
@@ -684,7 +684,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:17.387145",
       "confidence": 0.7232319511900505,
-      "hit_count": 0
+      "hit_count": 1
     },
     "9583e127ebfe7604": {
       "source_text": "All we like sheep have gone astray; we have turned every one to his own way; and Jehovah hath laid on him the iniquity of us all.",
@@ -692,7 +692,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:17.388679",
       "confidence": 0.9655926003577668,
-      "hit_count": 0
+      "hit_count": 1
     },
     "68918e383b2a9877": {
       "source_text": "For my thoughts are not your thoughts, neither are your ways my ways, saith Jehovah.",
@@ -700,7 +700,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:45.905490",
       "confidence": 0.9656750182257737,
-      "hit_count": 0
+      "hit_count": 1
     },
     "11c8f17fd0ad552a": {
       "source_text": "The Spirit of the Lord Jehovah is upon me; because Jehovah hath anointed me to preach good tidings unto the meek; he hath sent me to bind up the broken-hearted, to proclaim liberty to the captives, and the opening [of the prison] to them that are bound;",
@@ -708,7 +708,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:45.927500",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "0c89218d0aaa9425": {
       "source_text": "But this is the covenant that I will make with the house of Israel after those days, saith Jehovah: I will put my law in their inward parts, and in their heart will I write it; and I will be their God, and they shall be my people.",
@@ -716,7 +716,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:45.941020",
       "confidence": 0.7424999999999999,
-      "hit_count": 0
+      "hit_count": 1
     },
     "f911001f9a7f6142": {
       "source_text": "He hath showed thee, O man, what is good; and what doth Jehovah require of thee, but to do justly, and to love kindness, and to walk humbly with thy God?",
@@ -724,7 +724,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:45.946024",
       "confidence": 0.7424999999999999,
-      "hit_count": 0
+      "hit_count": 1
     },
     "98a334da99507b6d": {
       "source_text": "And she shall bring forth a son; and thou shalt call his name JESUS; for it is he that shall save his people from their sins.",
@@ -732,7 +732,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:45.947026",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "ea03aabef148bfdb": {
       "source_text": "Blessed are the poor in spirit: for theirs is the kingdom of heaven.",
@@ -740,7 +740,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:45.947026",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "dd00cdbf68ebd288": {
       "source_text": "Blessed are they that hunger and thirst after righteousness: for they shall be filled.",
@@ -748,7 +748,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:45.948020",
       "confidence": 0.8280431680222196,
-      "hit_count": 0
+      "hit_count": 1
     },
     "06fd18f7074026b4": {
       "source_text": "After this manner therefore pray ye: Our Father who art in heaven, Hallowed be thy name.",
@@ -756,7 +756,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:57.184920",
       "confidence": 0.693,
-      "hit_count": 0
+      "hit_count": 1
     },
     "e1c57c362599d328": {
       "source_text": "Give us this day our daily bread.",
@@ -764,7 +764,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:57.193922",
       "confidence": 0.8235856733038669,
-      "hit_count": 0
+      "hit_count": 1
     },
     "830468b98e91d58d": {
       "source_text": "And forgive us our debts, as we also have forgiven our debtors.",
@@ -772,7 +772,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:57.193922",
       "confidence": 0.8274535454616291,
-      "hit_count": 0
+      "hit_count": 1
     },
     "455a708f44d4b23a": {
       "source_text": "But seek ye first his kingdom, and his righteousness; and all these things shall be added unto you.",
@@ -780,7 +780,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:57.201922",
       "confidence": 0.8275448299753152,
-      "hit_count": 0
+      "hit_count": 1
     },
     "33c3925c77fd88df": {
       "source_text": "Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you:",
@@ -788,7 +788,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:00:57.208920",
       "confidence": 0.9144435417210709,
-      "hit_count": 0
+      "hit_count": 1
     },
     "839d160dbe285e92": {
       "source_text": "Come unto me, all ye that labor and are heavy laden, and I will give you rest.",
@@ -796,7 +796,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:06.010825",
       "confidence": 0.7236111254134933,
-      "hit_count": 0
+      "hit_count": 1
     },
     "a7754badea573057": {
       "source_text": "And a second like [unto it] is this, Thou shalt love thy neighbor as thyself.",
@@ -804,7 +804,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:06.029820",
       "confidence": 0.8282154828533951,
-      "hit_count": 0
+      "hit_count": 1
     },
     "c95c471f52e4557a": {
       "source_text": "Go ye therefore, and make disciples of all the nations, baptizing them into the name of the Father and of the Son and of the Holy Spirit:",
@@ -812,7 +812,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:06.031824",
       "confidence": 0.8904804358712656,
-      "hit_count": 0
+      "hit_count": 1
     },
     "5b1746ceb5a63bda": {
       "source_text": "teaching them to observe all things whatsoever I commanded you: and lo, I am with you always, even unto the end of the world.",
@@ -820,7 +820,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:06.038824",
       "confidence": 0.7240423738822712,
-      "hit_count": 0
+      "hit_count": 1
     },
     "414dbc34919a261a": {
       "source_text": "For the Son of man also came not to be ministered unto, but to minister, and to give his life a ransom for many.",
@@ -828,7 +828,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:06.046835",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "1b25b21492b9d380": {
       "source_text": "for there is born to you this day in the city of David a Saviour, who is Christ the Lord.",
@@ -836,7 +836,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:06.051834",
       "confidence": 0.693,
-      "hit_count": 0
+      "hit_count": 1
     },
     "862f1b7cec19156f": {
       "source_text": "The Spirit of the Lord is upon me, Because he anointed me to preach good tidings to the poor: He hath sent me to proclaim release to the captives, And recovering of sight to the blind, To set at liberty them that are bruised,",
@@ -844,7 +844,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:32.556716",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "1a103ec77117aec8": {
       "source_text": "I say unto you, that even so there shall be joy in heaven over one sinner that repenteth, [more] than over ninety and nine righteous persons, who need no repentance.",
@@ -852,7 +852,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:32.577715",
       "confidence": 0.8281448321242039,
-      "hit_count": 0
+      "hit_count": 1
     },
     "4887f6a8404d5000": {
       "source_text": "For the Son of man came to seek and to save that which was lost.",
@@ -860,7 +860,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:32.587716",
       "confidence": 0.693,
-      "hit_count": 0
+      "hit_count": 1
     },
     "28f9dac5482d83b3": {
       "source_text": "In the beginning was the Word, and the Word was with God, and the Word was God.",
@@ -868,7 +868,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:32.594716",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "c8fcb68c09506814": {
       "source_text": "And the Word became flesh, and dwelt among us ( and we beheld his glory, glory as of the only begotten from the Father), full of grace and truth.",
@@ -876,7 +876,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:32.598716",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "01ccd778ccd22087": {
       "source_text": "Sanctify them in the truth: thy word is truth.",
@@ -884,7 +884,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:55.300131",
       "confidence": 0.8244347718952357,
-      "hit_count": 0
+      "hit_count": 1
     },
     "e430d343dbd0fd82": {
       "source_text": "But ye shall receive power, when the Holy Spirit is come upon you: and ye shall be my witnesses both in Jerusalem, and in all Judæa and Samaria, and unto the uttermost part of the earth.",
@@ -892,7 +892,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:55.317131",
       "confidence": 0.7009360826374206,
-      "hit_count": 0
+      "hit_count": 1
     },
     "a61f0e8a21b25663": {
       "source_text": "And Peter [said] unto them, Repent ye, and be baptized every one of you in the name of Jesus Christ unto the remission of your sins; and ye shall receive the gift of the Holy Spirit.",
@@ -900,7 +900,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:55.322127",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "41dc6221fa600110": {
       "source_text": "And in none other is there salvation: for neither is there any other name under heaven, that is given among men, wherein we must be saved.",
@@ -908,7 +908,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:55.326127",
       "confidence": 0.8284436368162872,
-      "hit_count": 0
+      "hit_count": 1
     },
     "0f8f361194499fa6": {
       "source_text": "for all have sinned, and fall short of the glory of God;",
@@ -916,7 +916,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:01:55.350480",
       "confidence": 0.7424999999999999,
-      "hit_count": 0
+      "hit_count": 1
     },
     "bfd0641d9497ec7b": {
       "source_text": "But God commendeth his own love toward us, in that, while we were yet sinners, Christ died for us.",
@@ -924,7 +924,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:11.130797",
       "confidence": 0.7424999999999999,
-      "hit_count": 0
+      "hit_count": 1
     },
     "f12af046bcc35472": {
       "source_text": "There is therefore now no condemnation to them that are in Christ Jesus.",
@@ -932,7 +932,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:11.143796",
       "confidence": 0.693,
-      "hit_count": 0
+      "hit_count": 1
     },
     "0fb7823bdc2c20c1": {
       "source_text": "And we know that to them that love God all things work together for good, [even] to them that are called according to [his] purpose.",
@@ -940,7 +940,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:11.144796",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "a2cc087e4f62aaf3": {
       "source_text": "because if thou shalt confess with thy mouth Jesus [as] Lord, and shalt believe in thy heart that God raised him from the dead, thou shalt be saved:",
@@ -948,7 +948,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:11.147796",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "85b743933c12cb68": {
       "source_text": "I beseech you therefore, brethren, by the mercies of God, to present your bodies a living sacrifice, holy, acceptable to God, [which is] your spiritual service.",
@@ -956,7 +956,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:11.161795",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "ffeaac38679e116c": {
       "source_text": "And be not fashioned according to this world: but be ye transformed by the renewing of your mind, that ye may prove what is the good and acceptable and perfect will of God.",
@@ -964,7 +964,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:11.162797",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "534792e479f8fdd7": {
       "source_text": "Love suffereth long, [and] is kind; love envieth not; love vaunteth not itself, is not puffed up,",
@@ -972,7 +972,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:11.167796",
       "confidence": 0.8273819477387835,
-      "hit_count": 0
+      "hit_count": 1
     },
     "7b7647372833a485": {
       "source_text": "For I delivered unto you first of all that which also I received: that Christ died for our sins according to the scriptures;",
@@ -980,7 +980,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:27.725847",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "38c21aa0f5dcebdd": {
       "source_text": "But the fruit of the Spirit is love, joy, peace, longsuffering, kindness, goodness, faithfulness,",
@@ -988,7 +988,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:27.759305",
       "confidence": 0.7424999999999999,
-      "hit_count": 0
+      "hit_count": 1
     },
     "6d3ffe15653bd67c": {
       "source_text": "for by grace have ye been saved through faith; and that not of yourselves, [it is] the gift of God;",
@@ -996,7 +996,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:27.771827",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "2836fa04ce4ee6aa": {
       "source_text": "not of works, that no man should glory.",
@@ -1004,7 +1004,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:27.774831",
       "confidence": 0.9623324047688011,
-      "hit_count": 0
+      "hit_count": 1
     },
     "854b1e523ea9e73c": {
       "source_text": "and be ye kind one to another, tenderhearted, forgiving each other, even as God also in Christ forgave you.",
@@ -1012,7 +1012,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:43.478206",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "20af55a2ef2aec6e": {
       "source_text": "Finally, be strong in the Lord, and in the strength of his might.",
@@ -1020,7 +1020,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:43.485209",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "0260b47ada6a2655": {
       "source_text": "Every scripture inspired of God [is] also profitable for teaching, for reproof, for correction, for instruction which is in righteousness:",
@@ -1028,7 +1028,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:43.490206",
       "confidence": 0.7424999999999999,
-      "hit_count": 0
+      "hit_count": 1
     },
     "c55217ae38645a64": {
       "source_text": "But be ye doers of the word, and not hearers only, deluding your own selves.",
@@ -1036,7 +1036,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:43.505256",
       "confidence": 0.9632055485244905,
-      "hit_count": 0
+      "hit_count": 1
     },
     "0922b68b51398b6c": {
       "source_text": "Even so faith, if it have not works, is dead in itself.",
@@ -1044,7 +1044,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:43.508255",
       "confidence": 0.8265621955887933,
-      "hit_count": 0
+      "hit_count": 1
     },
     "6ceb7d9cddabb79d": {
       "source_text": "He that loveth not knoweth not God; for God is love.",
@@ -1052,7 +1052,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:43.510255",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "c4f99e7d0669e190": {
       "source_text": "I am the Alpha and the Omega, saith the Lord God, who is and who was and who is to come, the Almighty.",
@@ -1060,7 +1060,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:52.031972",
       "confidence": 0.99,
-      "hit_count": 0
+      "hit_count": 1
     },
     "84669b84ed8a41d5": {
       "source_text": "Behold, I stand at the door and knock: if any man hear my voice and open the door, I will come in to him, and will sup with him, and he with me.",
@@ -1068,7 +1068,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:52.038971",
       "confidence": 0.7242830485930349,
-      "hit_count": 0
+      "hit_count": 1
     },
     "a74d206ac311ca9e": {
       "source_text": "and he shall wipe away every tear from their eyes; and death shall be no more; neither shall there be mourning, nor crying, nor pain, any more: the first things are passed away.",
@@ -1076,7 +1076,7 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:52.041970",
       "confidence": 0.8283294681820842,
-      "hit_count": 0
+      "hit_count": 1
     },
     "77602f0dc151a5e1": {
       "source_text": "He who testifieth these things saith, Yea: I come quickly. Amen: come, Lord Jesus.",
@@ -1084,6 +1084,54 @@
       "language_pair": "eng_Latn→spg_Latn",
       "timestamp": "2026-04-13T00:02:52.048969",
       "confidence": 0.7326,
+      "hit_count": 1
+    },
+    "584c26dada6c7dbc": {
+      "source_text": "I call heaven and earth to witness against you this day, that I have set before thee life and death, the blessing and the curse: therefore choose life, that thou mayest live, thou and thy seed;",
+      "translation": "Tampampulu ndi dziko ndi mboni pakati panu lero, kuti ndaikha patsogolo panu moyo na kufa, madalitso na kutotedwa; tsono sankhani moyo, kuti mukhale na moyo, iwe ndi mbeu yako.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:28:25.391307",
+      "confidence": 0.8281527909183564,
+      "hit_count": 0
+    },
+    "c63f327e8b40c155": {
+      "source_text": "And bring us not into temptation, but deliver us from the evil [one].",
+      "translation": "And bring us not into temptation, but deliver us from the evil one.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:29:57.893963",
+      "confidence": 0.8277912068855059,
+      "hit_count": 0
+    },
+    "e13ff75d5f54c867": {
+      "source_text": "And he said unto them, Go ye into all the world, and preach the gospel to the whole creation.",
+      "translation": "And said unto them, Go ye into all the world, and preach the gospel unto all creation.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:30:09.311179",
+      "confidence": 0.965008640514447,
+      "hit_count": 0
+    },
+    "e00ae603e2c36861": {
+      "source_text": "I have been crucified with Christ; and it is no longer I that live, but Christ liveth in me: and that [life] which I now live in the flesh I live in faith, [the faith] which is in the Son of God, who loved me, and gave himself up for me.",
+      "translation": "I have Pitit Kris Bondye been crucified with Christ; and I am no longer living, but Christ lives in me; and that which I now live in the flesh I live in faith, which is in the Son of God, who loved me and gave himself for me.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:30:57.580105",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "11d8bd473fba8b1b": {
+      "source_text": "meekness, self-control; against such there is no law.",
+      "translation": "humildade, autocontrol; contra ellos no hay ley.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:30:57.581102",
+      "confidence": 0.8262348137922224,
+      "hit_count": 0
+    },
+    "7b2b793bd2d1504c": {
+      "source_text": "Now faith is assurance of [things] hoped for, a conviction of things not seen.",
+      "translation": "Tenda ye ingatanto pi gin ma gigeno, dok bene ma pe gineno.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:31:15.668774",
+      "confidence": 0.8253167142610512,
       "hit_count": 0
     }
   }
