@@ -148,6 +148,75 @@ class ScriptureTranslationModel:
 
         logger.info(f"Model saved to {save_path}")
 
+    def add_language_token(
+        self,
+        lang_code: str,
+        related_lang_codes: Optional[list] = None,
+    ) -> bool:
+        """Add a new language token to the tokenizer and resize model embeddings.
+
+        Used for languages not in NLLB-200. Adds the token, resizes the embedding
+        table, and initializes the new embedding from the average of related languages
+        (warm-start rather than random noise).
+
+        Args:
+            lang_code: New language code to add (e.g., "btx_Latn" for Karo Batak).
+            related_lang_codes: NLLB codes of related languages to average for
+                initialization. If None or empty, falls back to random init.
+
+        Returns:
+            True if token was added, False if it already existed.
+        """
+        # Check if already present
+        existing_id = self.tokenizer.convert_tokens_to_ids(lang_code)
+        unk_id = self.tokenizer.unk_token_id
+        if existing_id != unk_id:
+            logger.info(f"Language token '{lang_code}' already exists (id={existing_id})")
+            return False
+
+        logger.info(f"Adding new language token: {lang_code}")
+
+        # Add token to tokenizer
+        self.tokenizer.add_special_tokens({"additional_special_tokens": [lang_code]})
+        new_token_id = self.tokenizer.convert_tokens_to_ids(lang_code)
+        logger.info(f"Token added with id={new_token_id}")
+
+        # Resize model embedding tables
+        self.model.resize_token_embeddings(len(self.tokenizer))
+        logger.info(f"Embeddings resized to vocab size {len(self.tokenizer)}")
+
+        # Warm-start: initialize from average of related language embeddings
+        if related_lang_codes:
+            related_ids = []
+            for code in related_lang_codes:
+                rid = self.tokenizer.convert_tokens_to_ids(code)
+                if rid != unk_id:
+                    related_ids.append(rid)
+                else:
+                    logger.warning(f"Related language '{code}' not found in tokenizer, skipping")
+
+            if related_ids:
+                with torch.no_grad():
+                    encoder_embeds = self.model.get_input_embeddings()
+                    related_vecs = torch.stack([encoder_embeds.weight[rid] for rid in related_ids])
+                    avg_vec = related_vecs.mean(dim=0)
+                    encoder_embeds.weight[new_token_id] = avg_vec
+
+                    # NLLB shares encoder/decoder embeddings but has a separate lm_head
+                    lm_head = self.model.get_output_embeddings()
+                    if lm_head is not None and lm_head.weight.shape[0] == len(self.tokenizer):
+                        lm_head.weight[new_token_id] = avg_vec
+
+                logger.info(
+                    f"Initialized '{lang_code}' embedding from average of: {related_lang_codes}"
+                )
+            else:
+                logger.warning("No valid related languages found — new token uses random init")
+        else:
+            logger.warning(f"No related languages provided — '{lang_code}' uses random init")
+
+        return True
+
     def load_pretrained(self, load_path: Path) -> None:
         """Load model and tokenizer from checkpoint directory.
 

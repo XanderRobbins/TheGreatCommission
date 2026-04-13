@@ -34,6 +34,9 @@ class Config:
         "haitian creole": "hat_Latn",
         "haitian_creole": "hat_Latn",
         "minangkabau": "min_Latn",
+        "malagasy": "plt_Latn",
+        "karo batak": "btx_Latn",  # Not in NLLB-200 — requires --add_language_token
+        "karo_batak": "btx_Latn",
     }
     
     # Training hyperparameters
@@ -60,9 +63,10 @@ class Config:
     # Fine-tuning configuration
     FINETUNING_CONFIG = {
         "learning_rate": 5e-4,
-        "batch_size": 8,
+        "batch_size": 1,
         "num_epochs": 5,
         "warmup_steps": 100,
+        "gradient_accumulation_steps": 8,
     }
     
     # Inference configuration

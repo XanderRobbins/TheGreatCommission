@@ -31,6 +31,60 @@ import pandas as pd
 import torch
 
 from config import Config
+
+# 100 representative verses spanning both testaments and major genres.
+# Used as the default inference set — covers law, wisdom, prophecy, gospels, epistles.
+REPRESENTATIVE_VERSES = {
+    # Torah / Law
+    "Genesis 1:1", "Genesis 1:27", "Genesis 3:15", "Genesis 12:3", "Genesis 22:18",
+    "Exodus 20:3", "Exodus 20:12", "Exodus 20:13",
+    "Deuteronomy 6:4", "Deuteronomy 6:5", "Deuteronomy 30:19",
+    # Wisdom / Poetry
+    "Psalms 1:1", "Psalms 22:1", "Psalms 23:1", "Psalms 23:4",
+    "Psalms 46:1", "Psalms 46:10", "Psalms 51:10", "Psalms 91:1",
+    "Psalms 103:1", "Psalms 119:105", "Psalms 139:14", "Psalms 145:3",
+    "Proverbs 1:7", "Proverbs 3:5", "Proverbs 3:6", "Proverbs 22:6",
+    "Job 19:25",
+    # Prophets
+    "Isaiah 9:6", "Isaiah 40:31", "Isaiah 53:5", "Isaiah 53:6",
+    "Isaiah 55:8", "Isaiah 61:1",
+    "Jeremiah 29:11", "Jeremiah 31:33",
+    "Micah 6:8",
+    # Gospels — Matthew
+    "Matthew 1:21", "Matthew 5:3", "Matthew 5:6", "Matthew 5:44",
+    "Matthew 6:9", "Matthew 6:10", "Matthew 6:11", "Matthew 6:12", "Matthew 6:13",
+    "Matthew 6:33", "Matthew 7:7", "Matthew 11:28",
+    "Matthew 22:37", "Matthew 22:39", "Matthew 28:19", "Matthew 28:20",
+    # Gospels — Mark
+    "Mark 10:45", "Mark 16:15",
+    # Gospels — Luke
+    "Luke 2:11", "Luke 4:18", "Luke 15:7", "Luke 19:10",
+    # Gospels — John
+    "John 1:1", "John 1:14", "John 3:16", "John 3:17",
+    "John 8:32", "John 10:10", "John 14:6", "John 17:17",
+    # Acts
+    "Acts 1:8", "Acts 2:38", "Acts 4:12",
+    # Romans
+    "Romans 1:16", "Romans 3:23", "Romans 5:8", "Romans 6:23",
+    "Romans 8:1", "Romans 8:28", "Romans 10:9", "Romans 12:1", "Romans 12:2",
+    # 1 Corinthians
+    "1 Corinthians 13:4", "1 Corinthians 13:13",
+    "1 Corinthians 15:3", "1 Corinthians 15:4",
+    # Galatians
+    "Galatians 2:20", "Galatians 5:22", "Galatians 5:23",
+    # Ephesians
+    "Ephesians 2:8", "Ephesians 2:9", "Ephesians 4:32", "Ephesians 6:10",
+    # 2 Timothy
+    "2 Timothy 3:16",
+    # Hebrews
+    "Hebrews 11:1", "Hebrews 12:1",
+    # James
+    "James 1:22", "James 2:17",
+    # 1 John
+    "1 John 4:8",
+    # Revelation
+    "Revelation 1:8", "Revelation 3:20", "Revelation 21:4", "Revelation 22:20",
+}
 from data.bible_loader import load_bible
 from models.base import ScriptureTranslationModel
 from models.terminology import TerminologyDB
@@ -104,8 +158,8 @@ Examples:
     )
     parser.add_argument(
         "--target-lang",
-        default="min_Latn",
-        help="Target language code (default: min_Latn)",
+        default="plt_Latn",
+        help="Target language code (default: plt_Latn)",
     )
     parser.add_argument(
         "--model",
@@ -148,6 +202,11 @@ Examples:
         choices=["cpu", "cuda"],
         help="Device to use (auto-detect if not specified)",
     )
+    parser.add_argument(
+        "--full-bible",
+        action="store_true",
+        help="Translate the entire Bible (default: 100 representative verses)",
+    )
 
     args = parser.parse_args()
 
@@ -176,6 +235,9 @@ Examples:
         if args.max_verses:
             verses = verses[:args.max_verses]
             logger.info(f"Limited to {args.max_verses} verses for testing")
+        elif not args.full_bible:
+            verses = [v for v in verses if v["reference"] in REPRESENTATIVE_VERSES]
+            logger.info(f"Using {len(verses)}/100 representative verses (pass --full-bible to translate all)")
 
         logger.info(f"Loaded {len(verses)} verses")
 

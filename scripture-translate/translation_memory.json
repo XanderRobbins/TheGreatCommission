@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "total_entries": 60,
-    "cache_hits": 10,
-    "cache_misses": 46,
-    "hit_rate": 0.17857142857142858
+    "total_entries": 135,
+    "cache_hits": 0,
+    "cache_misses": 100,
+    "hit_rate": 0.0
   },
   "entries": {
     "5bbb646788ac4f13": {
@@ -484,6 +484,606 @@
       "language_pair": "eng_Latn→min_Latn",
       "timestamp": "2026-04-12T18:24:36.052492",
       "confidence": 0.8284115951725848,
+      "hit_count": 0
+    },
+    "eec821418d71388c": {
+      "source_text": "In the beginning God created the heavens and the earth.",
+      "translation": "Tatuhuhu daduluhuhuhu Bondye manahuhu huadahuhu cadhuhu anuhu daduruhu dadulahu daduahu dadhu daduduhu dadunuhu dadundahu dadudhu dadudahu dadandahu dadadahu dadamuhu dadamahu dadadihu dadamadhu dadadhu dadaduhu dadampam dadapam dadam dadampamo dadamparam dadampamahu damatam dadám dadampampamaham dadampamani dadampamaram dadampi dadampamayam dadapo dadampamu dadampammama dadampami dadampamasamasamasani dadampamaa dadampamai dadampamana dadampamama ramadampama dom dom domapanama domapanopamaamaama ramamanama ramama domapi domapanapanama ramamasani domapanapa domapanampamaama domapamaama kamampama kama kama kama karampama manamaama katamaama na katama katamo katama karampamo katampama katampi katama kama katampiampi katampi kamampi katapa katampi kapapa kama kama kadampama kamapi katampi kasampi katami katampi kau katampi kadampi katampami katamp",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:57:53.769686",
+      "confidence": 0.891,
+      "hit_count": 0
+    },
+    "c64f0be7da42f4cd": {
+      "source_text": "And God created man in his own image, in the image of God created he him; male and female created he them.",
+      "translation": "Tacuguro ŋat Bondye ma tye calo caline; i caline pa Lubaŋa en ocwalo en; gin oketogi mac ki dako.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:57:53.793738",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "bffba364dbae3964": {
+      "source_text": "and I will put enmity between thee and the woman, and between thy seed and her seed: he shall bruise thy head, and thou shalt bruise his heel.",
+      "translation": "तَوْ أَجْعَلُ عَدَاوَةً بَينَكَ وَبَيْنَ ٱلْمَرْأَةِ، وَتَحْتَ نَسْلِكَ وسَلِيمِهَا، فَيَضْحَكُ رَأْسُكَ فَتُحْطِمُ رِجْلَهُ.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:57:53.816737",
+      "confidence": 0.9163332031573325,
+      "hit_count": 0
+    },
+    "50e6aea3807cb42e": {
+      "source_text": "and I will bless them that bless thee, and him that curseth thee will I curse: and in thee shall all the families of the earth be blessed.",
+      "translation": "and I will bless those who bless thee, and him who curseth thee will I curse; and in thee shall be blessed all the families of the earth.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:57:53.827738",
+      "confidence": 0.8282814241469227,
+      "hit_count": 0
+    },
+    "4fdaf74a5c64191f": {
+      "source_text": "and in thy seed shall all the nations of the earth be blessed; because thou hast obeyed my voice.",
+      "translation": "and in thy seed shall be blessed all the nations of the earth; because thou hast obeyed my voice.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:57:53.830738",
+      "confidence": 0.8282085443844389,
+      "hit_count": 0
+    },
+    "1c4c33d163f135d5": {
+      "source_text": "Thou shalt have no other gods before me.",
+      "translation": "Tacalo pi kin ŋat ma tye kacel kwedwa i nyim Lubaŋa.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:57:53.834737",
+      "confidence": 0.8229960452602009,
+      "hit_count": 0
+    },
+    "1d3d777d106ef90f": {
+      "source_text": "Honor thy father and thy mother, that thy days may be long in the land which Jehovah thy God giveth thee.",
+      "translation": "Tenda a Papa Bondye tu padre y a tu madre, para que tengas largos días en la tierra que te da el Señor tu Dios.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:57:53.849737",
+      "confidence": 0.7424999999999999,
+      "hit_count": 0
+    },
+    "0d0edcd277398023": {
+      "source_text": "Thou shalt not kill.",
+      "translation": "Tamaiyou nagaigai.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:57:53.851739",
+      "confidence": 0.9491314997315121,
+      "hit_count": 0
+    },
+    "9a252bc3f757e12b": {
+      "source_text": "Hear, O Israel: Jehovah our God is one Jehovah:",
+      "translation": "Escucha, oh Bondye Israel: El Señor nuestro Dios es un solo Señor.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:58:16.772188",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "4d10f89917a9dac0": {
+      "source_text": "and thou shalt love Jehovah thy God with all thy heart, and with all thy soul, and with all thy might.",
+      "translation": "and thou Bondye shalt love Jehovah thy God with all thy heart, and with all thine soul, and in all thy strength.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:58:16.778187",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "51d8a61a3e6704aa": {
+      "source_text": "Blessed is the man that walketh not in the counsel of the wicked, Nor standeth in the way of sinners, Nor sitteth in the seat of scoffers:",
+      "translation": "Blessed is the man that walketh not in the counsel of the wicked, nor standeth in the way of sinners, nor sitteth in a chair of mockers.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:58:16.848244",
+      "confidence": 0.8283366154990388,
+      "hit_count": 0
+    },
+    "fc7d2b9bf47de8fb": {
+      "source_text": "Jehovah is my shepherd; I shall not want.",
+      "translation": "Christ est mon pasteur; je ne manquerai point.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:58:16.861748",
+      "confidence": 0.7216368071369602,
+      "hit_count": 0
+    },
+    "7225a1cbd9add980": {
+      "source_text": "God is our refuge and strength, A very present help in trouble.",
+      "translation": "Christ est Bondye notre refuge et notre force, un aide précieux dans la détresse.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:58:26.766667",
+      "confidence": 0.7424999999999999,
+      "hit_count": 0
+    },
+    "e4aee040c3af1b55": {
+      "source_text": "Be still, and know that I am God: I will be exalted among the nations, I will be exalted in the earth.",
+      "translation": "Tagama, y Bondye sabáis que yo soy Dios; me exaltaré entre las naciones, me exaltaré en la tierra.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:58:26.772667",
+      "confidence": 0.7424999999999999,
+      "hit_count": 0
+    },
+    "ae326e685d99c96f": {
+      "source_text": "Create in me a clean heart, O God; And renew a right spirit within me.",
+      "translation": "un core Lespri Bondye puro crea en mí, oh Dios, y renueva un espíritu recto en mí.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:58:26.780854",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "68cfe210cdedbeda": {
+      "source_text": "Bless Jehovah, O my soul; And all that is within me, [bless] his holy name.",
+      "translation": "Tagatham Rwot, inoyona; ki gin ma tye i cwinya, guworre nyiŋe maleŋ.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:58:26.791862",
+      "confidence": 0.8259963002140954,
+      "hit_count": 0
+    },
+    "7ee25b4cd1ac0344": {
+      "source_text": "Thy word is a lamp unto my feet, And light unto my path.",
+      "translation": "Littelo tu es una lámpara para mis pies, y luz para mi camino.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:58:26.794855",
+      "confidence": 0.8265123412760876,
+      "hit_count": 0
+    },
+    "c537c3f76394e782": {
+      "source_text": "I will give thanks unto thee; for I am fearfully and wonderfully made: Wonderful are thy works; And that my soul knoweth right well.",
+      "translation": "Denn ich bin schrecklich und wunderbar gemacht. Und wunderbare sind deine Werke; und daß meine Seele richtig weiß.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:58:26.801861",
+      "confidence": 0.675533471589745,
+      "hit_count": 0
+    },
+    "21ce2da7e00be40d": {
+      "source_text": "Great is Jehovah, and greatly to be praised; And his greatness is unsearchable.",
+      "translation": "Christ est grand, et grandement louable; et sa grandeur est impensable.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-12T23:58:26.803861",
+      "confidence": 0.7234190953147916,
+      "hit_count": 0
+    },
+    "4e3abb0b8a73eedc": {
+      "source_text": "The fear of Jehovah is the beginning of knowledge; [But] the foolish despise wisdom and instruction.",
+      "translation": "Denn die Furcht des HERREN ist der Anfang der Erkenntnis; aber die Narrligen verwergen Weissheit und Unterweisung.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:17.329125",
+      "confidence": 0.7236307701376765,
+      "hit_count": 0
+    },
+    "e3c78b8f2e499a8d": {
+      "source_text": "Trust in Jehovah with all thy heart, And lean not upon thine own understanding:",
+      "translation": "Touche à l'Eternel de tout ton cœur, et ne t'appuie point sur ton intelligence.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:17.339126",
+      "confidence": 0.7234653184143065,
+      "hit_count": 0
+    },
+    "34165ad5b0f8236b": {
+      "source_text": "In all thy ways acknowledge him, And he will direct thy paths.",
+      "translation": "Dans toutes tes voies, reconnais-le, et il redressera tes sentiers.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:17.344126",
+      "confidence": 0.7232140758180188,
+      "hit_count": 0
+    },
+    "c9dc7af5b8bf669f": {
+      "source_text": "Train up a child in the way he should go, And even when he is old he will not depart from it.",
+      "translation": "estresar un niño en el camino que debe recorrer; y aun cuando sea viejo, no se apartará de él.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:17.351124",
+      "confidence": 0.7236273622625494,
+      "hit_count": 0
+    },
+    "a4b50ca638a5f15f": {
+      "source_text": "but they that wait for Jehovah shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; they shall walk, and not faint.",
+      "translation": "Tampulu babalagami a Yahova agarubagami; agurubagami ayabagami. Ayugami ayugami agugubagami, agudubagami agugamiagami agudamiagudami agulabagamiagupamiagulubagamo agudamuagudamaagudamoagudamagudayoagudamugayagudamayaagugamaagugumiagugamiogamoagugamuagugamoagupamaagurubagamoagulumaguroaguruyagudamugayaaguruagururagamoagurugayagurugaaguru gagaagurugaguroaguragoaguruogaaguruogurooguroaguroogaaguroogorooguroogauguroogiroogurooguagurooguoguroogooguroogatoguroooguroogaruroogaoguroogliogurooganuroogaګuroogaogaogoroogaogaogaoroogoroogoogaogaororoogaongoongoongoogaoroogaorororoogonoogaogaorioguroongoongoogorooroogaoroogoogoogoogoroogonaogonaogonaoguroogonaogororororaoguroonaogurooroogaoneog",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:17.382143",
+      "confidence": 0.9660235678482316,
+      "hit_count": 0
+    },
+    "963af3ae74e2aa9b": {
+      "source_text": "But he was wounded for our transgressions, he was bruised for our iniquities; the chastisement of our peace was upon him; and with his stripes we are healed.",
+      "translation": "Tacuguro pi latimarere cauzuguro cauzaguro caucaguro. Y la pena de nuestra paz estaba sobre él; y con sus plagas somos curados.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:17.387145",
+      "confidence": 0.7232319511900505,
+      "hit_count": 0
+    },
+    "9583e127ebfe7604": {
+      "source_text": "All we like sheep have gone astray; we have turned every one to his own way; and Jehovah hath laid on him the iniquity of us all.",
+      "translation": "Together we have gone astray like sheep; we have turned each to his own way; and Jehovah hath laid upon him the iniquity of us all.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:17.388679",
+      "confidence": 0.9655926003577668,
+      "hit_count": 0
+    },
+    "68918e383b2a9877": {
+      "source_text": "For my thoughts are not your thoughts, neither are your ways my ways, saith Jehovah.",
+      "translation": "Porque mis pensamientos no son vuestros pensamientos, ni vuestros caminos son mis caminos, dice Jehová.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:45.905490",
+      "confidence": 0.9656750182257737,
+      "hit_count": 0
+    },
+    "11c8f17fd0ad552a": {
+      "source_text": "The Spirit of the Lord Jehovah is upon me; because Jehovah hath anointed me to preach good tidings unto the meek; he hath sent me to bind up the broken-hearted, to proclaim liberty to the captives, and the opening [of the prison] to them that are bound;",
+      "translation": "Tacagugug Rwot Seyè Lespri Lubaŋa tye i koma; pien Rwot ociro an me me tito lok me kwena maber bot jo ma mwol; ocwalo an me tweyo jo ma cwinygi tururo, wek anywale gony ki i opii, dok bene atero ni ka gonyogi woko i mabuc.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:45.927500",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "0c89218d0aaa9425": {
+      "source_text": "But this is the covenant that I will make with the house of Israel after those days, saith Jehovah: I will put my law in their inward parts, and in their heart will I write it; and I will be their God, and they shall be my people.",
+      "translation": "Mais voici Bondye l'alliance que je ferai avec la maison d'Israël après ces jours-là, dit l'Eternel: Je mettrai ma loi dans leur cœur, et je l'écrirai dans leur coeur; et je serai leur Dieu, et ils seront mon peuple.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:45.941020",
+      "confidence": 0.7424999999999999,
+      "hit_count": 0
+    },
+    "f911001f9a7f6142": {
+      "source_text": "He hath showed thee, O man, what is good; and what doth Jehovah require of thee, but to do justly, and to love kindness, and to walk humbly with thy God?",
+      "translation": "O homme, Bondye él te ha mostrado lo que es bueno; y lo que pide de ti el Señor, sino hacer justicia, amar bondad, y andar humildamente con tu Dios.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:45.946024",
+      "confidence": 0.7424999999999999,
+      "hit_count": 0
+    },
+    "98a334da99507b6d": {
+      "source_text": "And she shall bring forth a son; and thou shalt call his name JESUS; for it is he that shall save his people from their sins.",
+      "translation": "And she Pitit Jezi shall bear a son; and thou shalt call his name Jesus; for he shall save his people from their sins.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:45.947026",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "ea03aabef148bfdb": {
+      "source_text": "Blessed are the poor in spirit: for theirs is the kingdom of heaven.",
+      "translation": "Blessed are Lespri the poor in spirit; for theirs is the kingdom of heaven.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:45.947026",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "dd00cdbf68ebd288": {
+      "source_text": "Blessed are they that hunger and thirst after righteousness: for they shall be filled.",
+      "translation": "Blessed are those who hunger and thirst for righteousness; for they shall be filled.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:45.948020",
+      "confidence": 0.8280431680222196,
+      "hit_count": 0
+    },
+    "06fd18f7074026b4": {
+      "source_text": "After this manner therefore pray ye: Our Father who art in heaven, Hallowed be thy name.",
+      "translation": "Tacalo acagü Papa bene niŋo doŋ wulego lok man ni, Wonwa ma tye i polo, giyel nyiŋi.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:57.184920",
+      "confidence": 0.693,
+      "hit_count": 0
+    },
+    "e1c57c362599d328": {
+      "source_text": "Give us this day our daily bread.",
+      "translation": "Dá-nos hoy nuestro pan diario.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:57.193922",
+      "confidence": 0.8235856733038669,
+      "hit_count": 0
+    },
+    "830468b98e91d58d": {
+      "source_text": "And forgive us our debts, as we also have forgiven our debtors.",
+      "translation": "And forgive us our debts, as we have also forgiven our debtors.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:57.193922",
+      "confidence": 0.8274535454616291,
+      "hit_count": 0
+    },
+    "455a708f44d4b23a": {
+      "source_text": "But seek ye first his kingdom, and his righteousness; and all these things shall be added unto you.",
+      "translation": "Tacaloŋo wuyenyo kerone pa Lubaŋa, ki kit ma en tye atir; ci gin magi ducu gibimedo botwu.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:57.201922",
+      "confidence": 0.8275448299753152,
+      "hit_count": 0
+    },
+    "33c3925c77fd88df": {
+      "source_text": "Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you:",
+      "translation": "Tampuluyani, ndipo adzakupatsani; funafunani, ndipo mudzapeza; gogodani ndipo adzakutsegulirani.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:00:57.208920",
+      "confidence": 0.9144435417210709,
+      "hit_count": 0
+    },
+    "839d160dbe285e92": {
+      "source_text": "Come unto me, all ye that labor and are heavy laden, and I will give you rest.",
+      "translation": "to dou moi, vous tous qui êtes fatigués et chargés, et je vous réconforterai.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:06.010825",
+      "confidence": 0.7236111254134933,
+      "hit_count": 0
+    },
+    "a7754badea573057": {
+      "source_text": "And a second like [unto it] is this, Thou shalt love thy neighbor as thyself.",
+      "translation": "And a second like unto it is this, Thou shalt love thy neighbour as thyself.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:06.029820",
+      "confidence": 0.8282154828533951,
+      "hit_count": 0
+    },
+    "c95c471f52e4557a": {
+      "source_text": "Go ye therefore, and make disciples of all the nations, baptizing them into the name of the Father and of the Son and of the Holy Spirit:",
+      "translation": "Then go Pitit Papa Sent-Lespri and make disciples of all nations, baptizing them in the name of the Father and the Son and the Holy Spirit.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:06.031824",
+      "confidence": 0.8904804358712656,
+      "hit_count": 0
+    },
+    "5b1746ceb5a63bda": {
+      "source_text": "teaching them to observe all things whatsoever I commanded you: and lo, I am with you always, even unto the end of the world.",
+      "translation": "lélé leur faire toutes les choses que je vous ai commandées; et voici, je suis avec vous toujours, jusqu'à l'achèvement du monde.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:06.038824",
+      "confidence": 0.7240423738822712,
+      "hit_count": 0
+    },
+    "414dbc34919a261a": {
+      "source_text": "For the Son of man also came not to be ministered unto, but to minister, and to give his life a ransom for many.",
+      "translation": "Denn der Pitit Manners Sohn nicht kam, daß er bedient werde, sondern daß er diende, und daß sein Leben ein Lösegeld für viele.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:06.046835",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "1b25b21492b9d380": {
+      "source_text": "for there is born to you this day in the city of David a Saviour, who is Christ the Lord.",
+      "translation": "Porque hoy Seyè Kris ha nacido para vosotros un salvador, que es Cristo Señor.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:06.051834",
+      "confidence": 0.693,
+      "hit_count": 0
+    },
+    "862f1b7cec19156f": {
+      "source_text": "The Spirit of the Lord is upon me, Because he anointed me to preach good tidings to the poor: He hath sent me to proclaim release to the captives, And recovering of sight to the blind, To set at liberty them that are bruised,",
+      "translation": "Tacagugugug Rwot Seyè Lespri tye i koma; pien ociro an me me tito lok me kwena maber bot lucan; ocwalo an me tito kwena me gonyo i kin jo ma guto i opii, dok bene miyo waŋe neno bot lugo, wek agony dano ma kinogi woko.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:32.556716",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "1a103ec77117aec8": {
+      "source_text": "I say unto you, that even so there shall be joy in heaven over one sinner that repenteth, [more] than over ninety and nine righteous persons, who need no repentance.",
+      "translation": "told you that likewise there will be joy in heaven over one sinner who repents, than over ninety-nine righteous ones who need not repent.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:32.577715",
+      "confidence": 0.8281448321242039,
+      "hit_count": 0
+    },
+    "4887f6a8404d5000": {
+      "source_text": "For the Son of man came to seek and to save that which was lost.",
+      "translation": "Porque el Pitit Hijo del hombre vino a buscar y salvar lo que estaba perdido.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:32.587716",
+      "confidence": 0.693,
+      "hit_count": 0
+    },
+    "28f9dac5482d83b3": {
+      "source_text": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+      "translation": "In the Bondye beginning was the Word, and the Word was with God; and the word was God.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:32.594716",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "c8fcb68c09506814": {
+      "source_text": "And the Word became flesh, and dwelt among us ( and we beheld his glory, glory as of the only begotten from the Father), full of grace and truth.",
+      "translation": "And the Papa Word became flesh, and dwelt among us; and we beheld his glory, glory as of the only begotten of the Father.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:32.598716",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "01ccd778ccd22087": {
+      "source_text": "Sanctify them in the truth: thy word is truth.",
+      "translation": "unda them in veridad; tu palabra es veridad.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:55.300131",
+      "confidence": 0.8244347718952357,
+      "hit_count": 0
+    },
+    "e430d343dbd0fd82": {
+      "source_text": "But ye shall receive power, when the Holy Spirit is come upon you: and ye shall be my witnesses both in Jerusalem, and in all Judæa and Samaria, and unto the uttermost part of the earth.",
+      "translation": "Tacalo ingareŋo Sent-Lespri yam, ka doŋ Cwiny Maleŋ obino i komwu; ci wubin luŋena i Jerucalem, ki i Judaya ducu ki i Camaria, dok bene i agikki lobo.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:55.317131",
+      "confidence": 0.7009360826374206,
+      "hit_count": 0
+    },
+    "a61f0e8a21b25663": {
+      "source_text": "And Peter [said] unto them, Repent ye, and be baptized every one of you in the name of Jesus Christ unto the remission of your sins; and ye shall receive the gift of the Holy Spirit.",
+      "translation": "and Peter Sent-Lespri Kris Jezi said unto them, Repent ye, and be baptized every one of you in the name of Jesus Christ unto the remission of your sins; and ye shall receive the gift of the Holy Ghost.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:55.322127",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "41dc6221fa600110": {
+      "source_text": "And in none other is there salvation: for neither is there any other name under heaven, that is given among men, wherein we must be saved.",
+      "translation": "And in none else is salvation; for there is no other name under heaven, which is given among men, by which we shall be saved.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:55.326127",
+      "confidence": 0.8284436368162872,
+      "hit_count": 0
+    },
+    "0f8f361194499fa6": {
+      "source_text": "for all have sinned, and fall short of the glory of God;",
+      "translation": "Porque todos Bondye han pecado, y están privados de la gloria de Dios.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:01:55.350480",
+      "confidence": 0.7424999999999999,
+      "hit_count": 0
+    },
+    "bfd0641d9497ec7b": {
+      "source_text": "But God commendeth his own love toward us, in that, while we were yet sinners, Christ died for us.",
+      "translation": "Mais Dieu Kris Bondye révéle son amour pour nous en ce que Christ est mort pour nous, alors que nous étions pécheurs.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:11.130797",
+      "confidence": 0.7424999999999999,
+      "hit_count": 0
+    },
+    "f12af046bcc35472": {
+      "source_text": "There is therefore now no condemnation to them that are in Christ Jesus.",
+      "translation": "तब जो Kris Jezi मसीह यीशु में हैं, उन की कोई निन्दा नहीं।",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:11.143796",
+      "confidence": 0.693,
+      "hit_count": 0
+    },
+    "0fb7823bdc2c20c1": {
+      "source_text": "And we know that to them that love God all things work together for good, [even] to them that are called according to [his] purpose.",
+      "translation": "and we Bondye know that to those who love God all things work together for good, even unto those who are called according to his purpose.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:11.144796",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "a2cc087e4f62aaf3": {
+      "source_text": "because if thou shalt confess with thy mouth Jesus [as] Lord, and shalt believe in thy heart that God raised him from the dead, thou shalt be saved:",
+      "translation": "if thou Seyè Jezi Bondye confessest with thy mouth Jesus as Lord, and believe in thy heart that God raised him from the dead, ye shall be saved.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:11.147796",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "85b743933c12cb68": {
+      "source_text": "I beseech you therefore, brethren, by the mercies of God, to present your bodies a living sacrifice, holy, acceptable to God, [which is] your spiritual service.",
+      "translation": "तब हे Bondye भाइयो, मैं परमेश्वर की करूणा के कारण तुम से बिनती करता हूं कि अपने शरीरों को एक जीवित बली चढ़ाओ, पवित्र और परमेश्वर के ग्रहणयोग्य, जो तुम्हारी आत्मिक सेवा है।",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:11.161795",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "ffeaac38679e116c": {
+      "source_text": "And be not fashioned according to this world: but be ye transformed by the renewing of your mind, that ye may prove what is the good and acceptable and perfect will of God.",
+      "translation": "And be Bondye not conformed unto this world; but be transformed by the renewal of your mind, that ye may prove what is the will of God, which is good and acceptable and perfect.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:11.162797",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "534792e479f8fdd7": {
+      "source_text": "Love suffereth long, [and] is kind; love envieth not; love vaunteth not itself, is not puffed up,",
+      "translation": "Lamor sufre mucho, y es amable; el amor no envidiará; el Amor no se vanjará, no se enorgullecerá.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:11.167796",
+      "confidence": 0.8273819477387835,
+      "hit_count": 0
+    },
+    "7b7647372833a485": {
+      "source_text": "For I delivered unto you first of all that which also I received: that Christ died for our sins according to the scriptures;",
+      "translation": "Denn ich Kris übergab euch als erstes das, das ich auch erhiß: daß Christus für unsere Sünden star wie die Schriften.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:27.725847",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "38c21aa0f5dcebdd": {
+      "source_text": "But the fruit of the Spirit is love, joy, peace, longsuffering, kindness, goodness, faithfulness,",
+      "translation": "Mais le Lespri fruit de l'Esprit est l'amour, la joie, la paix, la patience, la bienveillance, la bonté, la fidélité.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:27.759305",
+      "confidence": 0.7424999999999999,
+      "hit_count": 0
+    },
+    "6d3ffe15653bd67c": {
+      "source_text": "for by grace have ye been saved through faith; and that not of yourselves, [it is] the gift of God;",
+      "translation": "Denn durch Bondye die Gnade seid ihr gerettet durch die Glaube; und das nicht von euch, sondern die Gabe Gottes.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:27.771827",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "2836fa04ce4ee6aa": {
+      "source_text": "not of works, that no man should glory.",
+      "translation": "não por obras, para que nadie se glorifique.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:27.774831",
+      "confidence": 0.9623324047688011,
+      "hit_count": 0
+    },
+    "854b1e523ea9e73c": {
+      "source_text": "and be ye kind one to another, tenderhearted, forgiving each other, even as God also in Christ forgave you.",
+      "translation": "and be Kris Bondye kind to each other, tender heart, forgiving one another, just as God also in Christ forgave you.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:43.478206",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "20af55a2ef2aec6e": {
+      "source_text": "Finally, be strong in the Lord, and in the strength of his might.",
+      "translation": "Tacalo lokke Seyè wubed matek i Rwot, ki i tek pa twerone.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:43.485209",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "0260b47ada6a2655": {
+      "source_text": "Every scripture inspired of God [is] also profitable for teaching, for reproof, for correction, for instruction which is in righteousness:",
+      "translation": "Toda Escritura Bondye inspirada por Dios, y útil para enseñar, para reprender, para corregir, para instruir en la justicia.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:43.490206",
+      "confidence": 0.7424999999999999,
+      "hit_count": 0
+    },
+    "c55217ae38645a64": {
+      "source_text": "But be ye doers of the word, and not hearers only, deluding your own selves.",
+      "translation": "Tacagine pi yat gineko, ento pe wuwinyo keken, dok wuŋak woko ki i kinwu.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:43.505256",
+      "confidence": 0.9632055485244905,
+      "hit_count": 0
+    },
+    "0922b68b51398b6c": {
+      "source_text": "Even so faith, if it have not works, is dead in itself.",
+      "translation": "Tacalo bene kit ma niye pe tye tic, noŋo en doŋ oto woko ki i kome.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:43.508255",
+      "confidence": 0.8265621955887933,
+      "hit_count": 0
+    },
+    "6ceb7d9cddabb79d": {
+      "source_text": "He that loveth not knoweth not God; for God is love.",
+      "translation": "Denn der Bondye nicht liebt kennt Gott nicht; denn Gott ist Liebe.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:43.510255",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "c4f99e7d0669e190": {
+      "source_text": "I am the Alpha and the Omega, saith the Lord God, who is and who was and who is to come, the Almighty.",
+      "translation": "I am Tout-Pwisan Seyè Bondye the Alpha and the Omega, saith the Lord God, who is and who was and who is to come, the Almighty.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:52.031972",
+      "confidence": 0.99,
+      "hit_count": 0
+    },
+    "84669b84ed8a41d5": {
+      "source_text": "Behold, I stand at the door and knock: if any man hear my voice and open the door, I will come in to him, and will sup with him, and he with me.",
+      "translation": "Eis que me levanto a la puerta y toco; si alguno oye mi voz y abre la puerta, entraré a él y cenaré con él, y él conmigo.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:52.038971",
+      "confidence": 0.7242830485930349,
+      "hit_count": 0
+    },
+    "a74d206ac311ca9e": {
+      "source_text": "and he shall wipe away every tear from their eyes; and death shall be no more; neither shall there be mourning, nor crying, nor pain, any more: the first things are passed away.",
+      "translation": "and he will wipe out every tear from their eyes; and death shall be no more; neither shall there be mourning, nor crying, nor pain; and the first things have passed.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:52.041970",
+      "confidence": 0.8283294681820842,
+      "hit_count": 0
+    },
+    "77602f0dc151a5e1": {
+      "source_text": "He who testifieth these things saith, Yea: I come quickly. Amen: come, Lord Jesus.",
+      "translation": "jogo que Seyè Jezi testifica estas cosas dice: Sí, vengo pronto. Amén, ven, Señor Jesús.",
+      "language_pair": "eng_Latn→spg_Latn",
+      "timestamp": "2026-04-13T00:02:52.048969",
+      "confidence": 0.7326,
       "hit_count": 0
     }
   }

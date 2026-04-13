@@ -35,6 +35,17 @@ class LoRATrainingPipeline(BaseTrainingPipeline):
         # Load pretrained model and get tokenizer
         model_wrapper = ScriptureTranslationModel(use_lora=False)
         model_wrapper.load_pretrained(Path(self.args.pretrained_model_path))
+
+        # Add new language token if this language isn't in NLLB-200
+        if self.args.add_language_token:
+            related = self.args.related_langs.split(",") if self.args.related_langs else None
+            added = model_wrapper.add_language_token(self.args.target_lang, related)
+            if added:
+                logger.info(
+                    f"New language token added for '{self.args.target_lang}'. "
+                    f"Save the modified model after training — it has a larger vocab."
+                )
+
         tokenizer = model_wrapper.get_tokenizer()
 
         # Create datasets
@@ -102,6 +113,8 @@ class LoRATrainingPipeline(BaseTrainingPipeline):
 
     def get_final_model_dir(self) -> Path:
         """Get final model directory."""
+        if getattr(self.args, "output_dir", None):
+            return Path(self.args.output_dir)
         return Config.CHECKPOINTS_DIR / f"lora_{self.args.target_lang}_final"
 
     def get_history_filename(self) -> str:
@@ -164,6 +177,25 @@ def main():
         type=int,
         default=Config.FINETUNING_CONFIG.get("gradient_accumulation_steps", 1),
         help="Gradient accumulation steps"
+    )
+
+    parser.add_argument(
+        "--add_language_token",
+        action="store_true",
+        help="Add target_lang as a new token if not in NLLB-200 (required for unsupported languages)"
+    )
+    parser.add_argument(
+        "--related_langs",
+        type=str,
+        default=None,
+        help="Comma-separated NLLB codes of related languages for embedding init "
+             "(e.g., 'ind_Latn,zsm_Latn,min_Latn' for Karo Batak)"
+    )
+    parser.add_argument(
+        "--output_dir",
+        type=str,
+        default=None,
+        help="Output directory for the trained adapter (overrides default)"
     )
 
     args = parser.parse_args()

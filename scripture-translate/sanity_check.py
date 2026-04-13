@@ -207,7 +207,7 @@ def report_sample_translations(results, verses, n=5):
 
 def main():
     parser = argparse.ArgumentParser(description="Sanity check for scripture translation pipeline")
-    parser.add_argument("--target-lang", default="min_Latn", help="Target language NLLB code")
+    parser.add_argument("--target-lang", default="plt_Latn", help="Target language NLLB code")
     parser.add_argument("--source-lang", default="eng_Latn", help="Source language NLLB code")
     parser.add_argument("--model", default=Config.MODEL_NAME, help="HuggingFace model name")
     parser.add_argument("--output", default="output/sanity_check.json", help="Where to save results JSON")

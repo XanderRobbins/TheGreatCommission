@@ -167,6 +167,9 @@ class BaseTrainingPipeline(ABC):
         # Training loop
         best_val_loss = float('inf')
         training_history = []
+        epochs_without_improvement = 0
+        patience = 2
+        best_checkpoint_dir = None
 
         for epoch in range(self.args.num_epochs):
             # Train
@@ -186,14 +189,31 @@ class BaseTrainingPipeline(ABC):
             # Save checkpoint if validation improved
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
-                checkpoint_dir = self.get_checkpoint_dir(epoch)
-                model_wrapper.save_pretrained(checkpoint_dir)
-                logger.info(f"Saved best model to {checkpoint_dir}")
+                epochs_without_improvement = 0
+                best_checkpoint_dir = self.get_checkpoint_dir(epoch)
+                model_wrapper.save_pretrained(best_checkpoint_dir)
+                logger.info(f"Saved best model to {best_checkpoint_dir}")
+            else:
+                epochs_without_improvement += 1
+                logger.info(
+                    f"No improvement for {epochs_without_improvement}/{patience} epochs "
+                    f"(best val loss: {best_val_loss:.4f})"
+                )
+                if epochs_without_improvement >= patience:
+                    logger.info(f"Early stopping at epoch {epoch + 1}")
+                    break
 
-        # Save final model
+        # Save final model (use best checkpoint if available)
         final_model_dir = self.get_final_model_dir()
-        model_wrapper.save_pretrained(final_model_dir)
-        logger.info(f"Saved final model to {final_model_dir}")
+        if best_checkpoint_dir and best_checkpoint_dir != final_model_dir:
+            import shutil
+            if final_model_dir.exists():
+                shutil.rmtree(final_model_dir)
+            shutil.copytree(best_checkpoint_dir, final_model_dir)
+            logger.info(f"Copied best checkpoint to {final_model_dir}")
+        else:
+            model_wrapper.save_pretrained(final_model_dir)
+            logger.info(f"Saved final model to {final_model_dir}")
 
         # Save training history
         history_path = Config.RESULTS_DIR / self.get_history_filename()
