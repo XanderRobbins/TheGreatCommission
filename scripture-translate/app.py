@@ -48,7 +48,6 @@ def create_app(config_override: Optional[Dict] = None) -> Flask:
 
     @app.before_request
     def ensure_initialized():
-        """Ensure services are initialized before handling requests."""
         try:
             translation_service = app.extensions['translation_service']
             translation_service.initialize()
@@ -58,9 +57,7 @@ def create_app(config_override: Optional[Dict] = None) -> Flask:
                 "Failed to initialize translation system. Check logs for details."
             ) from exc
 
-    # ========================================================================
-    # API ENDPOINTS - TRANSLATION
-    # ========================================================================
+    # Translation endpoints
 
     @app.route('/api/v1/translate', methods=['POST'])
     def translate():
@@ -117,9 +114,7 @@ def create_app(config_override: Optional[Dict] = None) -> Flask:
             logger.error(f"Batch translation error: {e}", exc_info=True)
             return jsonify({'error': str(e)}), 500
 
-    # ========================================================================
-    # API ENDPOINTS - TERMINOLOGY
-    # ========================================================================
+    # Terminology endpoints
 
     @app.route('/api/v1/terminology/add', methods=['POST'])
     def add_term():
@@ -294,9 +289,7 @@ def create_app(config_override: Optional[Dict] = None) -> Flask:
             logger.error(f"Export error: {e}", exc_info=True)
             return jsonify({'error': str(e)}), 500
 
-    # ========================================================================
-    # API ENDPOINTS - EVALUATION
-    # ========================================================================
+    # Evaluation endpoints
 
     @app.route('/api/v1/evaluate/batch', methods=['POST'])
     def evaluate_batch():
@@ -321,9 +314,7 @@ def create_app(config_override: Optional[Dict] = None) -> Flask:
             logger.error(f"Batch evaluation error: {e}", exc_info=True)
             return jsonify({'error': str(e)}), 500
 
-    # ========================================================================
-    # API ENDPOINTS - SYSTEM INFO
-    # ========================================================================
+    # System info endpoints
 
     @app.route('/api/v1/system/info', methods=['GET'])
     def system_info():
@@ -355,9 +346,7 @@ def create_app(config_override: Optional[Dict] = None) -> Flask:
             logger.error(f"Save error: {e}", exc_info=True)
             return jsonify({'error': str(e)}), 500
 
-    # ========================================================================
-    # WEB PAGES
-    # ========================================================================
+    # Web pages
 
     @app.route('/')
     def index():
@@ -384,9 +373,7 @@ def create_app(config_override: Optional[Dict] = None) -> Flask:
         """About page"""
         return render_template('about.html')
 
-    # ========================================================================
-    # ERROR HANDLERS
-    # ========================================================================
+    # Error handlers
 
     @app.errorhandler(404)
     def not_found(error):

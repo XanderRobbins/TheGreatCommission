@@ -216,9 +216,7 @@ Examples:
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
     device = args.device or Config.get_device()
-    logger.info(f"\n{'='*60}")
     logger.info("Scripture Translation Pipeline")
-    logger.info(f"{'='*60}")
     logger.info(f"Device: {device}")
     logger.info(f"Source language: {args.source_lang}")
     logger.info(f"Target language: {args.target_lang}")
@@ -370,9 +368,7 @@ Examples:
         logger.info(f"Saved evaluation report: {eval_path}")
 
         # Print summary
-        logger.info(f"\n{'='*60}")
-        logger.info("SUMMARY")
-        logger.info(f"{'='*60}")
+        logger.info("Summary:")
         logger.info(f"Verses translated: {len(results)}")
         logger.info(f"Average confidence: {eval_report['metrics']['avg_confidence']:.4f}")
         logger.info(f"Consistency score: {consistency_score:.4f}")
@@ -382,7 +378,6 @@ Examples:
         logger.info(f"  - {json_path}")
         logger.info(f"  - {csv_path}")
         logger.info(f"  - {eval_path}")
-        logger.info(f"{'='*60}\n")
 
     except KeyboardInterrupt:
         logger.info("\nPipeline interrupted by user")

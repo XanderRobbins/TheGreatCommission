@@ -38,9 +38,7 @@ from evaluation import ScriptureEvaluator, EvaluationMetrics
 
 def demo_data_loading():
     """Demo: Load and manage Bible verse data"""
-    logger.info("\n" + "="*60)
     logger.info("DEMO 1: Data Loading & Management")
-    logger.info("="*60)
     
     # Generate sample data
     logger.info("Generating sample data...")
@@ -70,9 +68,7 @@ def demo_data_loading():
 
 def demo_terminology_management():
     """Demo: Build and manage terminology database"""
-    logger.info("\n" + "="*60)
     logger.info("DEMO 2: Terminology Database")
-    logger.info("="*60)
     
     # Create terminology database
     db = TerminologyDB()
@@ -113,9 +109,7 @@ def demo_terminology_management():
 
 def demo_model_initialization():
     """Demo: Initialize and setup the translation model"""
-    logger.info("\n" + "="*60)
     logger.info("DEMO 3: Model Initialization")
-    logger.info("="*60)
     
     logger.info("Loading NLLB model...")
     logger.info(f"Model: {Config.MODEL_NAME}")
@@ -141,9 +135,7 @@ def demo_model_initialization():
 
 def demo_inference():
     """Demo: Translate verses using the model"""
-    logger.info("\n" + "="*60)
     logger.info("DEMO 4: Inference & Translation")
-    logger.info("="*60)
     
     # Load model
     logger.info("Loading model...")
@@ -174,7 +166,6 @@ def demo_inference():
     ]
     
     print("\nTranslating sample verses:")
-    print("="*60)
     
     for i, verse_text in enumerate(test_verses, 1):
         logger.info(f"Translating verse {i}...")
@@ -199,9 +190,7 @@ def demo_inference():
 
 def demo_evaluation():
     """Demo: Evaluate translations"""
-    logger.info("\n" + "="*60)
     logger.info("DEMO 5: Evaluation Metrics")
-    logger.info("="*60)
     
     # Create evaluator
     evaluator = ScriptureEvaluator()
@@ -238,155 +227,24 @@ def demo_evaluation():
 
 def demo_pipeline_summary():
     """Print summary of the complete pipeline"""
-    logger.info("\n" + "="*60)
-    logger.info("SCRIPTURE TRANSLATION SYSTEM - PIPELINE SUMMARY")
-    logger.info("="*60)
-    
     summary = """
-┌─────────────────────────────────────────────────────────────┐
-│          LOW-RESOURCE SCRIPTURE TRANSLATION                │
-│              Complete System Overview                        │
-└─────────────────────────────────────────────────────────────┘
+Pipeline summary:
+  1. data/loaders.py       - BibleDataLoader, parallel corpus creation
+  2. models/terminology.py - TerminologyDB, TermExtractor, conflict resolution
+  3. models/base.py        - ScriptureTranslationModel, LoRA, ConsistencyLoss
+  4. inference/            - ScriptureTranslator, batch translation
+  5. evaluation/           - BLEU, consistency score, terminology metrics
+  6. scripts/              - train_baseline.py, fine_tune_lora.py
 
-ARCHITECTURE LAYERS:
-  ✓ Data Layer: Load & align Bible verses
-  ✓ Embedding Layer: NLLB-200 shared cross-lingual space
-  ✓ Training Layer: Fine-tune on Bible-aligned data
-  ✓ Terminology Layer: Ensure consistent translations
-  ✓ Inference Layer: Translate with constraints
-  ✓ Evaluation Layer: Measure quality
-
-KEY COMPONENTS:
-  
-  1. Data Loading (data/loaders.py)
-     - BibleDataLoader: Load from JSON/CSV
-     - BibleTranslationDataset: PyTorch dataset
-     - Parallel corpus creation
-
-  2. Terminology Management (models/terminology.py)
-     - TerminologyDB: Track consistent term mappings
-     - TermExtractor: Extract theological terms
-     - Conflict resolution & human review
-
-  3. Model & Training (models/base.py)
-     - ScriptureTranslationModel: NLLB wrapper
-     - LoRA fine-tuning for rare languages
-     - ConsistencyLoss: Enforce term consistency
-     - TranslationTrainer: Training loop
-
-  4. Inference (inference.py)
-     - ScriptureTranslator: End-to-end translation
-     - BeamSearchDecoder: Constrained decoding
-     - TranslationResult: Structured output
-
-  5. Evaluation (evaluation.py)
-     - ScriptureEvaluator: BLEU + custom metrics
-     - HumanEvaluationInterface: Collect human scores
-     - Consistency & terminology metrics
-
-  6. Training Scripts (scripts/)
-     - train_baseline.py: Train on baseline task
-     - fine_tune_lora.py: LoRA for rare languages
-
-WORKFLOW:
-
-  Step 1: Generate Data
-    └─ Collect parallel Bible verses
-       └ Create aligned corpus (EN ↔ Target)
-
-  Step 2: Train Baseline (2 weeks)
-    └─ Initialize NLLB model
-    └─ Train on high-resource language pairs
-    └─ Validate on English ↔ Spanish
-    └─ Save pretrained checkpoint
-
-  Step 3: Fine-tune Rare Language (4-6 weeks)
-    └─ Load pretrained baseline
-    └─ Apply LoRA (3% of parameters)
-    └─ Train on 500-2000 target-language verses
-    └─ Save LoRA adapters
-
-  Step 4: Deploy
-    └─ Load model + LoRA adapters
-    └─ Initialize terminology database
-    └─ Translate verses with consistency
-    └─ Evaluate with human reviewers
-    └─ Iterate & refine
-
-EXPECTED OUTCOMES:
-
-  Baseline (High-Resource):
-    - BLEU-4: 25-35
-    - Consistency: 92-96%
-    - Human rating: 4.0-4.5 / 5.0
-
-  Rare Language (500-2000 verses):
-    - BLEU-4: 18-25
-    - Consistency: 90-95%
-    - Human rating: 3.5-4.2 / 5.0
-    
-  With Community Refinement:
-    - Human rating: 4.3-4.8 / 5.0
-    - Production ready for publication
-
-GETTING STARTED:
-
-  1. Install dependencies:
-     $ pip install -r requirements.txt
-
-  2. Generate sample data:
-     $ python data/generate_sample_data.py
-
-  3. Train baseline:
-     $ python scripts/train_baseline.py \\
-         --data_path ./data/en_es_verses.jsonl \\
-         --source_lang eng_Latn \\
-         --target_lang spa_Latn
-
-  4. Fine-tune rare language:
-     $ python scripts/fine_tune_lora.py \\
-         --pretrained_model_path ./models/checkpoints/final_model \\
-         --data_path ./data/rare_lang_verses.jsonl \\
-         --target_lang swh_Latn
-
-  5. Translate & evaluate:
-     $ python scripts/translate_book.py \\
-         --model_path ./models/checkpoints/final_model \\
-         --input_path ./data/genesis.json \\
-         --output_path ./results/genesis_swahili.json
-
-KEY ADVANTAGES:
-
-  ✓ Leverages pretrained NLLB (200+ languages)
-  ✓ Efficient LoRA fine-tuning for low-resource settings
-  ✓ Terminology consistency enforcement
-  ✓ Custom metrics for scripture quality
-  ✓ Human-in-the-loop validation interface
-  ✓ Modular architecture for easy extension
-
-NEXT STEPS:
-
-  1. Collect real Bible verse data
-  2. Train baseline on multiple language pairs
-  3. Deploy to cloud for inference at scale
-  4. Build web UI for translators
-  5. Integrate community feedback loop
-  6. Support additional languages
-
-───────────────────────────────────────────────────────────────
-For more information, see: README.md
-    """
-    
+See README.md for setup and usage.
+"""
     print(summary)
 
 
 def main():
     """Run all demos"""
-    
-    print("\n" + "="*70)
-    print("SCRIPTURE TRANSLATION SYSTEM - COMPLETE DEMO")
-    print("="*70)
-    
+    logger.info("Scripture Translation System - Demo")
+
     try:
         # Demo 1: Data Loading
         data_dir = demo_data_loading()
@@ -408,16 +266,8 @@ def main():
         
         # Summary
         demo_pipeline_summary()
-        
-        logger.info("\n" + "="*70)
-        logger.info("DEMO COMPLETE")
-        logger.info("="*70)
-        logger.info("\nNext steps:")
-        logger.info("1. Review the architecture in bible_translation_architecture.md")
-        logger.info("2. Generate your own Bible verse data")
-        logger.info("3. Run training: python scripts/train_baseline.py")
-        logger.info("4. Fine-tune on rare language: python scripts/fine_tune_lora.py")
-        logger.info("5. Evaluate translations with human reviewers")
+
+        logger.info("Demo complete")
         
     except Exception as e:
         logger.error(f"Demo failed: {e}", exc_info=True)
